@@ -1,31 +1,15 @@
 "use client";
-import { useRef, useState } from "react";
-import validate from "../utils/validate";
-import { STATE_NAME, BG_IMAGE } from "../utils/mockData";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import validate from "./utils/validate";
+import { STATE_NAME, BG_IMAGE } from "./utils/mockData";
 import { Input } from "./Input";
-
-const userSchema = MithuValidator({
-  name: MithuValidator.min(2),
-});
-
-const validationJson = {
-  name: {min:2, type:}
-}
-
-const validator = (obj, validationJson) => {
-  if(obj.name) {
-    const schema = validationJson[name]
-  }
-}
+import Select from "./Select";
 
 const Form = () => {
-  const router = useRouter();
   const initialState = {
     name: "",
     email: "",
     phone: "",
-    address: "",
   };
 
   const [form, setForm] = useState(initialState);
@@ -39,21 +23,29 @@ const Form = () => {
     e.preventDefault();
     clearErrorMessage();
 
-    const messageObj = validate(
-      name.current.value,
-      email.current.value,
-      phone.current.value
-    );
-
+    const messageObj = validate(form.name, form.email, form.phone);
+    
     if (messageObj !== null) {
-      if (!messageObj.name) setErrMessageForName("Name is not Valid");
-      if (!messageObj.email) setErrMessageForEmail("Email is not Valid");
-      if (!messageObj.phone) setErrMessageForPhone("Phone Number is not Valid");
+      
+      if (!messageObj.name)
+        setErrors((preErrorMsg) => ({
+          ...preErrorMsg,
+          ["name"]: "Name is Not Valid",
+        }));
+      if (!messageObj.email)
+        setErrors((preErrorMsg) => ({
+          ...preErrorMsg,
+          ["email"]: "Email is Not Valid",
+        }));
+      if (!messageObj.phone)
+        setErrors((preErrorMsg) => ({
+          ...preErrorMsg,
+          ["phone"]: "Phone is Not Valid",
+        }));
       return;
     }
 
     //Make an API request to save the user data in the database.
-    router.push("/formsubmitted");
   };
 
   const clearErrorMessage = () => {
@@ -83,35 +75,52 @@ const Form = () => {
             <Input
               value={form.phone}
               error={errors.phone}
-              label="Phon Number"
+              label="Phone Number"
               onChange={(e) => handleFormChange("phone", e.target.value)}
               placeholder="Phone Number"
             />
-            <Input value={form.email} label="Email" placeholder="Email" />
+            <Input
+              value={form.email}
+              error={errors.email}
+              label="Email"
+              onChange={(e) => handleFormChange("email", e.target.value)}
+              placeholder="Email"
+            />
             <Input
               value={form.address}
               label="Address"
+              onChange={(e) => handleFormChange("address", e.target.value)}
               placeholder="Address"
               type="textarea"
             />
-            <Input value={""} label="City" placeholder="City" type="textarea" />
             <Input
               value={""}
-              label="State"
-              placeholder="State"
-              type="textarea"
+              label="City"
+              onChange={(e) => handleFormChange("city", e.target.value)}
+              placeholder="City"
+              type="text"
             />
             <Input
               value={""}
               label="Pincode"
+              onChange={(e) => handleFormChange("pincode", e.target.value)}
               placeholder="Pincode"
-              type="textarea"
+              type="text"
+            />
+            <Select
+              value={""}
+              label="State"
+              onChange={(e) => handleFormChange("state", e.target.value)}
+              placeholder="State"
+              STATE_NAME={STATE_NAME}
+              type="text"
             />
             <Input
               value={""}
               label="Coupon Code"
+              onChange={(e) => handleFormChange("coupon", e.target.value)}
               placeholder="Coupon Code"
-              type="textarea"
+              type="text"
             />
             <div className="flex my-1">
               <button
