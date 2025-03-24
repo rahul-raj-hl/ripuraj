@@ -1,4 +1,4 @@
-export const stateName = [
+export const STATE_NAME = [
     "Andhra Pradesh",
     "Arunachal Pradesh",
     "Assam",
