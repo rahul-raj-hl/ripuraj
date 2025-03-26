@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 // Utility function to validate input
 const isValidInput = (value) => /^\d?$/.test(value);
 
-const OtpInput = ({ length = 6, onChange }) => {
+const OtpInput = ({ length, onChange }) => {
   // State to store OTP digits, initialized with empty strings
   const [otp, setOtp] = useState(() => Array.from({ length }, () => ""));
   const inputRefs = useRef([]);
@@ -15,7 +15,7 @@ const OtpInput = ({ length = 6, onChange }) => {
     const updatedOtp = [...otp];
     updatedOtp[index] = value;
     setOtp(updatedOtp);
-    onChange(updatedOtp.join("")); 
+    onChange(updatedOtp.join(""));
 
     // Autofocus the next input field if value is entered
     if (value && index < length - 1) focusInput(index + 1);
@@ -41,6 +41,8 @@ const OtpInput = ({ length = 6, onChange }) => {
     textAlign: "center",
     fontSize: "1.2rem",
     padding: "0.5rem",
+    border: "1px solid #000",
+    borderRadius: "4px",
   };
 
   return (

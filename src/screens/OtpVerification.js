@@ -1,15 +1,54 @@
 import { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import OtpInput from "../components/OtpInput";
 
+// Reusable Button component
+const Button = ({ onClick, children, style }) => (
+  <button
+    onClick={onClick}
+    style={{
+      padding: "0.5rem 1rem",
+      fontSize: "1rem",
+      cursor: "pointer",
+      border: "1px solid #000", 
+      borderRadius: "4px", 
+      ...style,
+    }}
+  >
+    {children}
+  </button>
+);
+
 const OTPValidation = () => {
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [error, setError] = useState("");
   const [otp, setOtp] = useState("");
 
-  // Validates a 10-digit phone number
-  const isValidPhoneNumber = (number) =>
-    typeof number === "string" && number.length === 10 && !isNaN(number);
+  const formik = useFormik({
+    initialValues: {
+      phoneNumber: "",
+    },
+    validationSchema: Yup.object({
+      phoneNumber: Yup.string()
+        .matches(/^\d{10}$/, "Phone number must be exactly 10 digits")
+        .required("Phone number is required"),
+    }),
+    onSubmit: async (values) => {
+      setIsOtpSent(true);
+      try {
+        const data = await apiRequest("/api/sendOtp", { phoneNumber: values.phoneNumber });
+        if (data.message === "OTP sent successfully") {
+          setIsOtpSent(true);
+          setError(""); // Clear any previous errors
+        } else {
+          setError(data.message || "Failed to send OTP.");
+        }
+      } catch (err) {
+        setError(err.message);
+      }
+    },
+  });
 
   // Handles API requests with error handling
   const apiRequest = async (url, payload) => {
@@ -28,25 +67,6 @@ const OTPValidation = () => {
     }
   };
 
-  // Sends OTP to the provided phone number
-  const sendOtp = async () => {
-    if (!isValidPhoneNumber(phoneNumber)) {
-      setError("Please enter a valid 10-digit phone number.");
-      return;
-    }
-    try {
-      const data = await apiRequest("/api/sendOtp", { phoneNumber });
-      if (data.message === "OTP sent successfully") {
-        setIsOtpSent(true);
-        setError(""); // Clear any previous errors
-      } else {
-        setError(data.message || "Failed to send OTP.");
-      }
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
   // Verifies the entered OTP
   const verifyOtp = async () => {
     if (otp.length !== 6) {
@@ -54,7 +74,7 @@ const OTPValidation = () => {
       return;
     }
     try {
-      const data = await apiRequest("verifyOtp", { phoneNumber, otp });//here api used to verify OTP
+      const data = await apiRequest("verifyOtp", { phoneNumber: formik.values.phoneNumber, otp });//here api used to verify OTP
       if (data.success) {
         window.location.href = "/next-page"; // Redirect on successful verification
       } else {
@@ -73,53 +93,35 @@ const OTPValidation = () => {
         <div>
           <h2>Enter OTP</h2>
           <OtpInput length={6} onChange={setOtp} />
-          <button
-            onClick={verifyOtp}
-            style={{
-              marginTop: "1rem",
-              padding: "0.5rem 1rem",
-              fontSize: "1rem",
-              cursor: "pointer",
-            }}
-          >
+          <Button onClick={verifyOtp} style={{ marginTop: "1rem" }}>
             Verify OTP
-          </button>
+          </Button>
         </div>
       ) : (
         // Phone number input section
-        <div>
-          <h2>Enter Phone Number</h2>
+        <form onSubmit={formik.handleSubmit}>
+          {/* <h2>Enter Phone Number</h2> */}
           <input
             type="text"
+            name="phoneNumber"
             placeholder="Enter phone number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={formik.values.phoneNumber}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             style={{
               width: "100%",
               padding: "0.5rem",
               marginBottom: "1rem",
               fontSize: "1rem",
-              border: "1px solid #ccc",
+              border: formik.touched.phoneNumber && formik.errors.phoneNumber ? "1px solid red" : "1px solid #ccc",
               borderRadius: "4px",
             }}
           />
-          <button
-            onClick={sendOtp}
-            style={{
-              padding: "0.5rem 1rem",
-              fontSize: "1rem",
-              cursor: "pointer",
-            }}
-          >
-            Send OTP
-          </button>
-        </div>
-      )}
-      {/* Display error message if any */}
-      {error && (
-        <p style={{ color: "red", marginTop: "1rem", fontSize: "0.9rem" }}>
-          {error}
-        </p>
+          {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+            <div style={{ color: "red", marginBottom: "1rem" }}>{formik.errors.phoneNumber}</div>
+          )}
+          <Button type="submit">Send OTP</Button>
+        </form>
       )}
     </div>
   );
