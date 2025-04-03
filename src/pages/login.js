@@ -1,7 +1,8 @@
-import OTPValidation from "@/screens/OtpVerification"
+import OTPValidation from "@/screens/OtpValidation"
+import Home from "@/screens/Home"
 
 const Login = () => {
-    return <OTPValidation />
+    return <Home />
 }
 
 export default Login
