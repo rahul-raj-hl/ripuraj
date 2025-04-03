@@ -1,9 +1,9 @@
-import Form from "@/components/Form";
+import FormPage from "@/components/FormPage";
 
 export default function Home() {
   return (
     <div>
-      <Form />
+      <FormPage />
     </div>
   );
 }
