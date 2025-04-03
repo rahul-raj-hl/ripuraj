@@ -5,7 +5,6 @@ import OtpSection from "../components/OtpSection";
 import PhoneNumberInput from "../components/PhoneNumberInput";
 import Instructions from "../components/Instructions";
 import { apiRequest } from "../utils/apiRequest";
-import Form from "../components/Form"
 import { useRouter } from "next/router";
 
 const OTPValidation = () => {
