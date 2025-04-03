@@ -1,18 +1,16 @@
-export const Input = ({ label = "", placeholder = "", error, ...rest }) => {
-  
+export const Input = ({ label = "", placeholder = "",className="input w-full", error, ...rest }) => {
   return (
-    <div className="my-1">
-      <label>{label}</label>
-
-      {rest.type === "textarea" ? (
+    <div className="">
+      {rest.type === "textarea" && (
         <textarea className="textarea my-1" placeholder="Address" />
-      ) : (
-        <input
-          className="grow input my-1"
-          placeholder={placeholder}
-          {...rest}
-        />
       )}
+      {
+        rest.type==="checkbox" && <input className={className} type={rest.type} />
+      }
+     {
+      rest.type==="text" && <input className={className} value={rest.value} onChange={rest.onChange} placeholder={placeholder} required />
+     }
+        
       {error && <p className="text-red-500">{error}</p>}
     </div>
   );
