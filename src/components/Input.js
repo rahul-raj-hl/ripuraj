@@ -1,4 +1,4 @@
-export const Input = ({ label = "", placeholder = "",className="input w-full", error, ...rest }) => {
+export const Input = ({ label = "", placeholder = "",className="input w-full bg-white border-[#707070] border-1 font-medium", error, ...rest }) => {
   return (
     <div className="">
       {rest.type === "textarea" && (

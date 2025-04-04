@@ -1,7 +1,9 @@
+import { useRouter } from "next/router";
 import Button from "./Button";
-import Form from "./Form"
+import FormPage from "./FormPage";
 
 const OtpInput = ({ length, onChange }) => {
+  const router = useRouter();
   const handleChange = (e, index) => {
     const value = e.target.value;
 
@@ -9,7 +11,7 @@ const OtpInput = ({ length, onChange }) => {
     if (value.length > 1) return;
 
     const inputs = e.target.parentNode.querySelectorAll("input");
-    const otpArray = Array.from(inputs).map((input, i) => 
+    const otpArray = Array.from(inputs).map((input, i) =>
       i === index ? value : input.value
     );
 
@@ -49,6 +51,10 @@ const OtpInput = ({ length, onChange }) => {
     ));
   };
 
+  const handleClick = () => {
+    router.push("./FormPage")
+  }
+
   return <div className="otp-input-container">{renderInputs()}</div>;
 };
 
@@ -57,7 +63,7 @@ const OtpSection = ({ otp, setOtp, verifyOtp }) => {
     <div>
       <h2 className="text-lg font-semibold mb-4">Enter OTP</h2>
       <OtpInput length={6} onChange={setOtp} />
-      <Button onClick={Form} className="mt-3">
+      <Button onClick={()=>router.push("./FormPage")} className="mt-3">
         Verify OTP
       </Button>
     </div>
