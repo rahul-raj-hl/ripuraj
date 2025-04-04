@@ -75,4 +75,5 @@ const OTPValidation = () => {
   );
 };
 
+
 export default OTPValidation;
