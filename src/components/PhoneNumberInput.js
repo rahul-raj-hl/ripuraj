@@ -15,13 +15,12 @@ const PhoneNumberInput = ({ formik }) => {
         <input
           type="text"
           name="phoneNumber"
-          className="flex-1 outline-none text-black"
+          className="flex-1 outline-none text-black bg-transparent"
           placeholder="Phone Number"
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           required
-          style={{ backgroundColor: "transparent" }}
           maxLength={10}
         />
       </div>
@@ -29,7 +28,7 @@ const PhoneNumberInput = ({ formik }) => {
         <div className="text-red-500 mb-3">{formik.errors.phoneNumber}</div>
       )}
       <div className="flex items-center mb-3">
-        <input type="checkbox" id="terms" className="mr-2" required />
+        <input type="checkbox" id="terms" className="mr-2 bg-gray-200" required />
         <label htmlFor="terms" className="text-black">
           I agree to the <span className="font-bold">Terms and Privacy Policy</span>
         </label>
