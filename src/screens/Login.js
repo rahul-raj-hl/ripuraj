@@ -3,10 +3,11 @@ import OTPValidation from "./OtpValidation";
 import VideoSection from "../components/VideoSection";
 import TermsAndConditions from "../components/TermsAndConditions";
 import styles from '../styles/Home.module.css';
+import Footer from '../components/Footer';
 
 const Login = () => {
     return (
-        <div>
+        <div className='bg-white'> 
             <Image 
                 src='/headerImage.png'
                 layout="responsive"
@@ -18,6 +19,7 @@ const Login = () => {
             <OTPValidation />
             <VideoSection />
             <TermsAndConditions />
+            <Footer />
         </div>
     );
 };
