@@ -3,6 +3,7 @@ import { Input } from "./Input";
 import Label from "./Label";
 import validate from "./utils/validate";
 import { useRouter } from "next/router";
+import Button from "./Button";
 
 const FormPage = () => {
   const router = useRouter();
@@ -74,8 +75,8 @@ const FormPage = () => {
 //   console.log(form)
 // },[])
   return (
-    <div className="card card-body shadow-2xl w-[80%] mx-auto my-10">
-      <h2 className="text-2xl font-bold mx-auto my-2">Registration Form</h2>
+    <div className="card card-body shadow-2xl w-[80%] mx-auto my-10 bg-white text-black ">
+      <h2 className="text-2xl font-bold  my-2">Registration Form</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
           <Label label="Name" />
@@ -106,7 +107,7 @@ const FormPage = () => {
               onChange={(e) => handleFormChange("address1", e.target.value)}
             />
             <Input
-              className="input w-full my-2"
+              className="input w-full my-2 bg-white border-[#707070] border-1"
               placeholder="Street Address Line 2"
               type="text"
               value={form.address2}
@@ -180,18 +181,19 @@ const FormPage = () => {
           </div>
         </div>
         <div className="flex my-2">
-          <Input className="checkbox" type="checkbox" />
+          <Input className="w-4 h-4 text-white bg-gray-100 rounded-sm " type="checkbox" />
           <p className="mx-2">
             Buy Submitting, you agree to the <b>Tearms and Privacy Policy</b>
           </p>
         </div>
         <div className="my-5">
-          <button
-            className="btn btn-success w-full text-lg font-bold"
+          {/* <button
+            className="btn w-full text-lg border-none text-black font-bold bg-[#E9B72E]"
             type="submit"
           >
             Submit
-          </button>
+          </button> */}
+          <Button type="submit" className="btn w-full text-lg border-none text-black font-bold bg-[#E9B72E]">Submit</Button>
         </div>
       </form>
     </div>
