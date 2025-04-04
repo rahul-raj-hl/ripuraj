@@ -5,7 +5,7 @@ import TermsAndConditions from "../components/TermsAndConditions";
 import styles from '../styles/Home.module.css';
 import Footer from '../components/Footer';
 
-const Home = () => {
+const Login = () => {
     return (
         <div className='bg-white'> 
             <Image 
@@ -24,4 +24,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Login;
