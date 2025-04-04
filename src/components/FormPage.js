@@ -76,7 +76,7 @@ const FormPage = () => {
 // },[])
   return (
     <div className="card card-body shadow-2xl w-[80%] mx-auto my-10 bg-white text-black ">
-      <h2 className="text-2xl font-bold mx-auto my-2">Registration Form</h2>
+      <h2 className="text-2xl font-bold  my-2">Registration Form</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
           <Label label="Name" />

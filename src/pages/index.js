@@ -4,8 +4,8 @@ import Login from "@/screens/Login";
 export default function Home() {
   return (
     <div>
-      {/* <Login /> */}
-      <FormPage />
+      <Login />
+      {/* <FormPage /> */}
     </div>
   );
 }
