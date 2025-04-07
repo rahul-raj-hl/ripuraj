@@ -21,8 +21,11 @@ const TermsAndConditions = () => {
   ];
 
   return (
-    <div className="bg-yellow-100 py-[4%]">
-      <h2 className="text-center text-gray-800 text-2xl font-semibold font-bold pb-[2%]">
+    <div
+      className="bg-yellow-100 py-[4%]"
+      style={{ backgroundImage: "url('/termsConditionPageImg.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
+    >
+      <h2 className="text-center text-gray-800 text-2xl font-bold pb-[2%]">
         भाग लेने से पहले जानें
       </h2>
       <div className="bg-white p-5 rounded-lg shadow-md w-[80%]   mx-auto">

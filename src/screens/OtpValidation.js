@@ -44,12 +44,43 @@ const OTPValidation = () => {
     );
   };
 
+  const steps = [
+    {
+      key: "step1",
+      text: (
+        <>
+          <strong>QR कोड</strong> को अपने मोबाइल से <strong>स्कैन करें</strong> और <strong>Link</strong> को क्लिक करें।
+        </>
+      ),
+    },
+    {
+      key: "step2",
+      text: (
+        <>
+          <strong>Link</strong> में खुलने वाले पेज में अपना नाम, पूरा पता, मोबाइल नंबर, <br />
+          <span className="ml-14">और स्क्रैच कार्ड में दिए गए <strong>कूपन कोड</strong> को <strong>एंटर करें</strong>।</span>
+        </>
+      ),
+    },
+    {
+      key: "step3",
+      text: <>शिकायत या सुझाव के कमेंट के साथ <strong>Submit बटन</strong> दबाएं।</>,
+    },
+    {
+      key: "step4",
+      text: <>अपने <strong>SMS</strong> और <strong>वॉट्सऐप</strong> पर <strong>Welcome Note</strong> प्राप्त करें।</>,
+    },
+  ];
+
   if (isOtpVerified) {
     return <FormPage />;
   }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen items-stretch justify-center bg-gray-100 text-black px-5">
+    <div
+      className="flex flex-col md:flex-row min-h-screen items-stretch justify-center bg-img text-black px-5"
+      style={{ backgroundImage: "url('/validationPageImg.jpg')" }}
+    >
       <div className="flex flex-col md:flex-row w-full md:w-[85%]">
         <div className="bg-white p-5 rounded-2xl shadow-md flex flex-col md:flex-row flex-1 text-black min-h-[80px] m-auto py-4 gap-5 items-stretch relative">
           {/* Left Content */}
@@ -72,18 +103,13 @@ const OTPValidation = () => {
 
           {/* Right Content */}
           <div className="flex-1 flex flex-col items-stretch justify-center p-5 gap-4">
-            <h2 className="text-xl font-semibold mb-4 text-center">कूपन को कैसे प्रयोग करें</h2>
-            {[
-              "QR कोड को अपने मोबाइल से स्कैन करें और Link को क्लिक करें।",
-              "Link में खुलने वाले पेज में अपना नाम, पूरा पता, मोबाइल नंबर, और स्क्रैच कार्ड में दिए गए कूपन कोड को एंटर करें।",
-              "शिकायत या सुझाव के कमेंट के साथ Submit बटन दबाएं।",
-              "अपने SMS और वॉट्सऐप पर Welcome Note प्राप्त करें।",
-            ].map((step, index) => (
-              <div key={index} className="mb-4">
+            <h2 className="text-xl font-semibold">कूपन को कैसे प्रयोग करें</h2>
+            {steps.map((step, index) => (
+              <div key={step.key} className="mb-3">
                 <p className="text-base">
-                  <strong>Step {index + 1}:</strong> {step}
+                  <strong>Step {index + 1}:</strong> {step.text}
                 </p>
-                {index < 3 && <hr className="border-gray-300 my-2" />}
+                {index < steps.length && <hr className="border-gray-300 my-3" />}
               </div>
             ))}
           </div>
@@ -92,6 +118,4 @@ const OTPValidation = () => {
     </div>
   );
 };
-
-
 export default OTPValidation;
