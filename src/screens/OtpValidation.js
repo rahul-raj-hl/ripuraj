@@ -68,7 +68,7 @@ const OTPValidation = () => {
     },
     {
       key: "step4",
-      text: <>अपने <strong>SMS</strong> और <strong>वॉट्सऐप</strong> पर <strong>Welcome Note</strong> प्राप्त करें।</>,
+      text: <>अपने <strong>SMS</strong> और <strong>WhatsApp</strong> पर <strong>Welcome Note</strong> प्राप्त करें।</>,
     },
   ];
 
@@ -78,38 +78,36 @@ const OTPValidation = () => {
 
   return (
     <div
-      className="flex flex-col md:flex-row min-h-screen items-stretch justify-center bg-img text-black px-5"
+      className="flex flex-col min-h-screen items-stretch justify-center bg-img text-black px-5"
       style={{ backgroundImage: "url('/validationPageImg.jpg')" }}
     >
-      <div className="flex flex-col md:flex-row w-full md:w-[85%]">
-        <div className="bg-white p-5 rounded-2xl shadow-md flex flex-col md:flex-row flex-1 text-black min-h-[80px] m-auto py-4 gap-5 items-stretch relative">
+      <div className="flex flex-col md:flex-row w-full max-w-[100%] lg:max-w-[90%] mx-auto">
+        <div className="bg-white rounded-2xl shadow-md flex flex-col md:flex-row flex-1 text-black min-h-[80px] gap-5 items-stretch relative">
           {/* Left Content */}
-          <div className="flex-1 flex flex-col items-stretch justify-center p-5 border-b md:border-b-0 md:border-r border-gray-300 gap-4">
+          <div className="flex-1 flex flex-col items-stretch justify-center p-8 border-b md:border-b-0 md:border-r border-[#D3D3D3] gap-4">
             {isOtpSent ? (
               <OtpSection otp={otp} setOtp={setOtp} verifyOtp={verifyOtp} />
             ) : (
               <>
-                <h2 className="text-lg font-semibold mb-4 font-serif text-left">
+                <h2 className="text-lg font-semibold mb-1 font-serif text-left">
                   Enter Your Mobile Number
                 </h2>
+                <h1 className="font-medium">Phone Number</h1>
                 <PhoneNumberInput formik={formik} />
               </>
             )}
             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
           </div>
 
-          {/* Vertical Divider */}
-          <div className="hidden md:block w-[1px] bg-gray-300 h-full"></div>
-
           {/* Right Content */}
-          <div className="flex-1 flex flex-col items-stretch justify-center p-5 gap-4">
-            <h2 className="text-xl font-semibold">कूपन को कैसे प्रयोग करें</h2>
+          <div className="flex-1 flex flex-col items-stretch justify-center p-4 md:py-18 md:pb-12 md:pr-8 gap-4">
+            <h2 className="text-xl font-bold">कूपन को कैसे प्रयोग करें:</h2>
             {steps.map((step, index) => (
-              <div key={step.key} className="mb-3">
-                <p className="text-base">
+              <div key={step.key} className="">
+                <p className="text-base mb-2">
                   <strong>Step {index + 1}:</strong> {step.text}
                 </p>
-                {index < steps.length && <hr className="border-gray-300 my-3" />}
+                {index < steps.length && <hr className="border-gray-300" />}
               </div>
             ))}
           </div>
