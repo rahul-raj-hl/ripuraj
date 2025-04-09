@@ -3,24 +3,28 @@ import React from "react";
 
 const Footer1 = () => {
   return (
-    <div className="relative">
-      <div>
-        <Image
-          src="/footer_1.jpg"
-          layout="responsive"
-          width={100}
-          height={80}
-          alt="footer-1"
-        />
-      </div>
+    <div className="relative w-full overflow-hidden">
+      {/* Background Image */}
+      <Image
+        src="/footer_1.jpg" // background with coins
+        alt="footer background"
+        layout="responsive"
+        width={500}
+            height={400}
+        objectFit="cover"
+        quality={100}
+        className="z-0"
+      />
+
+      {/* Centered Product Image */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-3/5 sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4">
+        <div className="w-4/9 md:w-4/8 lg:w-4/9 px-4">
           <Image
-            src="/10.png"
+            src="/10.png" // product group image
+            alt="footer product"
             layout="responsive"
-            width={100}
-            height={80}
-            alt="footer-2"
+            width={500}
+            height={400}
           />
         </div>
       </div>
