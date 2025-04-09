@@ -1,57 +1,59 @@
+import React from "react";
+
 const TermsAndConditions = () => {
   const sections = [
     {
       title: "नियम एवं शर्तें:",
       items: [
         "स्क्रैच किया गया कूपन संभाल कर रखें।",
-        "इनाम प्राप्त करते समय कूपन को कंपनी कर्मचारी को लौटाएं।",
-        "शिकायत या सुझाव के कमेंट के साथ Submit बटन दबाएं।",
-        "अपने SMS और वॉट्सऐप पर Welcome Note प्राप्त करें।",
+        "इनाम प्राप्त करते समय कूपन को कंपनी कर्मचारी को लौटादें।",
+        "सभी विवाद मोतिहारी न्यायालय क्षेत्राधिकार के अधीन है।",
+        "किसी भी विवाद के संबंध में <strong>RAPL</strong> द्वारा लिया गया निर्णय अंतिम होगा।",
       ],
     },
     {
       title: "Terms & Conditions:",
       items: [
-        "Keep the scratched coupon safe.",
-        "Return the coupon to the company staff when claiming the prize.",
+        "Keep the <strong>scratched coupon</strong> safe.",
+        "<strong>Return the coupon</strong> to the company staff while claiming the prize.",
         "All disputes will be under the jurisdiction of the Motihari court.",
-        "In case of any dispute, the decision made by RAPL will be final.",
+        "In case of any dispute, the decision made by <strong>RAPL</strong> will be final.",
       ],
     },
   ];
 
-  return (
-    <div className="bg-yellow-100 py-[4%]">
-      <h2 className="text-center text-gray-800 text-2xl font-semibold font-bold pb-[2%]">
-        भाग लेने से पहले जानें
-      </h2>
-      <div className="bg-white p-5 rounded-lg shadow-md w-[80%]   mx-auto">
-        <div className="flex flex-col md:flex-row justify-between   my-[2%] gap-5">
-          {sections.map((section, index) => (
-            <div
-              className={`
-              relative md:px-5
-              ${index !== 0 ? "pt-5 md:pt-0" : ""}
-            `}
-              key={index}
-            >
-              {/* Horizontal divider (for mobile) */}
-              {index !== 0 && (
-                <div className="block md:hidden absolute top-0 left-0 w-full h-px bg-gray-300"></div>
-              )}
+  const renderSection = (section, index) => (
+    <div key={index} className="relative md:px-5">
+      <h3 className="text-gray-700 font-bold mb-3">{section.title}</h3>
+      <ol className="list-decimal pl-5 text-gray-600 space-y-2">
+        {section.items.map((item, idx) => (
+          <li key={idx} dangerouslySetInnerHTML={{ __html: item }}></li>
+        ))}
+      </ol>
+    </div>
+  );
 
-              {/* Vertical divider (for md and above) */}
-              {index !== 0 && (
-                <div className="hidden md:block absolute left-0 top-0 h-full w-px bg-gray-300"></div>
-              )}
-              <h3 className="text-gray-700 font-bold mb-3">{section.title}</h3>
-              <ol className="list-decimal pl-5 text-gray-600 space-y-2">
-                {section.items.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ol>
-            </div>
-          ))}
+  return (
+    <div
+      className="bg-yellow-100 py-[4%] bg-cover bg-center"
+      style={{ backgroundImage: "url('/termsConditionPageImg.jpg')" }}
+    >
+      <h2 className="text-center text-gray-800 text-2xl md:text-3xl font-extrabold pb-[2%]">
+        भाग लेने से पहले जानें:
+      </h2>
+
+      <div className="bg-white rounded-lg shadow-md w-[95%] sm:w-[90%] md:w-[85%] mx-auto relative">
+        <div className="flex flex-col md:flex-row justify-between gap-3 md:gap-5">
+
+        {/*left section */}
+          <div className="flex-1 border-b py-5 md:border-b-0 md:border-r border-[#D3D3D3]">
+            {sections.map((section, index) => index === 0 && renderSection(section, index))}
+          </div>
+
+        {/*right section */}
+          <div className="flex-1 py-5">
+            {sections.map((section, index) => index === 1 && renderSection(section, index))}
+          </div>
         </div>
       </div>
     </div>

@@ -44,45 +44,76 @@ const OTPValidation = () => {
     );
   };
 
+  const steps = [
+    {
+      key: "step1",
+      text: (
+        <>
+          <strong>QR कोड</strong> को अपने मोबाइल से <strong>स्कैन करें</strong> और <strong>Link</strong> को क्लिक करें।
+        </>
+      ),
+    },
+    {
+      key: "step2",
+      text: (
+        <>
+          <strong>Link</strong> में खुलने वाले पेज में अपना नाम, पूरा पता, मोबाइल नंबर,
+          <span >और स्क्रैच कार्ड में दिए गए कूपन कोड को एंटर करें।</span>
+        </>
+      ),
+    },
+    {
+      key: "step3",
+      text: <>शिकायत या सुझाव के कमेंट के साथ <strong>Submit </strong> बटन दबाएं।</>,
+    },
+    {
+      key: "step4",
+      text: <>अपने <strong>SMS</strong> और <strong>WhatsApp</strong> पर <strong>Welcome Note</strong> प्राप्त करें।</>,
+    },
+  ];
+
   if (isOtpVerified) {
     return <FormPage />;
   }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen items-stretch justify-center bg-gray-100 text-black px-5">
-      <div className="flex flex-col md:flex-row w-full md:w-[85%]">
-        <div className="bg-white p-10 rounded-l-2xl shadow-md flex-1 text-black min-h-[434px] m-auto py-24">
-          {isOtpSent ? (
-            <OtpSection otp={otp} setOtp={setOtp} verifyOtp={verifyOtp} />
-          ) : (
-            <>
-              <h2 className="text-lg font-semibold mb-4 font-serif">
-                Enter Your Mobile Number
-              </h2>
-              <PhoneNumberInput formik={formik} />
-            </>
-          )}
-          {error && <p className="text-red-500 mt-2">{error}</p>}
-        </div>
-        <div className="p-5 bg-white rounded-r-2xl shadow-md flex-1 text-black min-h-[434px] m-auto py-24">
-          <h2 className="text-lg font-semibold mb-4">कूपन को कैसे प्रयोग करें</h2>
-          {[
-            "QR कोड को अपने मोबाइल से स्कैन करें और Link को क्लिक करें।",
-            "Link में खुलने वाले पेज में अपना नाम, पूरा पता, मोबाइल नंबर, और स्क्रैच कार्ड में दिए गए कूपन कोड को एंटर करें।",
-            "शिकायत या सुझाव के कमेंट के साथ Submit बटन दबाएं।",
-            "अपने SMS और वॉट्सऐप पर Welcome Note प्राप्त करें।",
-          ].map((step, index) => (
-            <div key={index}>
-              <p>
-                <strong>Step {index + 1}:</strong> {step}
-              </p>
-              <hr className="border-gray-300 my-2" />
-            </div>
-          ))}
+    <div
+      className="flex flex-col min-h-screen items-stretch justify-center bg-img text-black px-5"
+      style={{ backgroundImage: "url('/validationPageImg.jpg')" }}
+    >
+      <div className="flex flex-col md:flex-row w-full max-w-[100%] lg:max-w-[90%] mx-auto">
+        <div className="bg-white rounded-2xl shadow-md flex flex-col md:flex-row flex-1 text-black min-h-[80px] gap-5 items-stretch relative">
+          {/* Left Content */}
+          <div className="flex-1 flex flex-col items-stretch justify-center p-8 border-b md:border-b-0 md:border-r border-[#D3D3D3] gap-3">
+            {isOtpSent ? (
+              <OtpSection otp={otp} setOtp={setOtp} verifyOtp={verifyOtp} />
+            ) : (
+              <>
+                <h2 className="text-lg font-semibold font-serif text-left">
+                  Enter Your Mobile Number
+                </h2>
+                <h1 className="font-medium">Phone Number</h1>
+                <PhoneNumberInput formik={formik} />
+              </>
+            )}
+            {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
+          </div>
+
+          {/* Right Content */}
+          <div className="flex-1 flex flex-col items-stretch justify-center p-4 md:py-18 md:pb-12 md:pr-8 gap-4 font-medium">
+            <h2 className="text-xl font-bold">कूपन को कैसे प्रयोग करें:</h2>
+            {steps.map((step, index) => (
+              <div key={step.key} className="">
+                <p className="text-base mb-4">
+                  <strong >Step {index + 1}:</strong> {step.text}
+                </p>
+                {index < steps.length && <hr className="border-gray-300" />}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default OTPValidation;
