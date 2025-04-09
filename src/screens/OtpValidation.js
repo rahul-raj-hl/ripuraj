@@ -73,7 +73,7 @@ const OTPValidation = () => {
   ];
 
   if (isOtpVerified) {
-    return <FormPage />;
+    router.push("/userform");
   }
 
   return (

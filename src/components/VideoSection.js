@@ -21,7 +21,7 @@ return (
             अब इनाम जितना हुआ आसान! देखिए ये वीडियो और जानिए कैसे आप{" "}
             <strong>Ripuraj Gold /</strong>
             <strong>Silver Scheme</strong>
-            <br /> में भाग लेकर बन सकते हैं <strong>Lucky Winner</strong>!
+             में भाग लेकर बन सकते हैं <strong>Lucky Winner</strong>!
         </p>
         <div
             className="relative flex justify-center items-center w-full max-w-[1166px] h-[200px] sm:h-[400px] bg-yellow-400 rounded-2xl"
