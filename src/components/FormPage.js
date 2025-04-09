@@ -92,18 +92,30 @@ const FormPage = () => {
     setErrors(initialState);
   };
   return (
-    <div>
-      <div>
-        <Image
-          layout="responsive"
-          width={100}
-          height={80}
-          alt="Picture of the author"
-          src={"/MainForm_bg.jpg"}
-          className="opacity-55 absolute -my-[3.16%]"
-        />
-      </div>
-      <div className="card card-body shadow-2xl w-[80%] mx-auto my-10 bg-white text-black ">
+    <div className="relative min-h-screen flex items-center justify-center">
+       {/* Desktop background image */}
+      <Image
+    src="/MainForm_bg.jpg"
+    alt="Background"
+    layout="fill"
+    objectFit="cover"
+    className="hidden md:block absolute inset-0 z-0 opacity-90"
+    priority
+  />
+
+  {/* Mobile background image */}
+  <Image
+    src="/MainForm_bg_mobile.jpg"
+    alt="Mobile Background"
+    layout="fill"
+    objectFit="cover"
+    className="block md:hidden absolute inset-0 z-0 opacity-90"
+    priority
+  />
+
+      {/* Form Section - KEEP THIS EXACTLY AS YOU HAVE IT */}
+      <div className="card card-body mx-4 my-6 md:mx-32 md:my-10 shadow-2xl w-full md:w-[80%] bg-white text-black z-10">
+        
         <h2 className="text-2xl font-bold  my-2">Registration Form</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
@@ -179,11 +191,12 @@ const FormPage = () => {
             <div className="">
               <Label label="Phone *" />
               <Input
-                className="bg-gray-200 text-gray-500 cursor-not-allowed input w-full border-[#707070] border-1 font-medium"
+                className="bg-gray-200 text-gray-500  input w-full border-[#707070] border-1 font-medium"
                 placeholder="Phone"
                 type="text"
                 value={form.phone}
                 error={errors.phone}
+                onChange={(e) => handleFormChange("phone", e.target.value)}
               />
             </div>
             <div>

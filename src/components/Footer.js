@@ -17,19 +17,19 @@ const Footer = () => {
       </div>
 
       {/* Foreground Content */}
-      <div className="relative z-10 px-[8%] py-6 text-white">
+      <div className="relative z-10 px-[3%] py-7 text-white">
         {/* Logo & Socials */}
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-6">
           <div>
-            <img className="w-40 h-auto" src="/ripuraj-logo.png" alt="logo" />
+            <img className="w-30 h-auto " src="/ripuraj-logo.png" alt="logo" />
           </div>
           <div className="flex gap-3 items-center">
             <a href="#">
               <Svg
                 id="Layer_2"
                 xmlns="http://www.w3.org/2000/svg"
-                width="30.634"
-                height="30.634"
+                width="25.634"
+                height="25.634"
                 viewBox="0 0 33.634 33.634"
               >
                 <path
@@ -45,8 +45,8 @@ const Footer = () => {
               <Svg
                 id="instagram_2_"
                 xmlns="http://www.w3.org/2000/svg"
-                width="30.634"
-                height="30.634"
+                width="25.634"
+                height="25.634"
                 viewBox="0 0 33.634 33.634"
               >
                 <path
@@ -70,8 +70,8 @@ const Footer = () => {
               <Svg
                 id="_211929_social_youtube_icon"
                 xmlns="http://www.w3.org/2000/svg"
-                width="35.836"
-                height="30.634"
+                width="30.836"
+                height="28.634"
                 viewBox="0 0 44.836 33.634"
               >
                 <path
@@ -85,12 +85,12 @@ const Footer = () => {
         </div>
 
         {/* Footer Links */}
-        <div className="flex justify-between border-t-[2px] text-black border-[#bebcbc] pt-4 text-sm">
+        <div className="flex font-medium justify-between border-t-[2px] text-black border-[#bebcbc] pt-4 text-sm">
           <div className="text-[#262688]">
             <p>© 2025 Ripuraj Agro</p>
           </div>
           <div className="flex gap-5 text-[#262688]">
-            <p>TERMS OF USE</p>
+            <p>© TERMS OF USE</p>
             <p>PRIVACY NOTICE</p>
           </div>
         </div>

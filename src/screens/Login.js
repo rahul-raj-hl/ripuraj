@@ -8,6 +8,7 @@ import LandingPage from '@/components/LandingPage';
 import Footer1 from '../components/Footer1';
 import FormSubmitted from '@/components/FormSubmitted';
 import Navbar from '@/components/Navbar';
+import FormPage from '@/components/FormPage';
 
 const Login = () => {
     return (

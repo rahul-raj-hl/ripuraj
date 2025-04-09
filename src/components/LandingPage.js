@@ -29,10 +29,10 @@ const LandingPage = () => {
       </div>
       <div className="absolute top-0 left-0 w-full h-full flex items-center justify-end px-4 md:px-10">
         <div className="text-center text-white bg-opacity-50 rounded p-4 mr-[5%] mt-[5%] max-w-[90%] sm:max-w-[80%] md:max-w-[50%] lg:max-w-[40%]">
-          <p className="text-sm  sm:text-lg md:text-xl lg:text-2xl mb-2">
+          <p className="text-m  sm:text-lg md:text-xl lg:text-2xl mb-2">
             ख़रीदे रिपुराज सोनाशक्ति और
           </p>
-          <p className="text-base font-bold sm:text-2xl md:text-3xl lg:text-4xl mb-2">
+          <p className="text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl mb-2">
             जीतें <span className="text-[#E9B72E]">सोने</span> और{" "}
             <span className="text-[#E9B72E]">चांदी</span> के सिक्के
           </p>

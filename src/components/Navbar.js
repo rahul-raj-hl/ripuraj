@@ -11,7 +11,7 @@ const Navbar = () => {
       <div>
         <Select
           className={
-            "bg-[#E9B72E] text-black rounded-3xl w-30 px-7 font-medium"
+            "bg-[#E9B72E] text-black text-base rounded-3xl w-30 px-7 font-medium"
           }
           optionValue={LANGUAGE}
           placeholder="language"
