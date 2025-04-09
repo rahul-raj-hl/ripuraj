@@ -3,20 +3,21 @@ import Button from "./Button";
 const PhoneNumberInput = ({ formik }) => {
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="flex items-center border rounded-md p-2 mb-3">
+      <div className="flex items-center border border-1 border-[#A2A2A2] rounded-md p-2 mb-3">
         <div className="flex items-center mr-2">
           <img
             src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png"
             alt="India Flag"
             className="w-6 h-4 mr-1"
           />
+        <div className="border-l border-[#A2A2A2] h-6 mx-2"></div>
           <span className="text-black">+91</span>
         </div>
+
         <input
           type="text"
           name="phoneNumber"
           className="flex-1 outline-none text-black bg-transparent"
-          placeholder="Phone Number"
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
