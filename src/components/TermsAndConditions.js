@@ -24,7 +24,7 @@ const TermsAndConditions = () => {
 
   const renderSection = (section, index) => (
     <div key={index} className="relative md:px-5">
-      <h3 className="text-gray-700 font-bold mb-3">{section.title}</h3>
+      <h3 className="text-[#161644] text-xl font-extrabold mb-3">{section.title}</h3>
       <ol className="list-decimal pl-5 text-gray-600 space-y-2">
         {section.items.map((item, idx) => (
           <li key={idx} dangerouslySetInnerHTML={{ __html: item }}></li>
@@ -38,12 +38,12 @@ const TermsAndConditions = () => {
       className="bg-yellow-100 py-[4%] bg-cover bg-center"
       style={{ backgroundImage: "url('/termsConditionPageImg.jpg')" }}
     >
-      <h2 className="text-center text-gray-800 text-2xl md:text-3xl font-extrabold pb-[2%]">
+      <h2 className="text-center text-gray-800 text-2xl mt-6 md:text-3xl font-extrabold pb-[2%]">
         भाग लेने से पहले जानें:
       </h2>
 
-      <div className="bg-white rounded-lg shadow-md w-[95%] sm:w-[90%] md:w-[85%] mx-auto relative">
-        <div className="flex flex-col md:flex-row justify-between gap-3 md:gap-5">
+      <div className="bg-white rounded-3xl shadow-md w-[92%] sm:w-[90%] md:w-[85%] mx-auto mb-12 relative">
+        <div className="flex flex-col p-4 md:flex-row justify-between gap-3 md:gap-5">
 
         {/*left section */}
           <div className="flex-1 border-b py-5 md:border-b-0 md:border-r border-[#D3D3D3]">
