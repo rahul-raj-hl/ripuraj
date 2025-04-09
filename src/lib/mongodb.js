@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = "mongodb+srv://rahulraj:rahulraj@cluster0.ohykh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
+console.log("MONGODB_URI", MONGODB_URI);
 if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI in .env.local");
 }
@@ -13,15 +14,26 @@ export async function connectToDB() {
   if (cached.conn) return cached.conn; // Use existing connection
 
   if (!cached.promise) {
-    cached.promise = mongoose
-      .connect(MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-      .then((mongoose) => mongoose);
+    const opts = {
+      bufferCommands: false,
+    };
+
+    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+      console.log("MongoDB connected successfully");
+      return mongoose;
+    }).catch((error) => {
+      console.error("MongoDB connection error:", error);
+      throw error;
+    });
   }
 
-  cached.conn = await cached.promise;
+  try {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null;
+    throw e;
+  }
+
   global.mongoose = cached; // Store connection globally
   return cached.conn;
 }
