@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import { string } from "yup";
 
 const couponSchema = new mongoose.Schema(
   {
     code: { type: String, required: true, unique: true, trim: true },
     campaignId: { 
-      type: Number, 
+      type: string, 
       ref: "Campaign", 
       required: true 
     }, // Foreign key reference
