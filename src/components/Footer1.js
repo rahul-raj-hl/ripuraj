@@ -5,16 +5,18 @@ const Footer1 = () => {
   return (
     <div className="relative w-full overflow-hidden">
       {/* Background Image */}
+      <div className="h-40%">
       <Image
         src="/footer_1.jpg" // background with coins
         alt="footer background"
         layout="responsive"
         width={500}
-            height={400}
+        height={120}
         objectFit="cover"
         quality={100}
-        className="z-0"
+        className="z-0 "
       />
+      </div>
 
       {/* Centered Product Image */}
       <div className="absolute inset-0 flex items-center justify-center">
