@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Button from "./Button";
+import Image from "next/image"; // Added import for next/image
 
 const PhoneNumberInput = ({ formik }) => {
 
@@ -7,16 +8,19 @@ const PhoneNumberInput = ({ formik }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="flex items-center border border-1 border-[#A2A2A2] rounded-md p-2 mb-3">
+      <div className="flex items-center border-1 border-[#A2A2A2] rounded-md p-2 mb-3">
         <div className="flex items-center mr-2">
-          <img
+          <Image
             src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png"
             alt="India Flag"
-            className="w-6 h-4 mr-1"
+            width={24} 
+            height={16}
+            className="mr-1"
           />
         <div className="border-l border-[#A2A2A2] h-6 mx-2"></div>
           <span className="text-black">+91</span>
         </div>
+
 
         <input
           type="text"

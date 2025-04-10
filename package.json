@@ -14,6 +14,7 @@
     "formik": "^2.4.6",
     "i18next": "^24.2.3",
     "mongoose": "^8.12.1",
+    "mongoose-sequence": "^6.0.1",
     "next": "15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

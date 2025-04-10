@@ -11,11 +11,13 @@ const Navbar = () => {
 
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
+  console.log("i18n", i18n)
+
   const handleLanguageChange = (e) => {
     setSelectedLanguage(e.target.value);
     // dispatch(changeLanguage(e.target.value.toLowerCase()));
     i18n.changeLanguage(e.target.value.toLowerCase());
-    // console.log(e.target.value.toLowerCase());
+    console.log(e.target.value.toLowerCase());
   };
 
   return (

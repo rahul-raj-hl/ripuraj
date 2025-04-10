@@ -1,6 +1,4 @@
-import { useRouter } from "next/router";
 import Button from "./Button";
-import FormPage from "./FormPage";
 
 const OtpInput = ({ onChange }) => {
   const handleChange = (e) => {

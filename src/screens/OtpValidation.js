@@ -107,10 +107,13 @@ const OTPValidation = () => {
               {t("howToUseCoupon")}
               </h2>
             {steps.map((step, index) => (
-              <div key={step.key} className="">
-                <p className="text-base mb-4">
-                  <strong >Step {index + 1}:</strong> {step.text}
-                </p>
+              <div key={step.key} className="flex flex-col">
+                <div className="flex items-start">
+                  <span className="font-bold w-15 flex-shrink-0">
+                      Step {index +1}:
+                  </span>
+                <p className="text-base mb-4">{step.text}  </p>
+                </div>
                 {index < steps.length && <hr className="border-gray-300" />}
               </div>
             ))}
