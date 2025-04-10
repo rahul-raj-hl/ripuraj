@@ -1,22 +1,30 @@
-import { connectToDB } from "@/lib/mongodb";
+import { connectToDB } from "../../lib/mongodb";
 import User from "@/models/User";
 import Coupon from "@/models/coupon";
 import Form from "@/models/form";
 
 export default async function handler(req, res) {
   await connectToDB();
-  console.log("here")
   if (req.method === "POST") {
     try {
-      console.log("req.body", req.body);
-      const { userDetails, campaignId, couponCode, address} = req.body;
-      
+      const { userDetails, campaignId, couponCode, address } = req.body;
 
       // 1. Check if user exists by phone
       let user = await User.findOne({ phone: userDetails.phone });
-
+      console.log(user);
       if (user) {
-        // User exists, validate coupon
+        // Check if user is already registered for this campaign
+        const existingForm = await Form.findOne({
+          userId: user.userId,
+          campaignId: campaignId,
+        });
+
+        if (existingForm) {
+          return res
+            .status(400)
+            .json({ error: "User already registered for this campaign" });
+        }
+
         const coupon = await Coupon.findOne({
           code: couponCode,
           campaignId: campaignId,
@@ -30,25 +38,11 @@ export default async function handler(req, res) {
         if (coupon.userId) {
           return res.status(400).json({ error: "Coupon already used" });
         }
-
-        // Check if user is already registered for this campaign
-        const existingForm = await Form.findOne({
-          userId: user.userId,
-          campaignId: campaignId,
-        });
-
-        if (existingForm) {
-          return res
-            .status(400)
-            .json({ error: "User already registered for this campaign" });
-        }
       } else {
         // Create new user
         user = new User({
           ...userDetails,
-          email: userDetails.email,
-          phone: userDetails.phone,
-          address: address,
+          address,
         });
         await user.save();
       }
@@ -88,5 +82,3 @@ export default async function handler(req, res) {
 
   res.status(405).json({ error: "Method not allowed" });
 }
-
-

@@ -15,7 +15,7 @@ const formSchema = new mongoose.Schema(
     }, // FK reference to Coupon
 
     campaignId: { 
-      type: Number, 
+      type: String, 
       ref: "Campaign", 
       required: true 
     }, // FK reference to Campaign
