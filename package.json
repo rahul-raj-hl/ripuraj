@@ -9,13 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.6.1",
     "dotenv": "^16.4.7",
     "formik": "^2.4.6",
+    "i18next": "^24.2.3",
     "mongoose": "^8.12.1",
     "next": "15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-flags-select": "^2.4.0",
+    "react-i18next": "^15.4.1",
+    "react-redux": "^9.2.0",
     "react-world-flags": "^1.6.0",
     "yup": "^1.6.1"
   },

@@ -5,7 +5,7 @@ import OtpSection from "../components/OtpSection";
 import PhoneNumberInput from "../components/PhoneNumberInput";
 import { apiRequest } from "../utils/apiRequest";
 import { useRouter } from "next/router";
-import FormPage from "../components/FormPage";
+import { Trans, useTranslation } from "react-i18next";
 
 const OTPValidation = () => {
   const router = useRouter();
@@ -13,6 +13,8 @@ const OTPValidation = () => {
   const [error, setError] = useState("");
   const [otp, setOtp] = useState("");
   const [isOtpVerified, setIsOtpVerified] = useState(false);
+
+  const {t, i18n} = useTranslation();
 
   const formik = useFormik({
     initialValues: { phoneNumber: "" },
@@ -48,27 +50,22 @@ const OTPValidation = () => {
     {
       key: "step1",
       text: (
-        <>
-          <strong>QR कोड</strong> को अपने मोबाइल से <strong>स्कैन करें</strong> और <strong>Link</strong> को क्लिक करें।
-        </>
+        <Trans i18nKey="step1" components={{ 0: <strong />, 1: <strong />,2: <strong /> }} />
       ),
     },
     {
       key: "step2",
       text: (
-        <>
-          <strong>Link</strong> में खुलने वाले पेज में अपना नाम, पूरा पता, मोबाइल नंबर,
-          <span >और स्क्रैच कार्ड में दिए गए कूपन कोड को एंटर करें।</span>
-        </>
+        <Trans i18nKey="step2" components={{ 0:<strong />,1: <span /> }} />
       ),
     },
     {
       key: "step3",
-      text: <>शिकायत या सुझाव के कमेंट के साथ <strong>Submit </strong> बटन दबाएं।</>,
+      text: <Trans i18nKey="step3" components={{ 0: <strong /> }} />,
     },
     {
       key: "step4",
-      text: <>अपने <strong>SMS</strong> और <strong>WhatsApp</strong> पर <strong>Welcome Note</strong> प्राप्त करें।</>,
+      text: <Trans i18nKey="step4" components={{ 0: <strong />, 1: <strong />, 2: <strong /> }} />,
     },
   ];
 
@@ -90,9 +87,13 @@ const OTPValidation = () => {
             ) : (
               <>
                 <h2 className="text-lg font-semibold font-serif text-left">
-                  Enter Your Mobile Number
+                  {/* Enter Your Mobile Number */}
+                  {t("enterMobileNumber")}
                 </h2>
-                <h1 className="font-medium">Phone Number</h1>
+                <h1 className="font-medium">
+                  {/* Phone Number */}
+                  {t("phoneNumber")}
+                  </h1>
                 <PhoneNumberInput formik={formik} />
               </>
             )}
@@ -101,7 +102,10 @@ const OTPValidation = () => {
 
           {/* Right Content */}
           <div className="flex-1 flex flex-col items-stretch justify-center p-4 md:py-18 md:pb-12 md:pr-8 gap-4 font-medium">
-            <h2 className="text-xl font-bold">कूपन को कैसे प्रयोग करें:</h2>
+            <h2 className="text-xl font-bold">
+              {/* कूपन को कैसे प्रयोग करें: */}
+              {t("howToUseCoupon")}
+              </h2>
             {steps.map((step, index) => (
               <div key={step.key} className="">
                 <p className="text-base mb-4">

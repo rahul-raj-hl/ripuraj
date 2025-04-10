@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+LanguageTest.js
 
 # next.js
 /.next/

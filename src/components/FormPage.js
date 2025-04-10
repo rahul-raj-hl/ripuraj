@@ -79,7 +79,7 @@ const FormPage = () => {
         pincode: form.postalCode,
         state: form.country,
       },
-      campaignId: "123", // you can dynamically assign if needed
+      campaignId: "123",
       couponCode: form.couponCode,
     };
 
@@ -93,29 +93,27 @@ const FormPage = () => {
   };
   return (
     <div className="relative min-h-screen flex items-center justify-center">
-       {/* Desktop background image */}
+      {/* Desktop background image */}
       <Image
-    src="/MainForm_bg.jpg"
-    alt="Background"
-    layout="fill"
-    objectFit="cover"
-    className="hidden md:block absolute inset-0 z-0 opacity-90"
-    priority
-  />
+        src="/MainForm_bg.jpg"
+        alt="Background"
+        layout="fill"
+        objectFit="cover"
+        className="hidden md:block absolute inset-0 z-0 opacity-90"
+        priority
+      />
 
-  {/* Mobile background image */}
-  <Image
-    src="/MainForm_bg_mobile.jpg"
-    alt="Mobile Background"
-    layout="fill"
-    objectFit="cover"
-    className="block md:hidden absolute inset-0 z-0 opacity-90"
-    priority
-  />
+      {/* Mobile background image */}
+      <Image
+        src="/MainForm_bg_mobile.jpg"
+        alt="Mobile Background"
+        layout="fill"
+        objectFit="cover"
+        className="block md:hidden absolute inset-0 z-0 opacity-90"
+        priority
+      />
 
-      {/* Form Section - KEEP THIS EXACTLY AS YOU HAVE IT */}
       <div className="card card-body mx-4 my-6 md:mx-32 md:my-10 shadow-2xl w-full md:w-[80%] bg-white text-black z-10">
-        
         <h2 className="text-2xl font-bold  my-2">Registration Form</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
