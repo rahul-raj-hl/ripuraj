@@ -1,10 +1,12 @@
-import FormSubmitted from "@/components/FormSubmitted";
+import FormSubmitted from '@/components/FormSubmitted'
+import React from 'react'
 
-
-export default function Home() {
+const index = () => {
   return (
     <div>
-      <FormSubmitted />
+        <FormSubmitted />
     </div>
-  );
+  )
 }
+
+export default index
