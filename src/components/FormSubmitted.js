@@ -13,7 +13,6 @@ const FormSubmitted = () => {
   useEffect(() => {
     fun();
   }, []);
-  console.log(value);
 
   return (
     <div className="card card-body mx-auto my-10 w-[80%] shadow-2xl text-center">
