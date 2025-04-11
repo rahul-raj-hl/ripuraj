@@ -8,24 +8,25 @@ const PhoneNumberInput = ({ formik }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="flex items-center border-1 border-[#A2A2A2] rounded-md p-2 mb-3">
-        <div className="flex items-center mr-2">
+      <div className="flex items-center border-1 border-[#A2A2A2] rounded-md p-2 mb-3" style={{ boxSizing: 'border-box' }}>
+        <div className="flex items-center mr-2" style={{ minWidth: '80px' }}>
           <Image
             src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png"
             alt="India Flag"
             width={24} 
             height={16}
             className="mr-1"
+            style={{ flexShrink: 0 }}
           />
-        <div className="border-l border-[#A2A2A2] h-6 mx-2"></div>
-          <span className="text-black">+91</span>
+          <div className="border-l border-[#A2A2A2] h-6 mx-2" style={{ flexShrink: 0 }}></div>
+          <span className="text-black" style={{ whiteSpace: 'nowrap' }}>+91</span>
         </div>
-
 
         <input
           type="text"
           name="phoneNumber"
           className="flex-1 outline-none text-black bg-transparent"
+          style={{ minWidth: '0', width: '100%' }}
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
