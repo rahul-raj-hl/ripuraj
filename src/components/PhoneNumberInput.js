@@ -27,6 +27,7 @@ const PhoneNumberInput = ({ formik }) => {
             width={24} 
             height={16}
             className="mr-1"
+            style={{ flexShrink: 0 }}
           />
         <div className="border-l border-[#A2A2A2] h-6 ml-2"></div>
         <Select
@@ -38,11 +39,11 @@ const PhoneNumberInput = ({ formik }) => {
           {/* <span className="text-black">+91</span> */}
         </div>
 
-
         <input
           type="text"
           name="phoneNumber"
           className="flex-1 outline-none text-black bg-transparent"
+          style={{ minWidth: '0', width: '100%' }}
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
