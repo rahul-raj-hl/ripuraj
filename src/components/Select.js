@@ -2,9 +2,9 @@ import React from "react";
 
 const Select = ({ className, optionValue, onChange, value }) => {
   return (
-    <div className="my-1">
+    <div className="">
       <select
-        className={"select my-1 border-none outline-none focus:outline-none focus:ring-0 " + className}
+        className={"select border-none outline-none focus:outline-none focus:ring-0 " + className}
         onChange={onChange}
         value={value}
       >

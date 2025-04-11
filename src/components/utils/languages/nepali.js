@@ -23,6 +23,11 @@ const nepali = {
   step3: "<0>सबमिट</0> बटनमा क्लिक गरी आफ्नो गुनासो वा सुझाव पठाउनुहोस्।",
   step4:
     "<0>SMS</0> र <1>WhatsApp</1> मा <2>Welcome Note</2> प्राप्त गर्नुहोस्।",
+
+  //translation for video section
+  usetheCoupon: "कुपन कसरी प्रयोग गर्ने ?",
+  usetheCouponDetails:
+    "अब पुरस्कार जित्न अझ सजिलो भयो! यो भिडियो हेर्नुहोस् र जान्नुहोस् कसरी तपाईं Ripuraj <1>Gold/Silver Scheme</1> मा भाग लिएर <2>भाग्यशाली विजेता</2> बन्न सक्नुहुन्छ!",
 };
 
 export default nepali;

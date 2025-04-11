@@ -45,7 +45,7 @@ const LandingPage = () => {
           {t("landingMsg2")} <span className="text-[#E9B72E]">{t("landingMsg3")}</span> {t("landingMsg4")}{" "}
             <span className="text-[#E9B72E]">{t("landingMsg5")}</span> {t("landingMsg6")}
           </p>
-          <p className="text-xl font-bold sm:text-3xl md:text-5xl lg:text-6xl text-[#E9B72E]">
+          <p className="text-xl font-bold sm:text-3xl md:text-4xl lg:text-5xl text-[#E9B72E]">
           {t("landingMsg7")}
           </p>
         </div>

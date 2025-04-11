@@ -30,7 +30,7 @@ export default async function handler(req, res) {
           campaignId: campaignId,
         });
 
-        if (!coupon) {
+        if (!coupon && coupon.userId) {
           return res.status(400).json({ error: "Invalid coupon code" });
         }
 
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
         campaignId: campaignId,
       });
 
-      if (!coupon) {
+      if (!coupon || coupon.userId) {
         return res.status(400).json({ error: "Invalid coupon code" });
       }
 
