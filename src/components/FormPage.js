@@ -6,18 +6,22 @@ import Button from "./Button";
 import Image from "next/image";
 import validate from "./utils/validate";
 import { createUser } from "./utils/store";
+import { useSelector } from "react-redux";
 
 
 const campaignId = "gold-scheme";
 
 
 const FormPage = () => {
+
+  const userMobileNumber = useSelector((state)=>state.mobile.mob)
+
   const router = useRouter();
   const initialState = {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phone: userMobileNumber,
     address1: "",
     address2: "",
     city: "",
@@ -44,7 +48,7 @@ const FormPage = () => {
           firstName: form.firstName,
           lastName: form.lastName,
           email: form.email,
-          phone: form.phone,
+          phone: userMobileNumber,
         },
         campaignId: campaignId,
         couponCode: form.couponCode,
@@ -57,7 +61,8 @@ const FormPage = () => {
           country: form.country,
         },
       };
-
+      
+    
       const [, error] = await createUser(userDetail);
       if (error) {
         alert(error);
@@ -102,16 +107,16 @@ const FormPage = () => {
               <Input
                 placeholder="First"
                 type="text"
-                value={form.fName}
-                error={errors.fName}
-                onChange={(e) => handleFormChange("fName", e.target.value)}
+                value={form.firstName}
+                error={errors.firstName}
+                onChange={(e) => handleFormChange("firstName", e.target.value)}
               />
               <Input
                 placeholder="Last"
                 type="text"
-                value={form.lName}
-                error={errors.lName}
-                onChange={(e) => handleFormChange("lName", e.target.value)}
+                value={form.lastName}
+                error={errors.lastName}
+                onChange={(e) => handleFormChange("lastName", e.target.value)}
               />
             </div>
           </div>
@@ -169,12 +174,11 @@ const FormPage = () => {
             <div className="">
               <Label label="Phone *" />
               <Input
-                className="bg-gray-200 text-gray-500  input w-full border-[#707070] border-1 font-medium"
+                className="bg-gray-200 cursor-not-allowed text-gray-500  input w-full border-[#707070] border-1 font-medium"
                 placeholder="Phone"
                 type="text"
-                value={form.phone}
-                error={errors.phone}
-                onChange={(e) => handleFormChange("phone", e.target.value)}
+                value={userMobileNumber}
+                readOnly  
               />
             </div>
             <div>

@@ -8,7 +8,7 @@ export const Input = ({ label = "", placeholder = "",className="input w-full bg-
         rest.type==="checkbox" && <input className={className} type={rest.type} required />
       }
      {
-      rest.type==="text" && <input className={className} value={rest.value} onChange={rest.onChange} placeholder={placeholder} required />
+      rest.type==="text" && <input className={className} value={rest.value} onChange={rest.onChange} placeholder={placeholder} required {...rest} />
      }
         
       {error && <p className="text-red-500">{error}</p>}

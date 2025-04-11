@@ -33,3 +33,8 @@ export const BG_IMAGE =
   "https://img.freepik.com/free-photo/sack-rice-seed-with-white-rice-small-wooden-spoon-rice-plant_1150-35744.jpg?t=st=1742454064~exp=1742457664~hmac=0b1a9e2aa9951d14c406ccaa6229cdbe853e790d8e81b6bf291cba57c5894772&w=1380";
 
 export const LANGUAGE = ["English", "Hindi", "Nepali"];
+
+// export const COUNTRY_CODE = ["IN", "AD", "AF"];
+// export const COUNTRY_STD_CODE = ["+91", "+977", "+911"];
+
+export const COUNTRY = {IN:"+91",NP:"+977",BD:"+880"};

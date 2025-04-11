@@ -1,25 +1,42 @@
 import { useTranslation } from "react-i18next";
 import Button from "./Button";
 import Image from "next/image"; // Added import for next/image
+import Select from "./Select";
+import { COUNTRY } from "./utils/mockData";
+import { useState } from "react";
 
 const PhoneNumberInput = ({ formik }) => {
 
   const {t} = useTranslation();
+  const [selectedCountryCode, setSelectedCountryCode] = useState("IN");
+  
+  const handleCountryChange = (e) => {
+    const key = Object.keys(COUNTRY).find((key) => COUNTRY[key] === e.target.value)
+    setSelectedCountryCode(key);
+    
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="flex items-center border-1 border-[#A2A2A2] rounded-md p-2 mb-3" style={{ boxSizing: 'border-box' }}>
-        <div className="flex items-center mr-2" style={{ minWidth: '80px' }}>
+      <div className="flex items-center border-1 border-[#A2A2A2] rounded-md px-2 mb-3">
+        <div className="flex items-center mr-2">
+          
           <Image
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png"
-            alt="India Flag"
+            src={`https://flagsapi.com/${selectedCountryCode}/flat/64.png`}
+            alt={`${selectedCountryCode} Flag`}
             width={24} 
             height={16}
             className="mr-1"
             style={{ flexShrink: 0 }}
           />
-          <div className="border-l border-[#A2A2A2] h-6 mx-2" style={{ flexShrink: 0 }}></div>
-          <span className="text-black" style={{ whiteSpace: 'nowrap' }}>+91</span>
+        <div className="border-l border-[#A2A2A2] h-6 ml-2"></div>
+        <Select
+            className="bg-white text-black"
+            optionValue={Object.values(COUNTRY)}
+            onChange={handleCountryChange}
+            
+          />
+          {/* <span className="text-black">+91</span> */}
         </div>
 
         <input
