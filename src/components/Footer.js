@@ -85,13 +85,13 @@ const Footer = () => {
         </div>
 
         {/* Footer Links */}
-        <div className="flex font-medium justify-between border-t-[2px] text-black border-[#bebcbc] pt-4 text-sm">
+        <div className="flex font-medium justify-between items-center border-t-[2px] text-black border-[#bebcbc] pt-4 text-sm md:text-base lg:text-lg">
           <div className="text-[#262688]">
             <p>© 2025 Ripuraj Agro</p>
           </div>
-          <div className="flex gap-5 text-[#262688]">
-            <p>© TERMS OF USE</p>
-            <p>PRIVACY NOTICE</p>
+          <div className="flex gap-2 items-center text-[#262688]">
+            <p className="text-xs sm:text-sm md:text-base">© TERMS OF USE</p>
+            <p className="text-xs sm:text-sm md:text-base">PRIVACY NOTICE</p>
           </div>
         </div>
       </div>
