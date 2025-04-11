@@ -1,7 +1,11 @@
+import { useTranslation } from "react-i18next";
 import Button from "./Button";
 import Image from "next/image"; // Added import for next/image
 
 const PhoneNumberInput = ({ formik }) => {
+
+  const {t} = useTranslation();
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className="flex items-center border-1 border-[#A2A2A2] rounded-md p-2 mb-3">
@@ -35,10 +39,18 @@ const PhoneNumberInput = ({ formik }) => {
       <div className="flex items-center mb-3">
         <input type="checkbox" id="terms" className="mr-2 bg-gray-200" required />
         <label htmlFor="terms" className="text-black">
-          I agree to the <span className="font-bold">Terms and Privacy Policy</span>
+          {/* I agree to the */}
+          {t("termsText")}
+           <span className="font-bold">
+            {/* Terms and Privacy Policy */}
+            {t("terms")}
+            </span>
         </label>
       </div>
-      <Button type="submit">SEND OTP</Button>
+      <Button type="submit">
+        {/* SEND OTP */}
+        {t("sendOtp")}
+        </Button>
     </form>
   );
 };

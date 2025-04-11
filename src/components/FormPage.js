@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { Input } from "./Input";
 import Label from "./Label";
-import validate from "./utils/validate";
-import { useRouter } from "next/router";
 import Button from "./Button";
 import Image from "next/image";
+import validate from "./utils/validate";
+import { createUser } from "./utils/store";
+
+
+const campaignId = "gold-scheme";
+
 
 const FormPage = () => {
   const router = useRouter();
   const initialState = {
-    fName: "",
-    lName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     address1: "",
@@ -26,66 +31,41 @@ const FormPage = () => {
 
   const handleFormChange = (keyName, value) => {
     setForm((prevForm) => ({ ...prevForm, [keyName]: value }));
-    // console.log(value)
   };
-  console.log(form);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     clearErrorMessage();
+    const errorMsgObj = validate(form);
+    if (errorMsgObj.isValid) {
+      //Make an API request to save the user data in the database.
+      const userDetail = {
+        userDetails: {
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          phone: form.phone,
+        },
+        campaignId: campaignId,
+        couponCode: form.couponCode,
+        address: {
+          line1: form.address1,
+          line2: form.address2,
+          city: form.city,
+          state: form.region,
+          pincode: form.postalCode,
+          country: form.country,
+        },
+      };
 
-    const errorMsgObj = validate(
-      form.fName,
-      form.lName,
-      form.email,
-      form.phone
-    );
-
-    if (errorMsgObj) {
-      if (!errorMsgObj.fName)
-        setErrors((preErrorMsg) => ({
-          ...preErrorMsg,
-          ["fName"]: "First name must contain between 3 and 16 characters.",
-        }));
-      if (!errorMsgObj.lName)
-        setErrors((preErrorMsg) => ({
-          ...preErrorMsg,
-          ["lName"]: "Last name must contain between 3 and 16 characters.",
-        }));
-      if (!errorMsgObj.email)
-        setErrors((preErrorMsg) => ({
-          ...preErrorMsg,
-          ["email"]: "Enter a valid email address (e.g., example@gmail.com).",
-        }));
-      if (!errorMsgObj.phone)
-        setErrors((preErrorMsg) => ({
-          ...preErrorMsg,
-          ["phone"]: "Phone number must be 10 digits long.",
-        }));
-      return;
+      const [, error] = await createUser(userDetail);
+      if (error) {
+        alert(error);
+      } else {
+        router.push("/formsubmitted");
+      }
     }
-
-    const data = {
-      userDetails: {
-        email: form.email,
-        phone: form.phone,
-        firstName: form.fName,
-        lastName: form.lName,
-      },
-      address: {
-        line1: form.address1,
-        city: form.city,
-        district: form.region,
-        pincode: form.postalCode,
-        state: form.country,
-      },
-      campaignId: "123", // you can dynamically assign if needed
-      couponCode: form.couponCode,
-    };
-
-    //Make an API request to save the user data in the database.
-
-    router.push("/formsubmitted");
+    setErrors(errorMsgObj.errorMsg);
   };
 
   const clearErrorMessage = () => {
@@ -93,29 +73,27 @@ const FormPage = () => {
   };
   return (
     <div className="relative min-h-screen flex items-center justify-center">
-       {/* Desktop background image */}
+      {/* Desktop background image */}
       <Image
-    src="/MainForm_bg.jpg"
-    alt="Background"
-    layout="fill"
-    objectFit="cover"
-    className="hidden md:block absolute inset-0 z-0 opacity-90"
-    priority
-  />
+        src="/MainForm_bg.jpg"
+        alt="Background"
+        layout="fill"
+        objectFit="cover"
+        className="hidden md:block absolute inset-0 z-0 opacity-90"
+        priority
+      />
 
-  {/* Mobile background image */}
-  <Image
-    src="/MainForm_bg_mobile.jpg"
-    alt="Mobile Background"
-    layout="fill"
-    objectFit="cover"
-    className="block md:hidden absolute inset-0 z-0 opacity-90"
-    priority
-  />
+      {/* Mobile background image */}
+      <Image
+        src="/MainForm_bg_mobile.jpg"
+        alt="Mobile Background"
+        layout="fill"
+        objectFit="cover"
+        className="block md:hidden absolute inset-0 z-0 opacity-90"
+        priority
+      />
 
-      {/* Form Section - KEEP THIS EXACTLY AS YOU HAVE IT */}
       <div className="card card-body mx-4 my-6 md:mx-32 md:my-10 shadow-2xl w-full md:w-[80%] bg-white text-black z-10">
-        
         <h2 className="text-2xl font-bold  my-2">Registration Form</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
