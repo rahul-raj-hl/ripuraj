@@ -1,19 +1,22 @@
-const validate = ({ fName, lName, email, phone }) => {
-  const isFNameValid = /^[A-Za-z ]{3,16}$/.test(fName);
-  const isLNameValid = /^[A-Za-z ]{3,16}$/.test(lName);
+const validate = ({ firstName, lastName, email, phone }) => {
+  const isFNameValid = /^[A-Za-z ]{3,16}$/.test(firstName);
+  const isLNameValid = /^[A-Za-z ]{3,16}$/.test(lastName);
   const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
     email
   );
   const isPhoneNoValid = /^[6-9]\d{9}$/.test(phone);
 
+  console.log("start", isPhoneNoValid, phone);
+  console.log("start", isFNameValid, firstName);
+
   if (!isFNameValid || !isLNameValid || !isEmailValid || !isPhoneNoValid) {
     return {
       isValid: false,
       errorMsg: {
-        fName: isEmailValid
+        firstName: isEmailValid
           ? ""
           : "First name must contain between 3 and 16 characters.",
-        lName: isLNameValid
+        lastName: isLNameValid
           ? ""
           : "Last name must contain between 3 and 16 characters.",
         email: isEmailValid

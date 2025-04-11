@@ -6,8 +6,11 @@ import PhoneNumberInput from "../components/PhoneNumberInput";
 import { apiRequest } from "../utils/apiRequest";
 import { useRouter } from "next/router";
 import { Trans, useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { updateMobileNumber } from "@/components/utils/userMobileSlice";
 
 const OTPValidation = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [error, setError] = useState("");
@@ -44,6 +47,9 @@ const OTPValidation = () => {
     setIsOtpVerified(
       otp === "123456" ? true : setError("Please enter a valid OTP.")
     );
+
+    //adding user phone number to redux store
+    dispatch(updateMobileNumber(formik.values.phoneNumber))
   };
 
   const steps = [
