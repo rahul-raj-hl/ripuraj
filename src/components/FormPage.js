@@ -109,6 +109,7 @@ const FormPage = () => {
                 type="text"
                 value={form.firstName}
                 error={errors.firstName}
+                required
                 onChange={(e) => handleFormChange("firstName", e.target.value)}
               />
               <Input
@@ -116,6 +117,7 @@ const FormPage = () => {
                 type="text"
                 value={form.lastName}
                 error={errors.lastName}
+                required
                 onChange={(e) => handleFormChange("lastName", e.target.value)}
               />
             </div>
@@ -127,6 +129,7 @@ const FormPage = () => {
                 placeholder="Street Address"
                 type="text"
                 value={form.address1}
+                required
                 onChange={(e) => handleFormChange("address1", e.target.value)}
               />
               <Input
@@ -134,6 +137,7 @@ const FormPage = () => {
                 placeholder="Street Address Line 2"
                 type="text"
                 value={form.address2}
+                required
                 onChange={(e) => handleFormChange("address2", e.target.value)}
               />
             </div>
@@ -144,12 +148,14 @@ const FormPage = () => {
                 placeholder="City"
                 type="text"
                 value={form.city}
+                required
                 onChange={(e) => handleFormChange("city", e.target.value)}
               />
               <Input
                 placeholder="Region"
                 type="text"
                 value={form.region}
+                required
                 onChange={(e) => handleFormChange("region", e.target.value)}
               />
             </div>
@@ -160,12 +166,14 @@ const FormPage = () => {
                 placeholder="Postal / Zip Code"
                 type="text"
                 value={form.postalCode}
+                required
                 onChange={(e) => handleFormChange("postalCode", e.target.value)}
               />
               <Input
                 placeholder="Country"
                 type="text"
                 value={form.country}
+                required
                 onChange={(e) => handleFormChange("country", e.target.value)}
               />
             </div>
@@ -199,6 +207,7 @@ const FormPage = () => {
                 placeholder="Coupon Code"
                 type="text"
                 value={form.couponCode}
+                required
                 onChange={(e) => handleFormChange("couponCode", e.target.value)}
               />
             </div>
@@ -207,6 +216,7 @@ const FormPage = () => {
             <Input
               className="w-4 h-4 text-white bg-gray-100 rounded-sm "
               type="checkbox"
+              required
             />
             <p className="mx-2">
               Buy Submitting, you agree to the <b>Tearms and Privacy Policy</b>

@@ -11,20 +11,20 @@ const Footer = () => {
         <Image
           src="/footer_2.jpg"
           layout="fill" // Fill the entire container
-          objectFit="cover" // Maintain aspect ratio and cover the area
+          // objectFit="fit" // Maintain aspect ratio and cover the area
           alt="footer-2"
         />
       </div>
 
       {/* Foreground Content */}
-      <div className="relative z-10 px-[3%] py-7 text-white">
+      <div className="relative z-10 px-[7%] py-7 text-white">
         {/* Logo & Socials */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-4">
           <div>
-            <img className="w-30 h-auto " src="/ripuraj-logo.png" alt="logo" />
+            <img className="w-35 h-auto " src="/ripuraj-logo.png" alt="logo" />
           </div>
           <div className="flex gap-3 items-center">
-            <a href="#">
+            <a href="https://www.facebook.com/RipurajRice">
               <Svg
                 id="Layer_2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ const Footer = () => {
               </Svg>
             </a>
 
-            <a href="#">
+            <a href="https://www.instagram.com/ripurajagro/">
               <Svg
                 id="instagram_2_"
                 xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ const Footer = () => {
               </Svg>
             </a>
 
-            <a href="https://www.youtube.com/">
+            <a href="https://www.youtube.com/@RipurajAgro">
               <Svg
                 id="_211929_social_youtube_icon"
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Links */}
-        <div className="flex font-medium justify-between items-center border-t-[2px] text-black border-[#bebcbc] pt-4 text-sm md:text-base lg:text-lg">
+        <div className="flex font-medium justify-between border-t-[2px] text-black border-[#bebcbc] pt-4 text-[0.7rem]">
           <div className="text-[#262688]">
             <p>© 2025 Ripuraj Agro</p>
           </div>

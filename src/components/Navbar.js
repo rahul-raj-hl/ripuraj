@@ -21,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between left-0 right-0 items-center mx-[5%] absolute z-50 top-0">
+    <div className="flex justify-between left-0 right-0 items-center mx-[5%] absolute z-50 top-4">
       <div>
         <img className="w-40 h-auto" src="/ripuraj-logo.png" alt="logo" />
       </div>
