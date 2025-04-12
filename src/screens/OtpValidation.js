@@ -81,10 +81,18 @@ const OTPValidation = () => {
 
   return (
     <div
-      className="flex flex-col min-h-screen items-stretch justify-center bg-img text-black px-5"
-      style={{ backgroundImage: "url('/validationPageImg.jpg')" }}
+      className="flex flex-col min-h-screen items-stretch justify-center bg-img text-black px-[5%] bg-cover bg-no-repeat bg-center"
+      style={{
+        backgroundImage: "url('/validationPageImg.jpg')",
+        paddingTop: "5%",
+        paddingBottom: "5%", 
+      }}
     >
-      <div className="flex flex-col md:flex-row w-full max-w-[100%] lg:max-w-[90%] mx-auto">
+      <div
+        className={`flex flex-col md:flex-row w-full max-w-[100%] lg:max-w-[90%] mx-auto ${
+          /Android/i.test(navigator.userAgent) ? "mt-2 mb-2" : ""
+        }`}
+      >
         <div className="bg-white rounded-2xl shadow-md flex flex-col md:flex-row flex-1 text-black min-h-[80px] gap-5 items-stretch relative">
           {/* Left Content */}
           <div className="flex-1 flex flex-col items-stretch justify-center p-8 border-b md:border-b-0 md:border-r border-[#D3D3D3] gap-3">
@@ -107,7 +115,7 @@ const OTPValidation = () => {
           </div>
 
           {/* Right Content */}
-          <div className="flex-1 flex flex-col items-stretch justify-center p-4 md:py-18 md:pb-12 md:pr-8 gap-4 font-medium">
+          <div className="flex-1 flex flex-col items-stretch justify-center p-[3%] md:py-[5%] md:pb-[3%] md:pr-[2%] gap-3 font-medium">
             <h2 className="text-xl font-bold">
               {/* कूपन को कैसे प्रयोग करें: */}
               {t("howToUseCoupon")}

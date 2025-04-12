@@ -12,7 +12,7 @@ const english = {
   enterMobileNumber: "Enter Your Mobile Number",
   phoneNumber: "Phone Number",
   termsText: "I agree to the",
-  terms: "Terms and Privacy Policy",
+  terms: " Terms and Privacy Policy",
   sendOtp: "SEND OTP",
 
   howToUseCoupon: "How to use the coupon:",

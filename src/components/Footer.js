@@ -89,9 +89,9 @@ const Footer = () => {
           <div className="text-[#262688]">
             <p>© 2025 Ripuraj Agro</p>
           </div>
-          <div className="flex gap-5 text-[#262688]">
-            <p>© TERMS OF USE</p>
-            <p>PRIVACY NOTICE</p>
+          <div className="flex gap-2 items-center text-[#262688]">
+            <p className="text-xs sm:text-sm md:text-base">© TERMS OF USE</p>
+            <p className="text-xs sm:text-sm md:text-base">PRIVACY NOTICE</p>
           </div>
         </div>
       </div>
