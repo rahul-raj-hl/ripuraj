@@ -100,7 +100,7 @@ const OTPValidation = () => {
               <OtpSection otp={otp} setOtp={setOtp} verifyOtp={verifyOtp} />
             ) : (
               <>
-                <h2 className="text-lg font-semibold font-serif text-left">
+                <h2 className="text-lg text-left font-roxborough font-bold">
                   {/* Enter Your Mobile Number */}
                   {t("enterMobileNumber")}
                 </h2>
