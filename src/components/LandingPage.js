@@ -36,17 +36,20 @@ const LandingPage = () => {
           alt="Mobile version"
         />
       </div>
-      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-end px-4 md:px-10">
-        <div className="text-center text-white bg-opacity-50 rounded p-4 mr-[5%] mt-[5%] max-w-[90%] sm:max-w-[80%] md:max-w-[50%] lg:max-w-[40%]">
-          <p className="text-m  sm:text-lg md:text-xl lg:text-2xl mb-2">
+      <div className="absolute right-0 top-[42%] md:top-[40%] lg:top-[41.5%] xl:top-[41.5%] w-4/5 md:w-4/7 lg:w-4/7 xl:w-[58.5%] text-center">
+        <div className="text-white pl-[8%] md:pl-[1%]">
+          <p className="font-medium text-sm md:text-xl lg:text-2xl xl:text-[1.8rem] mb-2 xl:mb-3">
             {t("landingMsg1")}
           </p>
-          <p className="text-xl font-bold sm:text-2xl md:text-3xl lg:text-4xl mb-2">
-          {t("landingMsg2")} <span className="text-[#E9B72E]">{t("landingMsg3")}</span> {t("landingMsg4")}{" "}
-            <span className="text-[#E9B72E]">{t("landingMsg5")}</span> {t("landingMsg6")}
+          <p className="text-m font-bold md:text-[1.6rem] lg:text-4xl xl:text-[2.8rem] md:mb-1 xl:mb-2 ">
+            {t("landingMsg2")}{" "}
+            <span className="text-[#E9B72E]">{t("landingMsg3")}</span>{" "}
+            {t("landingMsg4")}{" "}
+            <span className="text-[#E9B72E]">{t("landingMsg5")}</span>{" "}
+            {t("landingMsg6")}
           </p>
-          <p className="text-xl font-bold sm:text-3xl md:text-4xl lg:text-5xl text-[#E9B72E]">
-          {t("landingMsg7")}
+          <p className="text-xl font-bold md:text-3xl lg:text-5xl xl:text-6xl text-[#E9B72E]">
+            {t("landingMsg7")}
           </p>
         </div>
       </div>
