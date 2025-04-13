@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const FormSubmitted = () => {
@@ -15,65 +16,56 @@ const FormSubmitted = () => {
   }, []);
 
   return (
-    <div className="card card-body mx-auto my-10 w-[80%] shadow-2xl text-center">
-      <svg
-        className="mx-auto"
-        width="100"
-        height="100"
-        viewBox="0 0 200 200"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle
-          cx="100"
-          cy="100"
-          r="90"
-          fill="gold"
-          stroke="orange"
-          stroke-width="5"
-        />
+    <div className="">
+  {/* Desktop Image */}
+  <div className="absolute w-full hidden md:block">
+    <Image
+      src="/landingImage.jpg"
+      layout="responsive"
+      width={100}
+      height={80}
+      alt="Desktop version"
+      className="opacity-50 blur-[0.1rem]"
+    />
+  </div>
 
-        <circle cx="100" cy="100" r="75" fill="goldenrod" opacity="0.5" />
+  {/* Mobile Image */}
+  <div className="absolute w-full block md:hidden ">
+    <Image
+      src="/landingImageForMobile.jpg"
+      layout="responsive"
+      width={100}
+      height={80}
+      alt="Mobile version"
+      className="opacity-50 blur-sm"
+    />
+  </div>
 
-        <g transform="translate(100, 100) rotate(45)">
-          <path d="M 0,-20 Q 10,0 0,20 Q -10,0 0,-20" fill="yellow" />
-          <path d="M -20,0 Q 0,-10 20,0 Q 0,10 -20,0" fill="yellow" />
-        </g>
-
-        <text
-          x="100"
-          y="30"
-          font-size="12"
-          fill="black"
-          font-weight="bold"
-          text-anchor="middle"
-        >
-          FINE GOLD 999.9
-        </text>
-
-        <text
-          x="100"
-          y="180"
-          font-size="12"
-          fill="black"
-          font-weight="bold"
-          text-anchor="middle"
-        >
-          RUPALI
-        </text>
-      </svg>
-      <div className="">
-        <h1 className="font-bold text-5xl text-green-600">Thank You!</h1>
-        <p className="font-bold text-2xl text-green-600">
+  <div className="flex w-[90%] md:w-[50%] mx-auto">
+    <div className="card card-body rounded-4xl bg-white my-[20%] md:my-[10%] shadow-2xl text-center">
+      <img className="w-22 mx-auto" src="/gold_coin.png" alt="logo" />
+      <div>
+        <h1 className="font-bold text-4xl md:text-5xl text-[#161644]">Thank You!</h1>
+        <p className="font-bold text-[1rem] md:text-[1.1rem] mt-2 text-[#E9B72E]">
           For Your Participation
         </p>
-        <p className="text-gray-500 mt-4">
-          A Lucky Draw will be held on the 5th of every month. The coupon codes
-          of the winners will be published on the company<span>&apos;</span>s website. The prizes
-          will be sent to the winners at their provided address.
-        </p>
+        <p className="text-[#161644] mt-4 font-medium text-sm md:text-base"> A Lucky Draw will be held on the 5th of every month. The coupon
+              codes of the winners will be published on the company
+              <span>&apos;</span>s website. The prizes will be sent to the
+              winners at their provided address.</p>
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
+
+{/* <p className="text-gray-500 mt-4 font-medium">
+              A Lucky Draw will be held on the 5th of every month. The coupon
+              codes of the winners will be published on the company
+              <span>&apos;</span>s website. The prizes will be sent to the
+              winners at their provided address.
+            </p> */}
 
 export default FormSubmitted;

@@ -22,9 +22,9 @@ const Footer1 = () => {
 
         {/* Centered Product Image */}
         <div className="absolute inset-0 flex justify-center items-center">
-          <div className="w-4/9 md:w-4/8 lg:w-4/9">
+          <div className="w-4/10 md:w-4/12 lg:w-4/12">
             <Image
-              src="/10_1.png"
+              src="/10.png"
               alt="footer product"
               layout="responsive"
               width={500}
