@@ -9,11 +9,11 @@ const PhoneNumberInput = ({ formik }) => {
 
   const {t} = useTranslation();
   const [selectedCountryCode, setSelectedCountryCode] = useState("IN");
-  
+  const [isChecked, setIsChecked] = useState(false);
+
   const handleCountryChange = (e) => {
     const key = Object.keys(COUNTRY).find((key) => COUNTRY[key] === e.target.value)
     setSelectedCountryCode(key);
-    
   };
 
   return (
@@ -54,19 +54,42 @@ const PhoneNumberInput = ({ formik }) => {
       {formik.touched.phoneNumber && formik.errors.phoneNumber && (
         <div className="text-red-500 mb-3">{formik.errors.phoneNumber}</div>
       )}
-      <div className="flex items-center mb-3">
-        <input type="checkbox" id="terms" className="mr-2 bg-gray-200" required />
-        <label htmlFor="terms" className="text-black">
-          {/* I agree to the */}
+      <div className="flex items-start mb-3">
+        <div
+          className={`w-5 h-5 flex items-center justify-center border rounded relative shrink-0 ${
+            isChecked ? "bg-[#262688] border-[#262688]" : "bg-gray-200 border-gray-400"
+          }`}
+        >
+          <input
+            type="checkbox"
+            id="terms"
+            className="absolute w-full h-full opacity-0 cursor-pointer"
+            onChange={(e) => setIsChecked(e.target.checked)}
+            required
+          />
+          {isChecked && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="white"
+              className="w-4 h-4"
+            >
+              <path d="M20.285 6.707a1 1 0 0 0-1.414-1.414l-9.192 9.192-3.364-3.364a1 1 0 0 0-1.414 1.414l4.071 4.071a1 1 0 0 0 1.414 0l10-10z" />
+            </svg>
+          )}
+        </div>
+        <label
+          htmlFor="terms"
+          className="text-black ml-2 flex-1 leading-tight"
+          style={{ lineHeight: "1.2" }}
+        >
           {t("termsText")}
-           <span className="font-bold">
-            {/* Terms and Privacy Policy */}
+          <span className="font-bold">
             {t("terms")}
-            </span>
+          </span>
         </label>
       </div>
       <Button type="submit">
-        {/* SEND OTP */}
         {t("sendOtp")}
         </Button>
     </form>
