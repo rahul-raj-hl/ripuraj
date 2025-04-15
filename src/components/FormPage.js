@@ -190,7 +190,7 @@ const FormPage = () => {
               />
             </div>
             <div>
-              <Label label="Email" />
+              <Label label="Email (Optional)" />
               <Input
                 placeholder="Email"
                 type="text"
