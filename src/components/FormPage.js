@@ -137,7 +137,6 @@ const FormPage = () => {
                 placeholder="Street Address Line 2"
                 type="text"
                 value={form.address2}
-                required
                 onChange={(e) => handleFormChange("address2", e.target.value)}
               />
             </div>
@@ -155,7 +154,6 @@ const FormPage = () => {
                 placeholder="Region"
                 type="text"
                 value={form.region}
-                required
                 onChange={(e) => handleFormChange("region", e.target.value)}
               />
             </div>
