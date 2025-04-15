@@ -2,18 +2,6 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const FormSubmitted = () => {
-  let initialState = {
-    name: "",
-    phone: "",
-  };
-  const [value, setValue] = useState(initialState);
-
-  const fun = () => {
-    setValue((preFun) => ({ ...preFun, ["name"]: "Rahul" }));
-  };
-  useEffect(() => {
-    fun();
-  }, []);
 
   return (
     <div className="">
@@ -25,7 +13,7 @@ const FormSubmitted = () => {
       width={100}
       height={80}
       alt="Desktop version"
-      className="opacity-50 blur-[0.1rem]"
+      className=" blur-[0.06rem]"
     />
   </div>
 
@@ -37,7 +25,7 @@ const FormSubmitted = () => {
       width={100}
       height={80}
       alt="Mobile version"
-      className="opacity-50 blur-sm"
+      className=" blur-[0.06rem]"
     />
   </div>
 
