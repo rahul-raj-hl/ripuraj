@@ -81,19 +81,17 @@ const OTPValidation = () => {
 
   return (
     <div
-      className="flex flex-col min-h-screen items-stretch justify-center bg-img text-black px-[5%] bg-cover bg-no-repeat bg-center"
+      className="flex flex-col min-h-screen items-stretch justify-center bg-img text-black px-[5%] bg-cover bg-no-repeat bg-center pt-16 sm:pt-20 pb-16 sm:pb-20"
       style={{
         backgroundImage: "url('/validationPageImg.jpg')",
-        paddingTop: "5%",
-        paddingBottom: "5%", 
       }}
     >
       <div
-        className={`flex flex-col md:flex-row w-full max-w-[100%] lg:max-w-[90%] mx-auto ${
+        className={`flex flex-col md:flex-row w-full max-w-[100%] lg:max-w-[96%] mx-auto ${
           /Android/i.test(navigator.userAgent) ? "mt-2 mb-2" : ""
         }`}
       >
-        <div className="bg-white rounded-2xl shadow-md flex flex-col md:flex-row flex-1 text-black min-h-[80px] gap-5 items-stretch relative">
+        <div className="bg-white rounded-2xl shadow-md flex flex-col md:flex-row flex-1 text-black min-h-[67vh] gap-5 items-stretch relative">
           {/* Left Content */}
           <div className="flex-1 flex flex-col items-stretch justify-center p-8 border-b md:border-b-0 md:border-r border-[#D3D3D3] gap-3">
             {isOtpSent ? (
