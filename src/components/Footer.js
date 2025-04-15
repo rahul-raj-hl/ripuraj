@@ -87,10 +87,11 @@ const Footer = () => {
 
         {/* Footer Links */}
         <div className="flex font-medium justify-between border-t-[2px] text-black border-[#bebcbc] pt-4 text-[0.7rem] md:text-sm lg:text-base ">
-          <div className="text-[#262688]">
+          <div className="md:flex lg:flex gap-4 text-center items-center text-[#262688]">
             <p >© 2025 Ripuraj Agro</p>
+            <a href={"https://ripurajagro.com/"}><p>View products</p></a>
           </div>
-          <div className="flex gap-4 items-center text-[#262688]">
+          <div className="md:flex lg:flex gap-4 text-center items-center text-[#262688]">
             <p >© TERMS OF USE </p>
             <p > PRIVACY NOTICE</p>
           </div>

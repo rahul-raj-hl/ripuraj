@@ -37,7 +37,7 @@ export const LANGUAGE = ["English", "Hindi", "Nepali"];
 // export const COUNTRY_CODE = ["IN", "AD", "AF"];
 // export const COUNTRY_STD_CODE = ["+91", "+977", "+911"];
 
-export const COUNTRY = {IN:"+91",NP:"+977",BD:"+880"};
+export const COUNTRY = {IN:"+91",NP:"+977"};
 
 export const COUNTRY_NAME = ["India","Nepal"];
 
