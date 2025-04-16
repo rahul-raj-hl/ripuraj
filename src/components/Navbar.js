@@ -11,8 +11,6 @@ const Navbar = () => {
 
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
-  console.log("i18n", i18n)
-
   const handleLanguageChange = (e) => {
     setSelectedLanguage(e.target.value);
     // dispatch(changeLanguage(e.target.value.toLowerCase()));
@@ -28,7 +26,7 @@ const Navbar = () => {
       <div>
         <Select
           className={
-            "bg-[#E9B72E] text-black text-base rounded-3xl w-32 px-7 font-medium"
+            "bg-[#E9B72E] text-black text-base rounded-3xl w-32 px-7 font-medium border-none outline-none focus:outline-none focus:ring-0"
           }
           optionValue={LANGUAGE}
           value={selectedLanguage}

@@ -1,12 +1,12 @@
 const english = {
   //landing page
   landingMsg1: "Buy Ripuraj Sonashakti and",
-  landingMsg2: "win",
-  landingMsg3: "gold",
+  landingMsg2: "Win",
+  landingMsg3: "Gold",
   landingMsg4: "and",
-  landingMsg5: "silver",
-  landingMsg6: "coins",
-  landingMsg7: "absolutely free",
+  landingMsg5: "Silver",
+  landingMsg6: "Coins",
+  landingMsg7: "Absolutely Free",
 
   // Enter Phone and Coupon Steps
   enterMobileNumber: "Enter Your Mobile Number",

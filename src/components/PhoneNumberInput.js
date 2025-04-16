@@ -2,17 +2,24 @@ import { useTranslation } from "react-i18next";
 import Button from "./Button";
 import Image from "next/image"; // Added import for next/image
 import Select from "./Select";
-import { COUNTRY } from "./utils/mockData";
+import { COUNTRY_DETAILS } from "./utils/mockData";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateCountryName } from "./utils/userCountryNameSlice";
 
 const PhoneNumberInput = ({ formik }) => {
+
+  const dispatch = useDispatch();
 
   const {t} = useTranslation();
   const [selectedCountryCode, setSelectedCountryCode] = useState("IN");
   
   const handleCountryChange = (e) => {
-    const key = Object.keys(COUNTRY).find((key) => COUNTRY[key] === e.target.value)
-    setSelectedCountryCode(key);
+    const key = COUNTRY_DETAILS.find((item)=>item.countrySTDCode===e.target.value)
+    setSelectedCountryCode(key.countryCode);
+    console.log("key",key)
+    //Adding Country Name to redux store
+    dispatch(updateCountryName(key.countryName))
     
   };
 
@@ -30,9 +37,9 @@ const PhoneNumberInput = ({ formik }) => {
             style={{ flexShrink: 0 }}
           />
         <div className="border-l border-[#A2A2A2] h-6 ml-2"></div>
-        <Select
-            className="bg-white text-black"
-            optionValue={Object.values(COUNTRY)}
+          <Select
+            className="bg-white text-black border-none focus:outline-none"
+            optionValue={COUNTRY_DETAILS.map(item => item.countrySTDCode)}
             onChange={handleCountryChange}
             
           />

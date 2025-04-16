@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Input } from "./Input";
 import Label from "./Label";
@@ -7,14 +7,14 @@ import Image from "next/image";
 import validate from "./utils/validate";
 import { createUser } from "./utils/store";
 import { useSelector } from "react-redux";
-
+import Select from "./Select";
+import { COUNTRY_DETAILS } from "./utils/mockData";
 
 const campaignId = "gold-scheme";
 
-
 const FormPage = () => {
-
-  const userMobileNumber = useSelector((state)=>state.mobile.mob)
+  const userMobileNumber = useSelector((state) => state.mobile.mob);
+  const userCountryName = useSelector((state) => state.countryName.countryName);
 
   const router = useRouter();
   const initialState = {
@@ -25,9 +25,9 @@ const FormPage = () => {
     address1: "",
     address2: "",
     city: "",
-    region: "",
+    state: "",
     postalCode: "",
-    country: "",
+    country: userCountryName ? userCountryName : "India",
     couponCode: "",
   };
   const [form, setForm] = useState(initialState);
@@ -48,7 +48,7 @@ const FormPage = () => {
           firstName: form.firstName,
           lastName: form.lastName,
           email: form.email,
-          phone: userMobileNumber,
+          phone: form.phone,
         },
         campaignId: campaignId,
         couponCode: form.couponCode,
@@ -56,13 +56,14 @@ const FormPage = () => {
           line1: form.address1,
           line2: form.address2,
           city: form.city,
-          state: form.region,
+          state: form.state,
           pincode: form.postalCode,
           country: form.country,
         },
       };
-      
-    
+
+      console.log(userDetail);
+
       const [, error] = await createUser(userDetail);
       if (error) {
         alert(error);
@@ -76,6 +77,12 @@ const FormPage = () => {
   const clearErrorMessage = () => {
     setErrors(initialState);
   };
+
+  // To find state name for selected country
+  const selectedCountry = COUNTRY_DETAILS.find(
+    (item) => item.countryName === form.country
+  );
+
   return (
     <div className="relative min-h-screen flex items-center justify-center">
       {/* Desktop background image */}
@@ -133,8 +140,8 @@ const FormPage = () => {
                 onChange={(e) => handleFormChange("address1", e.target.value)}
               />
               <Input
-                className="input w-full my-2 bg-white border-[#707070] border-1"
-                placeholder="Street Address Line 2"
+                className="input w-full my-2 bg-white border-[#707070] border-1 font-medium"
+                placeholder="Street Address Line 2 (Optional)"
                 type="text"
                 value={form.address2}
                 onChange={(e) => handleFormChange("address2", e.target.value)}
@@ -150,12 +157,19 @@ const FormPage = () => {
                 required
                 onChange={(e) => handleFormChange("city", e.target.value)}
               />
-              <Input
+
+              <Select
+                optionValue={selectedCountry.stateName}
+                className={"bg-white border-1 border-black w-full"}
+                onChange={(e) => handleFormChange("state", e.target.value)}
+                initialSelectedValue="Select State"
+              />
+              {/* <Input
                 placeholder="Region"
                 type="text"
                 value={form.region}
                 onChange={(e) => handleFormChange("region", e.target.value)}
-              />
+              /> */}
             </div>
           </div>
           <div>
@@ -168,11 +182,11 @@ const FormPage = () => {
                 onChange={(e) => handleFormChange("postalCode", e.target.value)}
               />
               <Input
-                placeholder="Country"
+                className="bg-gray-200 cursor-not-allowed text-gray-500  input w-full border-[#707070] border-1 font-medium"
+                placeholder={"Country"}
                 type="text"
                 value={form.country}
-                required
-                onChange={(e) => handleFormChange("country", e.target.value)}
+                readOnly
               />
             </div>
           </div>
@@ -183,8 +197,8 @@ const FormPage = () => {
                 className="bg-gray-200 cursor-not-allowed text-gray-500  input w-full border-[#707070] border-1 font-medium"
                 placeholder="Phone"
                 type="text"
-                value={userMobileNumber}
-                readOnly  
+                value={form.phone}
+                readOnly
               />
             </div>
             <div>
