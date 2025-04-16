@@ -32,6 +32,7 @@ const FormPage = () => {
   };
   const [form, setForm] = useState(initialState);
   const [errors, setErrors] = useState(initialState);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleFormChange = (keyName, value) => {
     setForm((prevForm) => ({ ...prevForm, [keyName]: value }));
@@ -225,13 +226,30 @@ const FormPage = () => {
             </div>
           </div>
           <div className="flex my-2">
-            <Input
-              className="w-4 h-4 text-white bg-gray-100 rounded-sm "
-              type="checkbox"
-              required
-            />
+            <div
+              className={`w-5 h-5 flex items-center justify-center border rounded relative ${
+                isChecked ? "bg-[#262688] border-[#262688]" : "bg-gray-100 border-gray-400"
+              }`}
+            >
+              <input
+                type="checkbox"
+                className="absolute w-full h-full opacity-0 cursor-pointer"
+                onChange={(e) => setIsChecked(e.target.checked)}
+                required
+              />
+              {isChecked && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  className="w-4 h-4"
+                >
+                  <path d="M20.285 6.707a1 1 0 0 0-1.414-1.414l-9.192 9.192-3.364-3.364a1 1 0 0 0-1.414 1.414l4.071 4.071a1 1 0 0 0 1.414 0l10-10z" />
+                </svg>
+              )}
+            </div>
             <p className="mx-2">
-              Buy Submitting, you agree to the <b>Tearms and Privacy Policy</b>
+              By Submitting, you agree to the <b>Terms and Privacy Policy</b>
             </p>
           </div>
           <div className="my-5">
