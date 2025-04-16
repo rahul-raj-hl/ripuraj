@@ -1,13 +1,14 @@
 import React from "react";
 
-const Select = ({ className, optionValue, onChange, value }) => {
+const Select = ({ className, optionValue, onChange, value,initialSelectedValue }) => {
   return (
-    <div className="">
+    <div>
       <select
-        className={"select border-none outline-none focus:outline-none focus:ring-0 " + className}
+        className={"select " + className}
         onChange={onChange}
         value={value}
       >
+        {initialSelectedValue && <option disabled selected>Select State</option>}
         {optionValue.map((val) => (
           <option className="bg-white font-medium hover:bg-[#E9B72E] " key={val} value={val}>
             {val}
