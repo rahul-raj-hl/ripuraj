@@ -1,9 +1,13 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Svg from "./Svg";
+import PrivacyPolicyModal from "./PrivacyPolicyModal"; // Import the Privacy Policy modal
+import TermsConditionModal from "./TermsConditionModal"; // Import the Terms & Condition modal
 
 const Footer = () => {
- 
+  const [isPrivacyPolicyOpen, setPrivacyPolicyOpen] = useState(false);
+  const [isTermsConditionOpen, setTermsConditionOpen] = useState(false);
+
   return (
     <div className="relative">
       {/* Background Image */}
@@ -92,10 +96,30 @@ const Footer = () => {
             <a href={"https://ripurajagro.com/"}><p>View products</p></a>
           </div>
           <div className="md:flex lg:flex gap-4 text-center items-center text-[#262688]">
-            <p >© TERMS OF USE </p>
-            <p > PRIVACY NOTICE</p>
+            <p
+              className="cursor-pointer"
+              onClick={() => setTermsConditionOpen(true)}
+            >
+              © TERMS & CONDITION
+            </p>
+            <p
+              className="cursor-pointer"
+              onClick={() => setPrivacyPolicyOpen(true)}
+            >
+              PRIVACY POLICY
+            </p>
           </div>
         </div>
+        {isTermsConditionOpen && (
+          <TermsConditionModal
+            onClose={() => setTermsConditionOpen(false)}
+          />
+        )}
+        {isPrivacyPolicyOpen && (
+          <PrivacyPolicyModal
+            onClose={() => setPrivacyPolicyOpen(false)}
+          />
+        )}
       </div>
     </div>
   );
