@@ -50,7 +50,7 @@ const PhoneNumberInput = ({ formik }) => {
         <input
           type="text"
           name="phoneNumber"
-          className="flex-1 outline-none text-black bg-transparent"
+          className="flex-1 outline-none text-black bg-transparent h-12"
           style={{ minWidth: '0', width: '100%' }}
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}

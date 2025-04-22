@@ -17,7 +17,7 @@ const english = {
 
   howToUseCoupon: "How to use the coupon:",
   step1:
-    "<0>Scan</0> <1>the QR Code</1> with your phone and click the <2>Link</2>.",
+    "Scan the <0>QR Code</0> with your phone and click the <1>Link</1>.",
   step2:
     "On the page that opens, enter your name, full address, mobile number, and <0>the coupon code</0> from the scratch card.",
   step3:
