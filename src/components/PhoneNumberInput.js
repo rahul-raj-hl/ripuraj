@@ -18,7 +18,6 @@ const PhoneNumberInput = ({ formik }) => {
   const handleCountryChange = (e) => {
     const key = COUNTRY_DETAILS.find((item)=>item.countrySTDCode===e.target.value)
     setSelectedCountryCode(key.countryCode);
-    console.log("key",key)
     //Adding Country Name to redux store
     dispatch(updateCountryName(key.countryName))
     

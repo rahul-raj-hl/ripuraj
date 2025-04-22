@@ -10,7 +10,7 @@ export async function createUser(userData) {
     const jsonResponse = await response.json();
 
     if (response.status !== 200) {
-      console.log(jsonResponse.error);
+      //console.log(jsonResponse.error);
       return [null, jsonResponse.error];
     }
 

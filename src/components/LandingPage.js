@@ -12,7 +12,6 @@ const LandingPage = () => {
   const selectedLanguage = useSelector((state)=>state.language.lang)
 
   // console.log(selectedLanguage,"landing page")
-  console.log(i18n)
 
   return (
     <div className=" relative w-full">
@@ -31,7 +30,7 @@ const LandingPage = () => {
       {/* Mobile Image */}
       <div className="block md:hidden">
         <Image
-          src="/landingImageForMobile.jpg"
+          src="/landingImageForMobile.png"
           layout="responsive"
           width={100}
           height={80}
