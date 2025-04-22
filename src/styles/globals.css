@@ -5,10 +5,19 @@ body{
     color: white;
 }
 
+@font-face {
+    font-family: 'RoxboroughCF-ExtraBold';
+    src: url('/fonts/RoxboroughCF-ExtraBold.otf') format('otf');
+    font-weight: 800; /* Adjust weight if necessary */
+    font-style: normal; /* Adjust style if necessary */
+}
 
+@font-face {
+    font-family: 'kohinoor-devanagari';
+    src: url('/fonts/kohinoor-devanagari.otf') format('otf');
+    font-style:normal;
+    font-weight: bolder;
 
-
-
-
+  }
 
 

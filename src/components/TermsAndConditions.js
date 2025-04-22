@@ -1,4 +1,8 @@
 import React from "react";
+import styles from "@/styles/Home.module.css";
+import { useTranslation } from 'react-i18next';
+
+
 
 const TermsAndConditions = () => {
   const sections = [
@@ -32,14 +36,17 @@ const TermsAndConditions = () => {
       </ol>
     </div>
   );
+  const {t, i18n} = useTranslation()
+
 
   return (
     <div
       className="bg-yellow-100 py-[4%] bg-cover bg-center"
       style={{ backgroundImage: "url('/termsConditionPageImg.jpg')" }}
     >
-      <h2 className="text-center text-gray-800 text-2xl mt-6 md:text-3xl font-extrabold pb-[2%]">
-        भाग लेने से पहले जानें:
+      <h2 className={`text-center text-gray-800 text-2xl mt-6 md:text-3xl font-extrabold pb-[2%]`}>
+      {t("termsHeading")}
+
       </h2>
 
       <div className="bg-white rounded-3xl shadow-md w-[92%] sm:w-[90%] md:w-[85%] mx-auto mb-12 relative">

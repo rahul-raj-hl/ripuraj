@@ -9,3 +9,12 @@
     }
 }
 
+.customFont {
+    font-family: RoxboroughCF-ExtraBold; 
+    font-weight: 800; 
+}
+
+.customFont1 {
+    font-family: kohinoor-devanagari;
+    font-weight: bolder;
+}
