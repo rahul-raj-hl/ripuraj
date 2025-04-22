@@ -1,16 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Trans, useTranslation } from "react-i18next";
+import styles from "@/styles/Home.module.css";
+
 
 const VideoSection = () => {
   const { t } = useTranslation();
 
   return (
     <div className="bg-white flex flex-col justify-center items-center p-4 sm:p-8 pb-16 min-h-0 sm:min-h-screen">
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-indigo-900 mb-3">
+      <h2 className={`text-3xl sm:text-3xl ${styles.customFont1} text-indigo-900 mb-3`}>
         {t("usetheCoupon")}
       </h2>
-      <p className="text-sm sm:text-l text-gray-800 text-center mb-5">
+      <p className="text-m sm:text-l text-gray-800 text-center mb-5">
         <Trans i18nKey="usetheCouponDetails" components={{ 1: <strong />,2:<strong /> }} />
         {/* अब इनाम जितना हुआ आसान! देखिए ये वीडियो और जानिए कैसे आप{" "}
             <strong>Ripuraj Gold /</strong>
