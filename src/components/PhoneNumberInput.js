@@ -49,7 +49,7 @@ const PhoneNumberInput = ({ formik }) => {
         <input
           type="text"
           name="phoneNumber"
-          className="flex-1 outline-none text-black bg-transparent"
+          className="flex-1 outline-none text-black bg-transparent h-12"
           style={{ minWidth: '0', width: '100%' }}
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
@@ -61,7 +61,7 @@ const PhoneNumberInput = ({ formik }) => {
       {formik.touched.phoneNumber && formik.errors.phoneNumber && (
         <div className="text-red-500 mb-3">{formik.errors.phoneNumber}</div>
       )}
-      <div className="flex items-start mb-3">
+      <div className="flex items-start mb-8 mt-5">
         <div
           className={`w-5 h-5 flex items-center justify-center border rounded relative shrink-0 ${
             isChecked ? "bg-[#262688] border-[#262688]" : "bg-gray-200 border-gray-400"
