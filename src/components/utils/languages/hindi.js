@@ -28,6 +28,9 @@ const hindi = {
   usetheCoupon: "कूपन का इस्तेमाल कैसे करें ?",
   usetheCouponDetails:
     "अब इनाम जितना हुआ आसान! देखिए ये वीडियो और जानिए कैसे आप Ripuraj <1>Gold/Silver Scheme</1> में भाग लेकर बन सकते हैं <2>Lucky Winner</2>!",
+
+  // translation for terms and condition page
+  termsHeading: "भाग लेने से पहले जानें:"
 };
 
 export default hindi;

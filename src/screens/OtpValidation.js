@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { Trans, useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { updateMobileNumber } from "@/components/utils/userMobileSlice";
+import styles from "@/styles/Home.module.css";
 
 const OTPValidation = () => {
   const dispatch = useDispatch();
@@ -98,7 +99,9 @@ const OTPValidation = () => {
               <OtpSection otp={otp} setOtp={setOtp} verifyOtp={verifyOtp} />
             ) : (
               <>
-                <h2 className="text-lg text-left font-roxborough font-bold">
+                <h2
+                  className={`text-xl text-left ${styles.customFont} font-sans`}
+                >
                   {/* Enter Your Mobile Number */}
                   {t("enterMobileNumber")}
                 </h2>

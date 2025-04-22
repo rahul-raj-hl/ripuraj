@@ -6,10 +6,13 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./src/styles/**/*.{js,ts,jsx,tsx,css}",
   ],
+  options: {
+    safelist: ['font-RoxboroughCF-ExtraBold'],
+  },
   theme: {
     extend: {
       fontFamily: {
-        roxborough: ["Roxborough", "serif"],
+        'RoxboroughCF-ExtraBold': ["RoxboroughCF-ExtraBold", "sans-serif"],
         kohinoor: ["Kohinoor", "sans-serif"],
       },
     },

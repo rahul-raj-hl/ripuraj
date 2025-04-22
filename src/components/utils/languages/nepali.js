@@ -28,6 +28,10 @@ const nepali = {
   usetheCoupon: "कुपन कसरी प्रयोग गर्ने ?",
   usetheCouponDetails:
     "अब पुरस्कार जित्न अझ सजिलो भयो! यो भिडियो हेर्नुहोस् र जान्नुहोस् कसरी तपाईं Ripuraj <1>Gold/Silver Scheme</1> मा भाग लिएर <2>भाग्यशाली विजेता</2> बन्न सक्नुहुन्छ!",
-};
+
+  // translation for terms and condition page
+  termsHeading: "भाग लिनु अघि जान्नुहोस्:"
+
+  };
 
 export default nepali;
