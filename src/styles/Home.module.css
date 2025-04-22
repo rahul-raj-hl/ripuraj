@@ -11,7 +11,8 @@
 
 .customFont {
     font-family: RoxboroughCF-ExtraBold; 
-    /* font-weight:700  */
+    font-weight:700;
+    font-size: 160%; 
 }
 
 .customFont1 {
@@ -24,4 +25,36 @@
     font-weight: 500;
     
 
+}
+
+.responsive-padding {
+  padding: 1rem; /* Default padding for small screens */
+}
+
+@media (min-width: 768px) {
+  .responsive-padding {
+    padding: 1.5rem; /* Medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-padding {
+    padding: 2rem; /* Large screens */
+  }
+}
+
+.responsive-heading {
+  font-size: 1rem; /* Default font size for small screens */
+}
+
+@media (min-width: 640px) {
+  .responsive-heading {
+    font-size: 1.5rem; /* Medium screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-heading {
+    font-size: 2rem; /* Large screens */
+  }
 }
