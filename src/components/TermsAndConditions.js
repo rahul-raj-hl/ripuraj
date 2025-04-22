@@ -42,7 +42,7 @@ const TermsAndConditions = () => {
   return (
     <div
       className="bg-yellow-100 py-[4%] bg-cover bg-center"
-      style={{ backgroundImage: "url('/termsConditionPageImg.jpg')" }}
+      style={{ backgroundImage: "url('/termsConditionPageImg1.jpg')" }}
     >
       <h2 className={`text-center text-gray-800 text-2xl mt-6 md:text-3xl font-extrabold pb-[2%]`}>
       {t("termsHeading")}
