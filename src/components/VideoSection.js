@@ -14,7 +14,7 @@ const VideoSection = () => {
         {t("usetheCoupon")}
       </h2>
       <p
-        className={`text-m sm:text-l text-gray-800 text-center mb-5 ${styles.objectiveMedium}`}
+        className={`text-[20px] w-[60%] sm:text-l text-gray-800 text-center mb-5 ${styles.objectiveMedium}`}
       >
         <Trans
           i18nKey="usetheCouponDetails"
