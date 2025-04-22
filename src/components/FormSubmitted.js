@@ -35,7 +35,7 @@ const FormSubmitted = () => {
         />
       </div>
 
-      <div className="flex mt-[13%] md:mt-[5%] lg:mt-[5%] w-[95%] md:w-[60%] lg:w-[40%] mx-auto min-h-screen items-center relative z-10">
+      <div className="flex mt-[13%] md:mt-[9%] lg:mt-[4%] w-[95%] md:w-[60%] lg:w-[40%] mx-auto min-h-screen items-center relative z-10">
         <div className="card card-body rounded-4xl bg-white shadow-2xl text-center w-full">
           {/* Card content */}
           <svg
