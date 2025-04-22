@@ -5,18 +5,10 @@ body{
     color: white;
 }
 
-@font-face {
-    font-family: 'Roxborough';
-    src: url("/fonts/RoxboroughCF-ExtraBold.otf") format('opentype');
-    font-weight: 800;
-    font-style: normal;
-  }
 
-  @font-face {
-    font-family: 'Kohinoor';
-    src: url('/fonts/kohinoor.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
+
+
+
+
 
 

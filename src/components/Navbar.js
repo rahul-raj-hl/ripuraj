@@ -15,7 +15,6 @@ const Navbar = () => {
     setSelectedLanguage(e.target.value);
     // dispatch(changeLanguage(e.target.value.toLowerCase()));
     i18n.changeLanguage(e.target.value.toLowerCase());
-    console.log(e.target.value.toLowerCase());
   };
 
   return (

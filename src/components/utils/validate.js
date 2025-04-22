@@ -6,8 +6,7 @@ const validate = ({ firstName, lastName, email, phone }) => {
   );
   const isPhoneNoValid = /^[6-9]\d{9}$/.test(phone);
 
-  console.log("start", isPhoneNoValid, phone);
-  console.log("start", isFNameValid, firstName);
+  
 
   if (!isFNameValid || !isLNameValid || !isEmailValid || !isPhoneNoValid) {
     return {

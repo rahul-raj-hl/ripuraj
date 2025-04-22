@@ -4,13 +4,13 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
-    "./src/styles/**/*.{js,ts,jsx,tsx,css}",
+    "./styles/**/*.{js,ts,jsx,tsx,css}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        roxborough: ["Roxborough", "serif"],
-        kohinoor: ["Kohinoor", "sans-serif"],
+        roxborough: ['Roxborough', 'sans-serif'],
+        kohinoor:['kohinoor']
       },
     },
   },

@@ -57,7 +57,7 @@ const FormSubmitted = () => {
           </svg>
           <img className="w-22 mx-auto" src="/gold_coin.png" alt="logo" />
           <div>
-            <h1 className="font-bold text-4xl md:text-5xl text-[#161644]">
+            <h1 style={{ fontFamily: 'Roxborough',color:"black" }} className="font-bold text-4xl md:text-5xl text-[#161644]">
               Thank You!
             </h1>
             <p className="font-bold text-[1rem] md:text-[1.1rem] mt-2 text-[#E9B72E]">
@@ -67,7 +67,7 @@ const FormSubmitted = () => {
               {" "}
               A Lucky Draw will be held on the 5th of every month. The coupon
               codes of the winners will be published on the company
-              <span>&apos;</span>s website. The prizes will be sent to the
+              <span>&apos;</span>s website - www.ripurajagro.com. The prizes will be sent to the
               winners at their provided address.
             </p>
           </div>
