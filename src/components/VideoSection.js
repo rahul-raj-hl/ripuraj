@@ -9,12 +9,12 @@ const VideoSection = () => {
   return (
     <div className="bg-white flex flex-col justify-center items-center p-4 sm:p-8 pb-16 min-h-0 sm:min-h-screen">
       <h2
-        className={`text-3xl sm:text-3xl ${styles.customFont1} text-indigo-900 mb-3`}
+        className={`text-[32px] sm:text-[40px] lg:text-[48px] ${styles.customFont1} text-indigo-900 mb-3`}
       >
         {t("usetheCoupon")}
       </h2>
       <p
-        className={`text-[20px] w-[60%] sm:text-l text-gray-800 text-center mb-5 ${styles.objectiveMedium}`}
+        className={`text-[20px] sm:w-[60%] text-gray-800 text-center mb-5 ${styles.objectiveMedium}`}
       >
         <Trans
           i18nKey="usetheCouponDetails"
