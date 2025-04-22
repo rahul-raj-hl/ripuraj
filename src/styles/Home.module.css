@@ -11,10 +11,17 @@
 
 .customFont {
     font-family: RoxboroughCF-ExtraBold; 
-    font-weight: 800; 
+    /* font-weight:700  */
 }
 
 .customFont1 {
     font-family: kohinoor-devanagari;
     font-weight: bolder;
+}
+
+.objectiveMedium{
+    font-family: Objective-Medium;
+    font-weight: 500;
+    
+
 }

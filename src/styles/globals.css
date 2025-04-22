@@ -8,7 +8,6 @@ body{
 @font-face {
     font-family: 'RoxboroughCF-ExtraBold';
     src: url('/fonts/RoxboroughCF-ExtraBold.otf') format('otf');
-    font-weight: 800; /* Adjust weight if necessary */
     font-style: normal; /* Adjust style if necessary */
 }
 
@@ -17,7 +16,12 @@ body{
     src: url('/fonts/kohinoor-devanagari.otf') format('otf');
     font-style:normal;
     font-weight: bolder;
+}
 
-  }
+@font-face {
+    font-family: 'Objective-Medium';
+    src: url('/fonts/Objective-Medium.otf') format('otf');
+    font-style: normal;
+}
 
 

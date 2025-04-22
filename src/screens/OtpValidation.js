@@ -94,18 +94,18 @@ const OTPValidation = () => {
       >
         <div className="bg-white rounded-2xl shadow-md flex flex-col md:flex-row flex-1 text-black min-h-[67vh] gap-5 items-stretch relative">
           {/* Left Content */}
-          <div className="flex-1 flex flex-col items-stretch justify-center p-8 border-b md:border-b-0 md:border-r border-[#D3D3D3] gap-3">
+          <div className="flex-1 flex flex-col items-stretch justify-center p-8 border-b md:border-b-0 md:border-r border-[#D3D3D3]">
             {isOtpSent ? (
               <OtpSection otp={otp} setOtp={setOtp} verifyOtp={verifyOtp} />
             ) : (
               <>
                 <h2
-                  className={`text-xl text-left ${styles.customFont} font-sans`}
+                  className={`text-3xl font-semibold text-left ${styles.customFont} font-sans text-[#161644]`}
                 >
                   {/* Enter Your Mobile Number */}
                   {t("enterMobileNumber")}
                 </h2>
-                <h1 className="font-medium">
+                <h1 className={`pt-4 mt-4 mb-2 mb-2${styles.objectiveMedium} text-[#161644] text-2xl`}>
                   {/* Phone Number */}
                   {t("phoneNumber")}
                   </h1>
@@ -117,17 +117,17 @@ const OTPValidation = () => {
 
           {/* Right Content */}
           <div className="flex-1 flex flex-col items-stretch justify-center p-[3%] md:py-[5%] md:pb-[3%] md:pr-[2%] gap-3 font-medium">
-            <h2 className="text-xl font-bold">
+            <h2 className={`text-xl font-bold ${styles.customFont1}  text-[#161644] pb-2`}>
               {/* कूपन को कैसे प्रयोग करें: */}
               {t("howToUseCoupon")}
               </h2>
             {steps.map((step, index) => (
-              <div key={step.key} className="flex flex-col">
+              <div key={step.key} className={`flex flex-col ${styles.objectiveMedium} text-[#454545]`}>
                 <div className="flex items-start">
                   <span className="font-bold w-15 flex-shrink-0">
                       Step {index +1}:
                   </span>
-                <p className="text-base mb-4">{step.text}  </p>
+                <p className={`text-base mb-4 `}>{step.text}  </p>
                 </div>
                 {index < steps.length && <hr className="border-gray-300" />}
               </div>
