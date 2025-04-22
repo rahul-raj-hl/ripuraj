@@ -104,12 +104,12 @@ const OTPValidation = () => {
             ) : (
               <>
                 <h2
-                  className={`font-semibold text-start sm:text-start ${styles.customFont} font-sans text-[#161644] responsive-heading`}
+                  className={`font-semibold text-[18px] sm:text-[25px] text-start ${styles.customFont} font-sans text-[#161644] responsive-heading`}
                 >
                   {/* Enter Your Mobile Number */}
                   {t("enterMobileNumber")}
                 </h2>
-                <h1 className={`pt-4 mt-2 mb-2 mb-2${styles.objectiveMedium} text-[#161644] text-xl`}>
+                <h1 className={`pt-4 mt-2 mb-2 mb-2 ${styles.objectiveMedium} text-[#161644] text-[18px] sm:text-[20px]`}>
                   {/* Phone Number */}
                   {t("phoneNumber")}
                   </h1>
@@ -120,8 +120,8 @@ const OTPValidation = () => {
           </div>
 
           {/* Right Content */}
-          <div className="flex-1 flex flex-col items-stretch justify-center p-[3%] md:py-[5%] md:pb-[3%] md:pr-[2%] gap-3 font-medium lg:pr-12">
-            <h2 className={`text-xl font-bold ${styles.customFont1}  text-[#161644] pb-2`}>
+          <div className="flex-1 flex flex-col items-stretch justify-center p-[3%] md:py-[3%] md:pb-[3%] md:pr-[2%] gap-3 font-medium lg:pr-12">
+            <h2 className={`text-xl font-bold text-[25px] ${styles.customFont1}  text-[#161644] pb-2`}>
               {/* कूपन को कैसे प्रयोग करें: */}
               {t("howToUseCoupon")}
               </h2>
