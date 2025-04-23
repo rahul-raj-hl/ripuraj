@@ -29,7 +29,7 @@ const TermsAndConditions = () => {
   const renderSection = (section, index) => (
     <div key={index} className="relative md:px-5">
       <h3 className="text-[#161644] text-xl font-extrabold mb-3">{section.title}</h3>
-      <ol className="list-decimal pl-5 text-gray-600 space-y-2">
+      <ol className={`list-decimal pl-5 text-gray-600 space-y-2 ${styles.objectiveMedium}`}>
         {section.items.map((item, idx) => (
           <li key={idx} dangerouslySetInnerHTML={{ __html: item }}></li>
         ))}
