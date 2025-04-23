@@ -31,7 +31,9 @@ const hindi = {
     "अब इनाम जितना हुआ आसान! देखिए ये वीडियो और जानिए कैसे आप Ripuraj <1>Gold/Silver Scheme</1> में भाग लेकर बन सकते हैं <2>Lucky Winner</2>!",
 
   // translation for terms and condition page
-  termsHeading: "भाग लेने से पहले जानें:"
+  termsHeading: "भाग लेने से पहले जानें:",
+//valid phone number
+  invalidPhoneNumber: "कृपया एक मान्य फोन नंबर दर्ज करें"
 };  
 
 export default hindi;

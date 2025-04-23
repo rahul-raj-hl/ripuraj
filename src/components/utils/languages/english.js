@@ -31,7 +31,11 @@ const english = {
     "Winning prizes is now easier! Watch this video and find out how you can participate in the Ripuraj <1>Gold/Silver Scheme</1> and become a <2>Lucky Winner</2>!",
     
   // translation for terms and condition page
-  termsHeading: "Know Before You Participate:"
+  termsHeading: "Know Before You Participate:",
+
+  //valid phone number
+  invalidPhoneNumber: "Please enter a valid phone number"
+
 };
 
 
