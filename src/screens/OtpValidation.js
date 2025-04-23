@@ -109,7 +109,7 @@ const OTPValidation = () => {
                   {/* Enter Your Mobile Number */}
                   {t("enterMobileNumber")}
                 </h2>
-                <h1 className={`pt-4 mt-2 mb-2 mb-2 ${styles.objectiveMedium} text-[#161644] text-[18px] sm:text-[20px]`}>
+                <h1 className={`pt-4 mt-2 mb-2 mb-2${styles.objectiveMedium} text-[#161644] text-[18px] sm:text-[20px]`}>
                   {/* Phone Number */}
                   {t("phoneNumber")}
                   </h1>
