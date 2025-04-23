@@ -29,9 +29,23 @@ const FormPage = () => {
     postalCode: "",
     country: userCountryName ? userCountryName : "India",
     couponCode: "",
-  };
+  }
+  const initialStateErrorMessage = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address1: "",
+    address2: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
+    couponCode: "",
+  }
+
   const [form, setForm] = useState(initialState);
-  const [errors, setErrors] = useState(initialState);
+  const [errors, setErrors] = useState(initialStateErrorMessage);
   const [isChecked, setIsChecked] = useState(false);
 
   const handleFormChange = (keyName, value) => {
@@ -42,6 +56,7 @@ const FormPage = () => {
     e.preventDefault();
     clearErrorMessage();
     const errorMsgObj = validate(form);
+    console.log(errorMsgObj)
     if (errorMsgObj.isValid) {
       //Make an API request to save the user data in the database.
       const userDetail = {
@@ -76,7 +91,7 @@ const FormPage = () => {
   };
 
   const clearErrorMessage = () => {
-    setErrors(initialState);
+    setErrors(initialStateErrorMessage);
   };
 
   // To find state name for selected country

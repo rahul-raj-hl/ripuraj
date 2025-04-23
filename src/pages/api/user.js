@@ -30,7 +30,7 @@ export default async function handler(req, res) {
           campaignId: campaignId,
         });
 
-        if (!coupon && coupon.userId) {
+        if (!coupon) {
           return res.status(400).json({ error: "Invalid coupon code" });
         }
 
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
         campaignId: campaignId,
       });
 
-      if (!coupon || coupon.userId) {
+      if (!coupon) {
         return res.status(400).json({ error: "Invalid coupon code" });
       }
 
@@ -76,8 +76,23 @@ export default async function handler(req, res) {
       });
     } catch (error) {
       console.error("Error:", error);
-      return res.status(500).json({ error: "Internal server error" });
-      
+
+      // Check specific error type and return meaningful error messages
+      if (error.code === 11000) {
+        return res.status(400).json({
+          error: "Duplicate entry error: This email or phone number is already in use.",
+        });
+      }
+
+      if (error.name === 'ValidationError') {
+        return res.status(400).json({
+          error: `Validation error: ${error.message}`,
+        });
+      }
+
+      return res.status(500).json({
+        error: `Internal server error: ${error.message || 'Something went wrong'}`,
+      });
     }
   }
 
