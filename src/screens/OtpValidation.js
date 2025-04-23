@@ -89,14 +89,14 @@ const OTPValidation = () => {
     >
       <div
         className={`flex flex-col md:flex-row w-full max-w-[100%] lg:max-w-[96%] mx-auto ${
-          /Android/i.test(navigator.userAgent) ? "mt-2 mb-2" : ""
+          typeof navigator !== "undefined" && /Android/i.test(navigator.userAgent) ? "mt-2 mb-2" : ""
         }`}
       >
         <div className="bg-white rounded-2xl shadow-md flex flex-col md:flex-row flex-1 text-black min-h-[67vh] gap-5 items-stretch relative">
           {/* Left Content */}
           <div
             className={`flex-1 flex flex-col items-stretch justify-center border-b md:border-b-0 md:border-r border-[#D3D3D3] responsive-padding ${
-              !/Android/i.test(navigator.userAgent) ? "p-6" : ""
+              typeof navigator !== "undefined" && !/Android/i.test(navigator.userAgent) ? "p-6" : ""
             } lg:p-12`} // Add padding for large screens using Tailwind's lg: prefix
           >
             {isOtpSent ? (
