@@ -19,9 +19,9 @@ const english = {
   step1:
     "Scan the <0>QR Code</0> with your phone and click the <1>Link</1>.",
   step2:
-    "On the page that opens, enter your name, full address, mobile number, and <0>the coupon code</0> from the scratch card.",
+    "On the page that opens, enter your name, full address, mobile number, and the <0>coupon code</0> from the scratch card.",
   step3:
-    "Click the <0>Submit</0> button along with your complaint or suggestion.",
+    "Click the <0>Submit button</0> along with your complaint or suggestion.",
   step4:
     "Receive a <0>Welcome Note</0> on your <1>SMS</1> and <2>WhatsApp</2>.",
 
