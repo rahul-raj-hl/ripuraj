@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Button from "./Button";
 import Link from "next/link";
+import styles from "@/styles/Home.module.css";
 
 const FormSubmitted = () => {
   const router = useRouter();
@@ -27,7 +28,7 @@ const FormSubmitted = () => {
       {/* Mobile BG */}
       <div className="absolute w-full h-full block md:hidden">
         <Image
-          src="/landingImageForMobile.jpg"
+          src="/landingImageForMobile.png"
           layout="fill"
           objectFit="cover"
           alt="Mobile version"
@@ -56,7 +57,7 @@ const FormSubmitted = () => {
           </svg>
           <img className="w-[17%] mx-auto" src="/gold_coin.png" alt="logo" />
           <div>
-            <h1 className="font-bold text-4xl md:text-5xl text-[#161644]">
+            <h1 className={`font-bold text-4xl md:text-5xl text-[#161644] ${styles.customFont}`} style={{ fontSize: '50px' }} >
               Thank You!
             </h1>
             <p className="font-bold text-[1rem] md:text-[1.1rem] mt-2 text-[#E9B72E]">
