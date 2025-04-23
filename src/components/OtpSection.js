@@ -14,7 +14,7 @@ const OtpInput = ({ onChange }) => {
     <input
       type="text"
       maxLength="6"
-      className="otp-input w-full h-10 border border-gray-300 rounded-md mx-1 text-lg pl-4 tracking-[1.5em] focus:outline-blue-500"
+      className="otp-input w-full h-10 border border-gray-300 rounded-md text-lg pl-8 tracking-[3.6em] focus:outline-blue-500"
       onFocus={(e) => (e.target.style.outline = "2px solid #007BFF")}
       onBlur={(e) => (e.target.style.outline = "none")}
       onChange={handleChange}
