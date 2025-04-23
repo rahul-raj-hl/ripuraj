@@ -37,8 +37,8 @@ const LandingPage = () => {
           alt="Mobile version"
         />
       </div>
-      <div className="absolute right-0 top-[42%] md:top-[40%] lg:top-[41.5%] xl:top-[41.5%] w-4/5 md:w-4/7 lg:w-4/7 xl:w-[58.5%] text-center">
-        <div className={`text-white text-2xl ${styles.customFont1} pl-[8%] md:pl-[1%]`}>
+      <div className="absolute right-0 top-[42%] md:top-[40%] lg:top-[41.5%] xl:top-[41.5%] w-4/5 md:w-4/7 lg:w-4/7 xl:w-[63.5%] text-center">
+        <div className={`text-white ${styles.customFont1} pl-[8%] md:pl-[1%]`}>
           <p className="font-medium text-sm md:text-xl lg:text-2xl xl:text-[1.8rem] ">
             {t("landingMsg1")}
           </p>
