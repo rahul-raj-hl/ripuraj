@@ -104,7 +104,7 @@ const OTPValidation = () => {
             ) : (
               <>
                 <h2
-                  className={`font-semibold text-[16px] sm:text-[25px] text-start ${styles.customFont} font-sans text-[#161644] responsive-heading`}
+                  className={`font-semibold text-[19px] lg:text-[25px] text-start ${styles.customFont} font-sans text-[#161644] responsive-heading`}
                 >
                   {/* Enter Your Mobile Number */}
                   {t("enterMobileNumber")}
