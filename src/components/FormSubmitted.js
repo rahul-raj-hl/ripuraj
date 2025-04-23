@@ -63,7 +63,7 @@ const FormSubmitted = () => {
             <p className="font-bold text-[1rem] md:text-[1.1rem] mt-2 text-[#E9B72E]">
               For Your Participation
             </p>
-            <p className="text-[#161644] mt-4 font-[500] text-sm md:text-base">
+            <p className={`text-[#161644] mt-4 font-[500] text-sm md:text-base ${styles.customFontPoppins}`}>
               {" "}
               A Lucky Draw will be held on the 5th of every month. The coupon
               codes of the winners will be published on the company
