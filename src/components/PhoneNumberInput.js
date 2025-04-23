@@ -15,6 +15,20 @@ const PhoneNumberInput = ({ formik }) => {
   const [selectedCountryCode, setSelectedCountryCode] = useState("IN");
   const [isChecked, setIsChecked] = useState(false);
 
+  const validatePhoneNumber = (phoneNumber) => {
+    const regex = /^[9876]\d{9}$/;
+    return regex.test(phoneNumber);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validatePhoneNumber(formik.values.phoneNumber)) {
+      formik.setFieldError("phoneNumber", t("invalidPhoneNumber"));
+      return;
+    }
+    formik.handleSubmit();
+  };
+
   const handleCountryChange = (e) => {
     const key = COUNTRY_DETAILS.find((item)=>item.countrySTDCode===e.target.value)
     setSelectedCountryCode(key.countryCode);
@@ -24,7 +38,7 @@ const PhoneNumberInput = ({ formik }) => {
   };
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="flex items-center border-1 border-[#A2A2A2] rounded-md px-2 mb-3">
         <div className="flex items-center mr-2">
           
