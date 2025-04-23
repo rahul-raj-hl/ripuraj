@@ -20,6 +20,11 @@
     font-weight: bolder;
 }
 
+.customFontPoppins {
+  font-family: 'Poppins', sans-serif;
+  font-weight: normal;
+}
+
 .objectiveMedium{
     font-family: Objective-Medium;
     font-weight: 500;

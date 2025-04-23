@@ -24,4 +24,11 @@ body{
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
