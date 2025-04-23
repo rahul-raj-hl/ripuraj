@@ -1,4 +1,5 @@
 import Button from "./Button";
+import styles from "@/styles/Home.module.css";
 
 const OtpInput = ({ onChange }) => {
   const handleChange = (e) => {
@@ -25,7 +26,12 @@ const OtpInput = ({ onChange }) => {
 const OtpSection = ({ otp, setOtp, verifyOtp }) => {
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-4">Enter OTP</h2>
+      <h1 className={`font-semibold text-[18px] sm:text-[25px] text-start ${styles.customFont} font-sans text-[#161644] responsive-heading`}>
+        OTP Verification
+        </h1>
+      <h2 className={`pt-4 mt-2 mb-2 mb-2${styles.objectiveMedium} text-[#161644] text-[18px] sm:text-[20px]`}>
+        Security Code
+        </h2>
       <OtpInput onChange={setOtp} />
       <Button onClick={verifyOtp} className="mt-3">
         VERIFY OTP
