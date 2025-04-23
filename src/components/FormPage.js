@@ -199,6 +199,7 @@ const FormPage = () => {
                 placeholder="Phone"
                 type="text"
                 value={form.phone}
+                error={errors.phone}
                 readOnly
               />
             </div>
