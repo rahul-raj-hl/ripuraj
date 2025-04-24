@@ -71,7 +71,7 @@ const FormSubmitted = () => {
               winners at their provided address.
             </p>
           </div>
-          <Link href={"https://ripurajagro.com/all-products/"}>
+          <Link href={"https://ripurajagro.com/shop2/"}>
             <Button
               className="w-[65%] md:w-[40%] lg:w-[45%] cursor-pointer my-2 mx-auto rounded-[0.5rem] bg-[#E9B72E] hover:bg-yellow-500 text-black font-bold py-2 px-4"
               type="button"
