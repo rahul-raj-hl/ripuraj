@@ -19,6 +19,16 @@ body{
 }
 
 @font-face {
+    font-family: 'Objective-Bold';
+    src: url('/fonts/Objective-Bold.otf') format('otf');
+    font-weight: bolder;
+    font-style: normal;
+    
+}
+
+
+
+@font-face {
     font-family: 'Objective-Medium';
     src: url('/fonts/Objective-Medium.otf') format('otf');
     font-style: normal;

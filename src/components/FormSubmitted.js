@@ -67,7 +67,7 @@ const FormSubmitted = () => {
               {" "}
               A Lucky Draw will be held on the 5th of every month. The coupon
               codes of the winners will be published on the company
-              <span>&apos;</span>s website - <Link className="font-bold" href={"https://ripurajagro.com/"}>www.ripurajagro.com</Link>. The prizes will be sent to the
+              <span>&apos;</span>s website - <Link className="font-extrabold" href={"https://ripurajagro.com/"}>www.ripurajagro.com</Link>. The prizes will be sent to the
               winners at their provided address.
             </p>
           </div>
