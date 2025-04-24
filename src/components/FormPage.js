@@ -56,7 +56,7 @@ const FormPage = () => {
     e.preventDefault();
     clearErrorMessage();
     const errorMsgObj = validate(form);
-    console.log(errorMsgObj)
+    // console.log(errorMsgObj)
     if (errorMsgObj.isValid) {
       //Make an API request to save the user data in the database.
       const userDetail = {
@@ -78,7 +78,7 @@ const FormPage = () => {
         },
       };
 
-      console.log(userDetail);
+      // console.log(userDetail);
 
       const [, error] = await createUser(userDetail);
       if (error) {

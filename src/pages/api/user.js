@@ -11,9 +11,11 @@ export default async function handler(req, res) {
 
       // 1. Check if user exists by phone
       let user = await User.findOne({ phone: userDetails.phone });
-      console.log(user);
+      // console.log(user);
       if (user) {
         // Check if user is already registered for this campaign
+        user = {...user, ...userDetails}
+        await user.save();
         const existingForm = await Form.findOne({
           userId: user.userId,
           campaignId: campaignId,

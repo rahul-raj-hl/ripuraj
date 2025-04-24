@@ -23,7 +23,6 @@ const headers = [
 const Dashboard = () => {
   const router = useRouter();
   const isUserLoggedIn = useSelector((state) => state.user.isLoggedInUser);
-  console.log("hello", isUserLoggedIn);
 
   useEffect(() => {
     if (!isUserLoggedIn) {
