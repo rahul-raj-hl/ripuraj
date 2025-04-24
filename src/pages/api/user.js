@@ -4,27 +4,55 @@ import Coupon from "@/models/coupon";
 import Form from "@/models/form";
 
 export default async function handler(req, res) {
-  await connectToDB();
+  await connectToDB()
+
   if (req.method === "POST") {
     try {
-      const { userDetails, campaignId, couponCode, address } = req.body;
+      let { userDetails, campaignId, couponCode, address } = req.body;
 
-      // 1. Check if user exists by phone
+      // Normalize email input
+      if (!userDetails.email || userDetails.email.trim() === "") {
+        userDetails.email = null;
+      }
+
+      // Check if user exists by phone
       let user = await User.findOne({ phone: userDetails.phone });
-      // console.log(user);
+
       if (user) {
-        // Check if user is already registered for this campaign
-        user = {...user, ...userDetails}
+        // Check for duplicate email if provided
+        if (userDetails.email) {
+          const emailExists = await User.findOne({
+            email: userDetails.email,
+            _id: { $ne: user._id }, // exclude current user
+          });
+
+          if (emailExists) {
+            return res.status(400).json({
+              error: "Email already in use by another user.",
+            });
+          }
+        }
+
+        // Update user data
+        Object.assign(user, userDetails);
+
+        if (address) {
+          user.address = address;
+          user.markModified("address");
+        }
+
         await user.save();
+
+        // Check if user already registered for this campaign
         const existingForm = await Form.findOne({
           userId: user.userId,
           campaignId: campaignId,
         });
 
         if (existingForm) {
-          return res
-            .status(400)
-            .json({ error: "User already registered for this campaign" });
+          return res.status(400).json({
+            error: "User already registered for this campaign",
+          });
         }
 
         const coupon = await Coupon.findOne({
@@ -36,20 +64,24 @@ export default async function handler(req, res) {
           return res.status(400).json({ error: "Invalid coupon code" });
         }
 
-        // Check if coupon is already used
         if (coupon.userId) {
           return res.status(400).json({ error: "Coupon already used" });
         }
       } else {
-        // Create new user
+        // Creating a new user
+        if (!userDetails.email || userDetails.email.trim() === "") {
+          userDetails.email = null;
+        }
+
         user = new User({
           ...userDetails,
           address,
         });
+
         await user.save();
       }
 
-      // Get the coupon
+      // Get coupon again (outside if block)
       const coupon = await Coupon.findOne({
         code: couponCode,
         campaignId: campaignId,
@@ -76,10 +108,10 @@ export default async function handler(req, res) {
         userId: user.userId,
         formId: form._id,
       });
+
     } catch (error) {
       console.error("Error:", error);
 
-      // Check specific error type and return meaningful error messages
       if (error.code === 11000) {
         return res.status(400).json({
           error: "Duplicate entry error: This email or phone number is already in use.",
@@ -94,7 +126,7 @@ export default async function handler(req, res) {
 
       return res.status(500).json({
         error: `Internal server error: ${error.message || 'Something went wrong'}`,
-      });
+      }); 
     }
   }
 

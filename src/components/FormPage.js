@@ -195,6 +195,7 @@ const FormPage = () => {
                 type="text"
                 value={form.postalCode}
                 required
+                maxLength="6"
                 onChange={(e) => handleFormChange("postalCode", e.target.value)}
               />
               <Input
