@@ -31,6 +31,12 @@ if (!connection.models.User) {
         },
         state: { type: String, required: true },
         country: { type: String, required: true },
+      },
+      // Add OTP related fields
+      otp: { 
+        code: { type: String },
+        expiresAt: { type: Date },
+        verified: { type: Boolean, default: false }
       }
     },
     { timestamps: true }

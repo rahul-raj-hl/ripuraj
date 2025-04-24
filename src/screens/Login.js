@@ -8,7 +8,7 @@ import Footer1 from "../components/Footer1";
 const Login = () => {
   return (
     <div className="bg-white">
-      <LandingPage />
+            <LandingPage />
             <OTPValidation />
             <VideoSection />
             <TermsAndConditions />
