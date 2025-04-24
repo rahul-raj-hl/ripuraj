@@ -33,22 +33,31 @@ const OTPValidation = () => {
   const handleSendOtp = async (phoneNumber) => {
     setIsOtpSent(true);
     try {
-      const data = await apiRequest("/api/sendOtp", { phoneNumber });
-      setError(
-        data.message === "OTP sent successfully"
-          ? ""
-          : data.message || "Failed to send OTP."
-      );
+      const data = await apiRequest("/api/generateOtp", { phone: phoneNumber });
+      if(data.success){
+        setIsOtpSent(true);
+      }
+      else{
+        setError(data.message);
+      }
     } catch (err) {
       setError(err.message);
     }
   };
 
   const verifyOtp = async () => {
-    setIsOtpVerified(
-      otp === "123456" ? true : setError("Please enter a valid OTP.")
-    );
-
+  
+    try {
+      const data = await apiRequest("/api/validateOtp", { phone: formik.values.phoneNumber, otp: otp });
+      if(data.success){
+        setIsOtpVerified(true);
+      }
+      else{
+        setError(data.message);
+      }
+    } catch (err) {
+      setError(err.message);
+    }
     //adding user phone number to redux store
     dispatch(updateMobileNumber(formik.values.phoneNumber))
   };

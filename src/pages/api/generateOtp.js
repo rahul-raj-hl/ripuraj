@@ -1,1 +1,119 @@
+import { connectToDB } from "../../lib/mongodb";
+import User from "@/models/User";
+import { NextResponse } from "next/server";
 
+// Simple in-memory store for rate limiting
+// Note: In production, use Redis or a database
+const rateLimitStore = new Map();
+
+// Rate limit checker
+const checkRateLimit = (ip) => {
+  const now = Date.now();
+  const limit = 5; // 5 requests per minute
+  const interval = 60 * 1000; // 1 minute
+
+  const userRequests = rateLimitStore.get(ip) || [];
+  const recentRequests = userRequests.filter((time) => now - time < interval);
+
+  if (recentRequests.length >= limit) {
+    return false;
+  }
+
+  recentRequests.push(now);
+  rateLimitStore.set(ip, recentRequests);
+  return true;
+};
+
+// Generate 6 digit OTP
+const generateOTP = () => {
+  return Math.floor(100000 + Math.random() * 900000);
+};
+
+// For Pages Router API route
+export default async function handler(req, res) {
+  try {
+    // Connect to database
+    await connectToDB();
+
+    // Get request body (fixed for Pages Router)
+    const { phone } = req.body;
+
+    if (!phone) {
+      return res.status(400).json({
+        success: false,
+        error: "Phone number is required",
+      });
+    }
+
+    // Get IP address
+    const ip = req.headers["x-forwarded-for"] || "anonymous";
+
+    // Check rate limit
+    // if (!checkRateLimit(ip)) {
+    //   return res.status(429).json({
+    //     success: false,
+    //     error: "Too many requests. Please try again later.",
+    //   });
+    // }
+
+    // Generate OTP
+    const otp = generateOTP().toString();
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
+
+    // Find user by phone number or create new one
+    let user = await User.findOne({ phone });
+
+    if (user) {
+      // Update existing user's OTP
+      user.otp = {
+        code: otp,
+        expiresAt,
+        verified: false,
+      };
+      // Ensure country field exists
+      if (!user.address.country) {
+          user.address.country = "India";
+      }
+    } else {
+      // Create new user with minimal info
+      user = new User({
+        phone,
+        otp: {
+          code: otp,
+          expiresAt,
+          verified: false,
+        },
+        // Required fields with placeholder values
+        email: `temp_${phone}@placeholder.com`,
+        firstName: "Temporary",
+        lastName: "User",
+        address: {
+          line1: "Pending",
+          line2: "Pending",
+          city: "Pending",
+          pincode: "000000",
+          state: "Pending",
+          country: "IN",
+        },
+      });
+    }
+
+    await user.save();
+
+    // In a real application, you would send the OTP via SMS here
+    // For now, we'll just return it in the response (not recommended in production)
+    return res.status(200).json({
+      success: true,
+      data: {
+        timestamp: new Date().toISOString(),
+        expiresIn: "5 minutes",
+      },
+    });
+  } catch (error) {
+    console.error("OTP Generation Error:", error);
+    return res.status(500).json({
+      success: false,
+      error: "Internal server error",
+    });
+  }
+}
