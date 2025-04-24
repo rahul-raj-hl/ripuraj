@@ -19,6 +19,11 @@
     font-weight: bolder;
 }
 
+.kohinoor-devanagari {
+  font-family: kohinoor-devanagari;
+  font-weight: bold;
+}
+
 .customFontPoppins {
   font-family: 'Poppins', sans-serif;
   font-weight: normal;
@@ -30,6 +35,10 @@
     
 
 }
+.Objective-Bold{
+  font-family: Objective-Bold;
+}
+
 
 .responsive-padding {
   padding: 1rem; /* Default padding for small screens */

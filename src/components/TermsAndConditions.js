@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 const TermsAndConditions = () => {
   const sections = [
     {
-      title: "नियम एवं शर्तें:",
+      title: <span style={{ fontFamily: "kohinoor-devanagari",fontWeight:"bolder" }}>नियम एवं शर्तें:</span>,
       items: [
         "स्क्रैच किया गया कूपन संभाल कर रखें।",
         "इनाम प्राप्त करते समय कूपन को कंपनी कर्मचारी को लौटादें।",
@@ -16,7 +16,7 @@ const TermsAndConditions = () => {
       ],
     },
     {
-      title: "Terms & Conditions:",
+      title: <span style={{ fontFamily: "Objective-Bold", fontWeight: "bolder" }}>Terms & Conditions:</span>,
       items: [
         "Keep the <strong>scratched coupon</strong> safe.",
         "<strong>Return the coupon</strong> to the company staff while claiming the prize.",
@@ -28,7 +28,7 @@ const TermsAndConditions = () => {
 
   const renderSection = (section, index) => (
     <div key={index} className="relative md:px-5">
-      <h3 className="text-[#161644] text-xl font-extrabold mb-3">{section.title}</h3>
+      <h3 className="text-[#161644] text-xl font-extrabold mb-3 ">{section.title}</h3>
       <ol className={`list-decimal pl-5 text-gray-600 space-y-2 ${styles.objectiveMedium}`}>
         {section.items.map((item, idx) => (
           <li key={idx} dangerouslySetInnerHTML={{ __html: item }}></li>
@@ -44,7 +44,7 @@ const TermsAndConditions = () => {
       className="bg-yellow-100 py-[4%] bg-cover bg-center"
       style={{ backgroundImage: "url('/termsConditionPageImg1.jpg')" }}
     >
-      <h2 className={`text-center text-gray-800 text-2xl mt-6 md:text-3xl font-extrabold pb-[2%]`}>
+      <h2 className={`text-center text-gray-800 text-2xl mt-6 md:text-3xl ${styles.customFont1} font-extrabold pb-[2%]`}>
       {t("termsHeading")}
 
       </h2>
