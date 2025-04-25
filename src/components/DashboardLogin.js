@@ -17,7 +17,6 @@ const DashboardLogin = () => {
     setErrorMsg(false)
     // Handle login logic here
     if(userId === "Admin" && password === "Admin"){
-        // console.log("Success")
         dispatch(changeLoggedInUser(true))
         router.push("/dashboard");
 
