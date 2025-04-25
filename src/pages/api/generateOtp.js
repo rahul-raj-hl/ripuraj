@@ -24,9 +24,42 @@ const checkRateLimit = (ip) => {
   return true;
 };
 
-// Generate 6 digit OTP
+// Generate 4 digit OTP
 const generateOTP = () => {
-  return Math.floor(100000 + Math.random() * 900000);
+  return Math.floor(1000 + Math.random() * 9000);
+};
+
+// SMS sending function
+const sendOTPviaSMS = async (phone, otp) => {
+  const baseUrl = 'http://pertinaxsolution.com/api/mt/SendSMS';
+  const params = new URLSearchParams({
+    user: 'Ripuraj Agro',
+    password: 'del1543',
+    senderid: 'RIPUAG',
+    channel: 'trans',
+    DCS: '0',
+    flashsms: '0',
+    number: phone,
+    text: `Congratulations!
+    Your chance to win Gold & Silver coins is here. 
+    Enter the OTP ${otp} to claim your prize!
+    Absolutely Free. Limited time offer.
+    Ripuraj Agro.`,
+    route: '13',
+    Peid: '1101587830000086432',
+    DLTTemplateId: '1107174540786881548'
+  });
+
+  try {
+    const response = await fetch(`${baseUrl}?${params.toString()}`);
+    if (!response.ok) {
+      throw new Error('SMS sending failed');
+    }
+    return true;
+  } catch (error) {
+    console.error('SMS Sending Error:', error);
+    return false;
+  }
 };
 
 // For Pages Router API route
@@ -100,13 +133,15 @@ export default async function handler(req, res) {
 
     await user.save();
 
-    // In a real application, you would send the OTP via SMS here
-    // For now, we'll just return it in the response (not recommended in production)
+    // Send OTP via SMS
+    const smsSent = await sendOTPviaSMS(phone, otp);
+
     return res.status(200).json({
       success: true,
       data: {
         timestamp: new Date().toISOString(),
         expiresIn: "5 minutes",
+        smsSent: smsSent
       },
     });
   } catch (error) {
