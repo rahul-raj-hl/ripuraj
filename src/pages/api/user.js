@@ -3,6 +3,23 @@ import User from "@/models/User";
 import Coupon from "@/models/coupon";
 import Form from "@/models/form";
 
+// Add this helper function before the main handler
+async function sendSMS(phoneNumber) {
+  try {
+    const url = `http://pertinaxsolution.com/api/mt/SendSMS?user=Ripuraj Agro&password=del1543&senderid=RIPUAG&channel=trans&DCS=0&flashsms=0&number=${phoneNumber}&text=Thank you for participating in Ripuraj Gold %26 Silver Scheme! Keep your scratch coupon safe. We'll contact you soon for prize verification.\nRipuraj Agro&route=13&Peid=1101587830000086432&DLTTemplateId=1107174540819636355`
+
+    const response = await fetch(url);
+    console.log(await response.json());
+    if (!response.ok) {
+      throw new Error('SMS sending failed');
+    }
+    return true;
+  } catch (error) {
+    console.error('SMS sending error:', error);
+    return false;
+  }
+}
+
 export default async function handler(req, res) {
   await connectToDB()
 
@@ -102,6 +119,9 @@ export default async function handler(req, res) {
         couponId: coupon._id,
       });
       await form.save();
+      
+      // Send SMS notification
+      await sendSMS(user.phone);
 
       return res.status(200).json({
         message: "Registration successful",

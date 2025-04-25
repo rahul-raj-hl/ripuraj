@@ -9,7 +9,7 @@ const validate = ({ firstName, lastName, email, phone, postalCode }) => {
 
   
 
-  if (!isFNameValid || !isLNameValid || !isEmailValid || !isPhoneNoValid || isPostalCode) {
+  if (!isFNameValid || !isLNameValid || !isEmailValid || !isPhoneNoValid || !isPostalCode) {
     return {
       isValid: false,
       errorMsg: {
