@@ -14,6 +14,7 @@
     "@mui/material": "^7.0.2",
     "@reduxjs/toolkit": "^2.6.1",
     "dotenv": "^16.4.7",
+    "file-saver": "^2.0.5",
     "formik": "^2.4.6",
     "i18next": "^24.2.3",
     "mongoose": "^8.12.1",
@@ -25,6 +26,7 @@
     "react-i18next": "^15.4.1",
     "react-redux": "^9.2.0",
     "react-world-flags": "^1.6.0",
+    "xlsx": "^0.18.5",
     "yup": "^1.6.1"
   },
   "devDependencies": {

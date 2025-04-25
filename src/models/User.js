@@ -10,7 +10,7 @@ if (!connection.models.User) {
   const userSchema = new mongoose.Schema(
     {
       userId: { type: Number, unique: true }, // Auto-increment field
-      email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+      email: { type: String, lowercase: true, trim: true , default: null},
       firstName: { type: String, required: true },
       lastName: { type: String, required: true },
       phone: { 
@@ -21,7 +21,7 @@ if (!connection.models.User) {
       },
       address: {
         line1: { type: String, required: true },
-        line2: { type: String, required: true },
+        line2: { type: String },
         city: { type: String, required: true },
         // district: { type: String, required: true },
         pincode: { 
