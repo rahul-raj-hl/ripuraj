@@ -181,6 +181,8 @@ const FormPage = () => {
                 className="bg-white border-1 border-black w-full"
                 onChange={(e) => handleFormChange("state", e.target.value)}
                 initialSelectedValue="Select State"
+                required={true} 
+                error={errors.state} 
               />
             </div>
           </div>

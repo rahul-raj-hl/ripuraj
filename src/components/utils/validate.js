@@ -1,4 +1,4 @@
-const validate = ({ firstName, lastName, email, phone, postalCode }) => {
+const validate = ({ firstName, lastName, email, phone, postalCode, state }) => {
   const isFNameValid = /^[A-Za-z ]{3,16}$/.test(firstName);
   const isLNameValid = /^[A-Za-z ]{3,16}$/.test(lastName);
   const isEmailValid = email===""?true: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
@@ -6,10 +6,10 @@ const validate = ({ firstName, lastName, email, phone, postalCode }) => {
   );
   const isPhoneNoValid = /^[6-9]\d{9}$/.test(phone);
   const isPostalCode = /^\d{6}$/.test(postalCode)
-
+  const isStateValid = state !== ""; 
   
 
-  if (!isFNameValid || !isLNameValid || !isEmailValid || !isPhoneNoValid || !isPostalCode) {
+  if (!isFNameValid || !isLNameValid || !isEmailValid || !isPhoneNoValid || !isPostalCode || !isStateValid) {
     return {
       isValid: false,
       errorMsg: {
@@ -24,6 +24,7 @@ const validate = ({ firstName, lastName, email, phone, postalCode }) => {
           : "Enter a valid email address (e.g., example@gmail.com).",
         phone: isPhoneNoValid ? "" : "Phone number must be 10 digits long.",
         postalCode: isPostalCode ? "" : "Please enter a valid PIN code.",
+        state: isStateValid ? "" : "State is required.",
       },
     };
   }
