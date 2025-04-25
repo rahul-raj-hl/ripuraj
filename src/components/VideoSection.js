@@ -28,7 +28,7 @@ const VideoSection = () => {
       <div className="relative flex justify-center items-center w-full max-w-[1166px] h-[200px] sm:h-[400px] bg-yellow-400 rounded-2xl">
         <iframe
           className="h-full w-full rounded-2xl"
-          src="https://www.youtube.com/embed/-8dJB8QUUBM?si=pNzQIL24jlZBhc63"
+          src="https://www.youtube.com/embed/MxFC0tv-bK4?si=knfu_c3sINFhExsq"
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

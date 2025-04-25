@@ -17,6 +17,7 @@ const FormPage = () => {
   const userCountryName = useSelector((state) => state.countryName.countryName);
 
   const router = useRouter();
+
   const initialState = {
     firstName: "",
     lastName: "",
@@ -29,7 +30,8 @@ const FormPage = () => {
     postalCode: "",
     country: userCountryName ? userCountryName : "India",
     couponCode: "",
-  }
+  };
+
   const initialStateErrorMessage = {
     firstName: "",
     lastName: "",
@@ -42,23 +44,29 @@ const FormPage = () => {
     postalCode: "",
     country: "",
     couponCode: "",
-  }
+  };
 
   const [form, setForm] = useState(initialState);
   const [errors, setErrors] = useState(initialStateErrorMessage);
   const [isChecked, setIsChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleFormChange = (keyName, value) => {
     setForm((prevForm) => ({ ...prevForm, [keyName]: value }));
   };
 
+  const clearErrorMessage = () => {
+    setErrors(initialStateErrorMessage);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     clearErrorMessage();
+
     const errorMsgObj = validate(form);
-    // console.log(errorMsgObj)
+
     if (errorMsgObj.isValid) {
-      //Make an API request to save the user data in the database.
       const userDetail = {
         userDetails: {
           firstName: form.firstName,
@@ -78,30 +86,26 @@ const FormPage = () => {
         },
       };
 
-      // console.log(userDetail);
-
       const [, error] = await createUser(userDetail);
+      setLoading(false);
+
       if (error) {
         alert(error);
       } else {
         router.push("/formsubmitted");
       }
+    } else {
+      setLoading(false);
+      setErrors(errorMsgObj.errorMsg);
     }
-    setErrors(errorMsgObj.errorMsg);
   };
 
-  const clearErrorMessage = () => {
-    setErrors(initialStateErrorMessage);
-  };
-
-  // To find state name for selected country
   const selectedCountry = COUNTRY_DETAILS.find(
     (item) => item.countryName === form.country
   );
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
-      {/* Desktop background image */}
       <Image
         src="/MainForm_bg.jpg"
         alt="Background"
@@ -111,7 +115,6 @@ const FormPage = () => {
         priority
       />
 
-      {/* Mobile background image */}
       <Image
         src="/MainForm_bg_mobile.jpg"
         alt="Mobile Background"
@@ -122,8 +125,8 @@ const FormPage = () => {
       />
 
       <div className="card card-body mx-4 my-6 md:mx-32 md:my-10 shadow-2xl w-full md:w-[80%] bg-white text-black z-10">
-        <h2 className="text-2xl font-bold  my-2">Registration Form</h2>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <h2 className="text-2xl font-bold my-2">Registration Form</h2>
+        <form onSubmit={handleSubmit}>
           <div>
             <Label label="Name" />
             <div className="grid grid-cols-2 gap-5">
@@ -145,25 +148,25 @@ const FormPage = () => {
               />
             </div>
           </div>
+
           <div className="my-2">
             <Label label="Address" />
-            <div>
-              <Input
-                placeholder="Street Address"
-                type="text"
-                value={form.address1}
-                required
-                onChange={(e) => handleFormChange("address1", e.target.value)}
-              />
-              <Input
-                className="input w-full my-2 bg-white border-[#707070] border-1 font-medium"
-                placeholder="Street Address Line 2 (Optional)"
-                type="text"
-                value={form.address2}
-                onChange={(e) => handleFormChange("address2", e.target.value)}
-              />
-            </div>
+            <Input
+              placeholder="Street Address"
+              type="text"
+              value={form.address1}
+              required
+              onChange={(e) => handleFormChange("address1", e.target.value)}
+            />
+            <Input
+              className="input w-full my-2 bg-white border-[#707070] border-1 font-medium"
+              placeholder="Street Address Line 2 (Optional)"
+              type="text"
+              value={form.address2}
+              onChange={(e) => handleFormChange("address2", e.target.value)}
+            />
           </div>
+
           <div className="my-2">
             <div className="grid grid-cols-2 gap-5">
               <Input
@@ -173,21 +176,15 @@ const FormPage = () => {
                 required
                 onChange={(e) => handleFormChange("city", e.target.value)}
               />
-
               <Select
                 optionValue={selectedCountry.stateName}
-                className={"bg-white border-1 border-black w-full"}
+                className="bg-white border-1 border-black w-full"
                 onChange={(e) => handleFormChange("state", e.target.value)}
                 initialSelectedValue="Select State"
               />
-              {/* <Input
-                placeholder="Region"
-                type="text"
-                value={form.region}
-                onChange={(e) => handleFormChange("region", e.target.value)}
-              /> */}
             </div>
           </div>
+
           <div>
             <div className="grid grid-cols-2 gap-5">
               <Input
@@ -200,19 +197,20 @@ const FormPage = () => {
                 onChange={(e) => handleFormChange("postalCode", e.target.value)}
               />
               <Input
-                className="bg-gray-200 cursor-not-allowed text-gray-500  input w-full border-[#707070] border-1 font-medium"
-                placeholder={"Country"}
+                className="bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium"
+                placeholder="Country"
                 type="text"
                 value={form.country}
                 readOnly
               />
             </div>
           </div>
+
           <div className="my-2 grid grid-cols-2 gap-5">
-            <div className="">
+            <div>
               <Label label="Phone *" />
               <Input
-                className="bg-gray-200 cursor-not-allowed text-gray-500  input w-full border-[#707070] border-1 font-medium"
+                className="bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium"
                 placeholder="Phone"
                 type="text"
                 value={form.phone}
@@ -231,18 +229,18 @@ const FormPage = () => {
               />
             </div>
           </div>
+
           <div>
             <Label label="Scratch Coupon" />
-            <div className="">
-              <Input
-                placeholder="Coupon Code"
-                type="text"
-                value={form.couponCode}
-                required
-                onChange={(e) => handleFormChange("couponCode", e.target.value)}
-              />
-            </div>
+            <Input
+              placeholder="Coupon Code"
+              type="text"
+              value={form.couponCode}
+              required
+              onChange={(e) => handleFormChange("couponCode", e.target.value)}
+            />
           </div>
+
           <div className="flex my-2">
             <div
               className={`w-5 h-5 flex items-center justify-center border rounded relative ${
@@ -270,18 +268,37 @@ const FormPage = () => {
               By Submitting, you agree to the <b>Terms and Privacy Policy</b>
             </p>
           </div>
+
           <div className="my-5">
-            {/* <button
-            className="btn w-full text-lg border-none text-black font-bold bg-[#E9B72E]"
-            type="submit"
-          >
-            Submit
-          </button> */}
             <Button
               type="submit"
-              className="btn w-full text-lg border-none text-black font-bold bg-[#E9B72E]"
+              className="btn w-full text-lg border-none text-black font-bold bg-[#E9B72E] flex items-center justify-center"
+              disabled={loading}
             >
-              Submit
+              {loading ? (
+                <svg
+                  className="animate-spin h-5 w-5 mr-2 text-black"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4l3.5-3.5L12 0v4a8 8 0 00-8 8z"
+                  ></path>
+                </svg>
+              ) : (
+                "Submit"
+              )}
             </Button>
           </div>
         </form>
