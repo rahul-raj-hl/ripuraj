@@ -31,27 +31,14 @@ const generateOTP = () => {
 
 // SMS sending function
 const sendOTPviaSMS = async (phone, otp) => {
-  const baseUrl = 'http://pertinaxsolution.com/api/mt/SendSMS';
-  const params = new URLSearchParams({
-    user: 'Ripuraj Agro',
-    password: 'del1543',
-    senderid: 'RIPUAG',
-    channel: 'trans',
-    DCS: '0',
-    flashsms: '0',
-    number: phone,
-    text: `Congratulations!
-    Your chance to win Gold & Silver coins is here. 
-    Enter the OTP ${otp} to claim your prize!
-    Absolutely Free. Limited time offer.
-    Ripuraj Agro.`,
-    route: '13',
-    Peid: '1101587830000086432',
-    DLTTemplateId: '1107174540786881548'
-  });
+  const url = `http://pertinaxsolution.com/api/mt/SendSMS?user=Ripuraj Agro&password=del1543&senderid=RIPUAG&channel=trans&DCS=0&flashsms=0&number=${phone}&text=Congratulations!
+Your chance to win Gold %26 Silver coins is here. 
+Enter the OTP ${otp} to claim your prize!
+Absolutely Free. Limited time offer.
+Ripuraj Agro.&route=13&Peid=1101587830000086432&DLTTemplateId=1107174540786881548`
 
   try {
-    const response = await fetch(`${baseUrl}?${params.toString()}`);
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error('SMS sending failed');
     }

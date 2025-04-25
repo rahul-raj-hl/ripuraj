@@ -65,7 +65,6 @@ const FormPage = () => {
     clearErrorMessage();
 
     const errorMsgObj = validate(form);
-
     if (errorMsgObj.isValid) {
       const userDetail = {
         userDetails: {
@@ -85,6 +84,7 @@ const FormPage = () => {
           country: form.country,
         },
       };
+
 
       const [, error] = await createUser(userDetail);
       setLoading(false);
