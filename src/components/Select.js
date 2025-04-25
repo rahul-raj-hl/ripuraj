@@ -1,12 +1,13 @@
 import React from "react";
 
-const Select = ({ className, optionValue, onChange, value,initialSelectedValue }) => {
+const Select = ({ className, optionValue, onChange, value,initialSelectedValue, required, error }) => {
   return (
     <div>
       <select
         className={"select " + className}
         onChange={onChange}
         value={value}
+        required={required}
       >
         {initialSelectedValue && <option disabled selected>Select State</option>}
         {optionValue.map((val) => (
@@ -15,6 +16,7 @@ const Select = ({ className, optionValue, onChange, value,initialSelectedValue }
           </option>
         ))}
       </select>
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 };
