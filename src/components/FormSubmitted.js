@@ -19,7 +19,7 @@ const FormSubmitted = () => {
         <Image
           src="/landingImage.jpg"
           layout="fill"
-          objectFit="cover"
+          objectFit="fill"
           alt="Desktop version"
           className="blur-[0.06rem]"
         />
@@ -30,7 +30,7 @@ const FormSubmitted = () => {
         <Image
           src="/landingImageForMobile.png"
           layout="fill"
-          objectFit="cover"
+          objectFit="fill"
           alt="Mobile version"
           className="blur-[0.06rem]"
         />
