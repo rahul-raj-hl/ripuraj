@@ -59,7 +59,7 @@ const OTPValidation = () => {
       setError(err.message);
     }
     //adding user phone number to redux store
-    dispatch(updateMobileNumber(formik.values.phoneNumber))
+    // dispatch(updateMobileNumber(formik.values.phoneNumber))
   };
 
   const steps = [

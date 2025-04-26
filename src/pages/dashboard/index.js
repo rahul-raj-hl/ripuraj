@@ -43,29 +43,28 @@ const Dashboard = () => {
   const fetchDashboardData = async (page, pageSize, state, city, from, to) => {
     setLoading(true);
     try {
-      // Adjusting API call to pass page and pageSize correctly
       const [response, error] = await getDashboardData({
-        page: page + 1, // Assuming 1-based indexing for pages
-        pageSize: pageSize,
+        page: page + 1,
+        limit: pageSize,
         state,
         city,
         from,
         to,
       });
-
+  
       if (error) {
         console.error("Error fetching data:", error);
         return;
       }
-
+  
       let filteredData = response.data;
-
+  
       if (city) {
         filteredData = filteredData.filter((item) =>
           item?.city?.toLowerCase()?.includes(city.toLowerCase())
         );
       }
-
+  
       if (from && to) {
         filteredData = filteredData.filter((item) => {
           const itemDate = new Date(item?.createdAt);
@@ -74,15 +73,16 @@ const Dashboard = () => {
           return itemDate >= fromDate && itemDate <= toDate;
         });
       }
-
+  
       setData(filteredData);
-      setTotalCount(response.totalCount); // Ensure the API provides this
+      setTotalCount(response.pagination.total); // ✅ Correct line
     } catch (error) {
       console.error("Error in fetchDashboardData:", error);
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handlePageChange = (newPage) => {
     setPagination((prev) => ({ ...prev, page: newPage }));

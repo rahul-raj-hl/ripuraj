@@ -5,7 +5,7 @@ export const apiRequest = async (url, payload) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    if (!response.ok) throw new Error("Failed to fetch data from the server.");
+    if (!response.ok) throw new Error("Kindly Enter Valid OTP.");
     return await response.json();
   } catch (error) {
     throw new Error(error.message || "Network error. Please try again.");

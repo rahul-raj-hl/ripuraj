@@ -6,6 +6,7 @@ import { COUNTRY_DETAILS } from "./utils/mockData";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateCountryName } from "./utils/userCountryNameSlice";
+import { updateMobileNumber } from "@/components/utils/userMobileSlice";
 
 const PhoneNumberInput = ({ formik }) => {
 
@@ -17,6 +18,9 @@ const PhoneNumberInput = ({ formik }) => {
 
   const validatePhoneNumber = (phoneNumber) => {
     const regex = /^[9876]\d{9}$/;
+    console.log("hello", phoneNumber)
+    //adding user phone number to redux store
+    dispatch(updateMobileNumber(formik.values.phoneNumber))
     return regex.test(phoneNumber);
   };
 
