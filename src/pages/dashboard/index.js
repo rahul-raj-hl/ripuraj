@@ -43,7 +43,16 @@ const Dashboard = () => {
   const fetchDashboardData = async (page, pageSize, state, city, from, to) => {
     setLoading(true);
     try {
-      const [response, error] = await getDashboardData({ page, pageSize, state });
+      // Adjusting API call to pass page and pageSize correctly
+      const [response, error] = await getDashboardData({
+        page: page + 1, // Assuming 1-based indexing for pages
+        pageSize: pageSize,
+        state,
+        city,
+        from,
+        to,
+      });
+
       if (error) {
         console.error("Error fetching data:", error);
         return;
@@ -67,7 +76,7 @@ const Dashboard = () => {
       }
 
       setData(filteredData);
-      setTotalCount(filteredData.length);
+      setTotalCount(response.totalCount); // Ensure the API provides this
     } catch (error) {
       console.error("Error in fetchDashboardData:", error);
     } finally {
@@ -130,7 +139,14 @@ const Dashboard = () => {
       dateFrom,
       dateTo
     );
-  }, [pagination.page, pagination.pageSize, selectedState, selectedCity, dateFrom, dateTo]);
+  }, [
+    pagination.page,
+    pagination.pageSize,
+    selectedState,
+    selectedCity,
+    dateFrom,
+    dateTo,
+  ]);
 
   if (!isUserLoggedIn) return null;
 
