@@ -22,11 +22,15 @@ export async function createUser(userData) {
 
 export async function getDashboardData(params) {
   try {
-    const { page, pageSize, state } = params;
+    const { page, limit, state, city, from, to } = params;  // ✅ Updated
+
     const queryParams = new URLSearchParams({
       page: page.toString(),
-      pageSize: pageSize.toString(),
-      ...(state && { state })
+      limit: limit.toString(),  // ✅ Updated
+      ...(state && { state }),
+      ...(city && { city }),
+      ...(from && { startDate: from }),
+      ...(to && { endDate: to }),
     });
 
     const response = await fetch(`/api/dashboard?${queryParams.toString()}`, {
