@@ -3,6 +3,7 @@ import Button from "./Button";
 import styles from "@/styles/Home.module.css";
 // import { useRouter } from "next/router";
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
 const OtpInput = ({ onChange }) => {
   const handleChange = (e) => {
@@ -41,7 +42,17 @@ const OtpSection = ({ otp, setOtp, verifyOtp }) => {
       <h1 className={`font-semibold text-[18px] sm:text-[25px] text-start ${styles.customFont} font-sans text-[#161644] responsive-heading`}>
         OTP Verification
         </h1>
-        <p className="mt-2">{userCountryName? "+977":"+91"} {userMobileNumber} Wrong Number? <span onClick={changeMobileNumber} className="underline cursor-pointer text-blue-600">Update now</span></p>
+        <div className="flex gap-2 items-center p-2 bg-white w-fit">
+  <p className="text-gray-700 font-medium">
+    {userCountryName ? "+977" : "+91"} {userMobileNumber}
+  </p>
+  <img 
+    className="h-5 w-5 object-contain cursor-pointer hover:scale-110 transition-transform duration-200" 
+    alt="edit-logo" 
+    src="/editIcon.png" 
+  />
+</div>
+
       <h2 className={`pt-4 mt-2 mb-2 mb-2${styles.objectiveMedium} text-[#161644] text-[18px] sm:text-[20px]`}>
         Security Code
         </h2>
