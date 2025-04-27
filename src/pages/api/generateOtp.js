@@ -31,7 +31,8 @@ const generateOTP = () => {
 
 // SMS sending function
 const sendOTPviaSMS = async (phone, otp) => {
-  const url = `http://pertinaxsolution.com/api/mt/SendSMS?user=Ripuraj Agro&password=del1543&senderid=RIPUAG&channel=trans&DCS=0&flashsms=0&number=${phone}&text=Congratulations!
+  const password = process.env.SMS_PASSWORD
+  const url = `http://pertinaxsolution.com/api/mt/SendSMS?user=Ripuraj Agro&password=${password}&senderid=RIPUAG&channel=trans&DCS=0&flashsms=0&number=${phone}&text=Congratulations!
 Your chance to win Gold %26 Silver coins is here. 
 Enter the OTP ${otp} to claim your prize!
 Absolutely Free. Limited time offer.
@@ -48,6 +49,40 @@ Ripuraj Agro.&route=13&Peid=1101587830000086432&DLTTemplateId=110717454078688154
     return false;
   }
 };
+
+
+// // Email sending function
+// const sendOTPviaEmail = async (email, otp) => {
+//   const nodemailer = require("nodemailer");
+
+//   // Configure the transporter
+//   const transporter = nodemailer.createTransport({
+//     service: "gmail", // Use your email service provider
+//     auth: {
+//       user: "nandan.shri21@gmail.com", // Your email
+//       pass: "Nandan@7782", // Your email password or app password
+//     },
+//   });
+
+//   // Email options
+//   const mailOptions = {
+//     from: "nandan.shri21@gmail.com", // Your email
+//     to: email,
+//     subject: "Ripuraj Agro Gold Scheme",
+//     text: `Thank you for participating in Ripuraj Gold %26 Silver Scheme! 
+//             Keep your scratch coupon safe. 
+//             We'll contact you soon for prize verification.`,
+//   };
+
+//   try {
+//     const info = await transporter.sendMail(mailOptions);
+//     console.log("Email sent: ", info.response);
+//     return true;
+//   } catch (error) {
+//     console.error("Email Sending Error:", error);
+//     return false;
+//   }
+// };
 
 // For Pages Router API route
 export default async function handler(req, res) {
