@@ -6,12 +6,14 @@ import PhoneNumberInput from "../components/PhoneNumberInput";
 import { apiRequest } from "../utils/apiRequest";
 import { useRouter } from "next/router";
 import { Trans, useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateMobileNumber } from "@/components/utils/userMobileSlice";
 import styles from "@/styles/Home.module.css";
 
 const OTPValidation = () => {
   const dispatch = useDispatch();
+  const countryCode = useSelector((state)=>state.countryName.countryCode);
+
   const router = useRouter();
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [error, setError] = useState("");
@@ -33,7 +35,7 @@ const OTPValidation = () => {
   const handleSendOtp = async (phoneNumber) => {
     setIsOtpSent(true);
     try {
-      const data = await apiRequest("/api/generateOtp", { phone: phoneNumber });
+      const data = await apiRequest("/api/generateOtp", { phone: phoneNumber,countryCode:countryCode });
       if(data.success){
         setIsOtpSent(true);
       }

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Button from "./Button";
 import styles from "@/styles/Home.module.css";
 // import { useRouter } from "next/router";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const OtpInput = ({ onChange }) => {
@@ -35,27 +35,32 @@ const OtpSection = ({ otp, setOtp, verifyOtp }) => {
 
   const changeMobileNumber = () => {
     router.refresh();
-  }
+  };
 
   return (
     <div>
-      <h1 className={`font-semibold text-[18px] sm:text-[25px] text-start ${styles.customFont} font-sans text-[#161644] responsive-heading`}>
+      <h1
+        className={`font-semibold text-[18px] sm:text-[25px] text-start ${styles.customFont} font-sans text-[#161644] responsive-heading`}
+      >
         OTP Verification
-        </h1>
-        <div className="flex gap-2 items-center p-2 bg-white w-fit">
-  <p className="text-gray-700 font-medium">
-    {userCountryName ? "+977" : "+91"} {userMobileNumber}
-  </p>
-  <img 
-    className="h-5 w-5 object-contain cursor-pointer hover:scale-110 transition-transform duration-200" 
-    alt="edit-logo" 
-    src="/editIcon.png" 
-  />
-</div>
+      </h1>
+      <div className="flex gap-2 items-center p-2 bg-white w-fit">
+        <p className="text-gray-700 font-medium">
+          {userCountryName ? "+977" : "+91"} {userMobileNumber}
+        </p>
+        <img
+          className="h-5 w-5 object-contain cursor-pointer hover:scale-110 transition-transform duration-200"
+          alt="edit-logo"
+          src="/editIcon.png"
+          onClick={changeMobileNumber}
+        />
+      </div>
 
-      <h2 className={`pt-4 mt-2 mb-2 mb-2${styles.objectiveMedium} text-[#161644] text-[18px] sm:text-[20px]`}>
+      <h2
+        className={`pt-4 mt-2 mb-2 mb-2${styles.objectiveMedium} text-[#161644] text-[18px] sm:text-[20px]`}
+      >
         Security Code
-        </h2>
+      </h2>
       <OtpInput onChange={setOtp} />
       <Button onClick={verifyOtp} className="mt-3">
         VERIFY OTP

@@ -91,7 +91,9 @@ export default async function handler(req, res) {
     await connectToDB();
 
     // Get request body (fixed for Pages Router)
-    const { phone } = req.body;
+    const { phone, countryCode } = req.body;
+
+    console.log("api call",req.body)
 
     if (!phone) {
       return res.status(400).json({
@@ -149,6 +151,7 @@ export default async function handler(req, res) {
           pincode: "000000",
           state: "Pending",
           country: "IN",
+          countryCode:countryCode
         },
       });
     }
