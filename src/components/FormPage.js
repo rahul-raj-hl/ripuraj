@@ -15,6 +15,7 @@ const campaignId = "gold-scheme";
 const FormPage = () => {
   const userMobileNumber = useSelector((state) => state.mobile.mob);
   const userCountryName = useSelector((state) => state.countryName.countryName);
+  const countryCode = useSelector((state)=>state.countryName.countryCode);
 
   const router = useRouter();
 
@@ -29,6 +30,7 @@ const FormPage = () => {
     state: "",
     postalCode: "",
     country: userCountryName ? userCountryName : "India",
+    countryCode:countryCode,
     couponCode: "",
   };
 
@@ -83,6 +85,7 @@ const FormPage = () => {
           state: form.state,
           pincode: form.postalCode,
           country: form.country,
+          countryCode:form.countryCode
         },
       };
 

@@ -31,6 +31,7 @@ if (!connection.models.User) {
         },
         state: { type: String, required: true },
         country: { type: String, required: true },
+        countryCode:{type: String, required: true}
       },
       // Add OTP related fields
       otp: { 

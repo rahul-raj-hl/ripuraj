@@ -5,7 +5,7 @@ import Select from "./Select";
 import { COUNTRY_DETAILS } from "./utils/mockData";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateCountryName } from "./utils/userCountryNameSlice";
+import { updateCountryCode, updateCountryName } from "./utils/userCountryNameSlice";
 import { updateMobileNumber } from "@/components/utils/userMobileSlice";
 
 const PhoneNumberInput = ({ formik }) => {
@@ -38,6 +38,7 @@ const PhoneNumberInput = ({ formik }) => {
     setSelectedCountryCode(key.countryCode);
     //Adding Country Name to redux store
     dispatch(updateCountryName(key.countryName))
+    dispatch(updateCountryCode(e.target.value))
     
   };
 
