@@ -7,9 +7,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateCountryCode, updateCountryName } from "./utils/userCountryNameSlice";
 import { updateMobileNumber } from "@/components/utils/userMobileSlice";
+import { useRouter } from "next/router";
 
 const PhoneNumberInput = ({ formik }) => {
 
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const {t} = useTranslation();
@@ -39,6 +41,9 @@ const PhoneNumberInput = ({ formik }) => {
     //Adding Country Name to redux store
     dispatch(updateCountryName(key.countryName))
     dispatch(updateCountryCode(e.target.value))
+    if(key.countryName==="Nepal"){
+      router.push("/userform");
+    }
     
   };
 

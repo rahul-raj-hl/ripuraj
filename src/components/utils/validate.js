@@ -22,7 +22,7 @@ const validate = ({ firstName, lastName, email, phone, postalCode, state }) => {
         email: isEmailValid
           ? ""
           : "Enter a valid email address (e.g., example@gmail.com).",
-        phone: isPhoneNoValid ? "" : "Phone number must be 10 digits long.",
+        phone: isPhoneNoValid ? "" : "Phone number must be 10 digits long and valid.",
         postalCode: isPostalCode ? "" : "Please enter a valid PIN code.",
         state: isStateValid ? "" : "State is required.",
       },
