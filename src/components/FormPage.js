@@ -215,12 +215,15 @@ const FormPage = () => {
             <div>
               <Label label="Phone *" />
               <Input
-                className="bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium"
+                className={userCountryName === 'Nepal'? "input w-full bg-white border-[#707070] border-1 font-medium" : "bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium"}
                 placeholder="Phone"
                 type="text"
+                required
                 value={form.phone}
                 error={errors.phone}
-                readOnly
+                maxLength="10"
+                readOnly={userCountryName !== 'Nepal'}
+                onChange={userCountryName !== 'Nepal'? null : (e)=>handleFormChange("phone", e.target.value)}
               />
             </div>
             <div>
