@@ -7,6 +7,8 @@ const validate = ({ firstName, lastName, email, phone, postalCode, state }) => {
   const isPhoneNoValid = /^[6-9]\d{9}$/.test(phone);
   const isPostalCode = /^\d{6}$/.test(postalCode)
   const isStateValid = state !== ""; 
+
+  // console.log("phobe",isPhoneNoValid)
   
 
   if (!isFNameValid || !isLNameValid || !isEmailValid || !isPhoneNoValid || !isPostalCode || !isStateValid) {

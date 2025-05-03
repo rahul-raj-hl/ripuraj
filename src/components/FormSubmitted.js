@@ -4,11 +4,19 @@ import { useRouter } from "next/router";
 import Button from "./Button";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCountryCode, updateCountryName } from "./utils/userCountryNameSlice";
 
 const FormSubmitted = () => {
   const router = useRouter();
+  const dispatch = useDispatch()
+
+  const userCountryName = useSelector((state) => state.countryName.countryName);
+  const selectedLanguage = useSelector((state) => state.language.lang);
 
   const handleCrossIcon = () => {
+    dispatch(updateCountryCode("+91"))
+    dispatch(updateCountryName(null))
     router.push("/");
   };
 
@@ -56,21 +64,99 @@ const FormSubmitted = () => {
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           <img className="w-[17%] mx-auto" src="/gold_coin.png" alt="logo" />
-          <div>
-            <h1 className={`font-bold text-4xl md:text-5xl text-[#161644] ${styles.customFont}`} style={{ fontSize: '50px' }} >
-              Thank You!
-            </h1>
-            <p className="font-bold text-[1rem] md:text-[1.1rem] mt-2 text-[#E9B72E]">
-              For Your Participation
-            </p>
-            <p className={`text-[#161644] mt-4 font-[500] text-sm md:text-base ${styles.customFontPoppins}`}>
-              {" "}
-              A Lucky Draw will be held on the 5th of every month. The coupon
-              codes of the winners will be published on the company
-              <span>&apos;</span>s website - <Link className="font-extrabold" href={"https://ripurajagro.com/"}>www.ripurajagro.com</Link>. The prizes will be sent to the
-              winners at their provided address.
-            </p>
-          </div>
+          {userCountryName === null && (
+            <div>
+              <h1
+                className={`font-bold text-4xl md:text-5xl text-[#161644] ${styles.customFont}`}
+                style={{ fontSize: "50px" }}
+              >
+                Thank You!
+              </h1>
+              <p className="font-bold text-[1rem] md:text-[1.1rem] mt-2 text-[#E9B72E]">
+                For Your Participation
+              </p>
+              <p
+                className={`text-[#161644] mt-4 font-[500] text-sm md:text-base ${styles.customFontPoppins}`}
+              >
+                {" "}
+                A Lucky Draw will be held on the 5th of every month. The coupon
+                codes of the winners will be published on the company
+                <span>&apos;</span>s website -{" "}
+                <Link
+                  className="font-extrabold"
+                  href={"https://ripurajagro.com/"}
+                >
+                  www.ripurajagro.com
+                </Link>
+                . The prizes will be sent to the winners at their provided
+                address.
+              </p>
+            </div>
+          )}
+          {userCountryName === "Nepal" && selectedLanguage === "english" && (
+            <div>
+              <h1
+                className={`font-bold text-4xl md:text-5xl text-[#161644] ${styles.customFont}`}
+                style={{ fontSize: "50px" }}
+              >
+                Thank you
+              </h1>
+              <p className="font-bold text-[1rem] md:text-[1.1rem] mt-2 text-[#E9B72E]">
+                For participating in the Ripuraj Gold/Silver contest!
+              </p>
+              <p
+                className={`text-[#161644] mt-4 font-[500] text-sm md:text-base ${styles.customFontPoppins}`}
+              >
+                {" "}
+                On the 5th of every month, you will receive an SMS/WhatsApp
+                message with the winners names and complete details. Best of
+                luck to all!
+              </p>
+            </div>
+          )}
+          {userCountryName === "Nepal" && selectedLanguage === "nepali" && (
+            <div>
+              <h1
+                className={`font-bold text-4xl md:text-5xl text-[#161644] ${styles.customFont}`}
+                style={{ fontSize: "50px" }}
+              >
+                धन्यवाद!
+              </h1>
+              <p className="font-bold text-[1rem] md:text-[1.1rem] mt-2 text-[#E9B72E]">
+                Ripuraj Gold/Silver प्रतियोगितामा भाग लिनेका लागि तपाईंलाई
+                हृदयदेखि धन्यवाद।
+              </p>
+              <p
+                className={`text-[#161644] mt-4 font-[500] text-sm md:text-base ${styles.customFontPoppins}`}
+              >
+                {" "}
+                प्रत्येक महिना ५ तारिखमा तपाईंलाई SMS/WhatsApp द्वारा एक सन्देश
+                प्राप्त हुनेछ, जसमा विजेताहरूको नाम र उनीहरूको सम्पूर्ण विवरण
+                हुनेछ। शुभकामना!
+              </p>
+            </div>
+          )}
+          {userCountryName === "Nepal" && selectedLanguage === "hindi" && (
+            <div>
+              <h1
+                className={`font-bold text-4xl md:text-5xl text-[#161644] ${styles.customFont}`}
+                style={{ fontSize: "50px" }}
+              >
+                Thank you
+              </h1>
+              <p className="font-bold text-[1rem] md:text-[1.1rem] mt-2 text-[#E9B72E]">
+                For participating in the Ripuraj Gold/Silver contest!
+              </p>
+              <p
+                className={`text-[#161644] mt-4 font-[500] text-sm md:text-base ${styles.customFontPoppins}`}
+              >
+                {" "}
+                On the 5th of every month, you will receive an SMS/WhatsApp
+                message with the winners names and complete details. Best of
+                luck to all!
+              </p>
+            </div>
+          )}
           <Link href={"https://ripurajagro.com/shop2/"}>
             <Button
               className="w-[65%] md:w-[40%] lg:w-[45%] cursor-pointer my-2 mx-auto rounded-[0.5rem] bg-[#E9B72E] hover:bg-yellow-500 text-black font-bold py-2 px-4"
@@ -82,7 +168,6 @@ const FormSubmitted = () => {
         </div>
       </div>
     </div>
-
   );
 };
 
