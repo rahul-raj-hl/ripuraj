@@ -6,14 +6,14 @@ import { changeLanguage } from "./utils/langSlice";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const handleLanguageChange = (e) => {
     setSelectedLanguage(e.target.value);
-    // dispatch(changeLanguage(e.target.value.toLowerCase()));
+    dispatch(changeLanguage(e.target.value.toLowerCase()));
     i18n.changeLanguage(e.target.value.toLowerCase());
   };
 
