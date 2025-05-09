@@ -1,10 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans, useTranslation} from "react-i18next";
+import { useSelector } from "react-redux";
 import styles from "@/styles/Home.module.css";
 
 const VideoSection = () => {
   const { t } = useTranslation();
+  
+
+  const selectedLanguage = useSelector((state) => state.language.lang);
+  console.log(selectedLanguage);
+
 
   return (
     <div className="bg-white flex flex-col justify-center items-center p-4 sm:p-8 pb-16 min-h-0 sm:min-h-screen">
@@ -26,14 +32,25 @@ const VideoSection = () => {
              में भाग लेकर बन सकते हैं <strong>Lucky Winner</strong>! */}
       </p>
       <div className="relative flex justify-center items-center w-full max-w-[1166px] h-[200px] sm:h-[400px] bg-yellow-400 rounded-2xl">
-        <iframe
-          className="h-full w-full rounded-2xl"
-          src="https://www.youtube.com/embed/MxFC0tv-bK4?si=knfu_c3sINFhExsq"
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+      {selectedLanguage === "nepali" ? (
+          <iframe
+            className="h-full w-full rounded-2xl"
+            src="https://www.youtube.com/embed/Yfsc8viEkhE?si=TavFCVyub4Nyv41q"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <iframe
+            className="h-full w-full rounded-2xl"
+            src="https://www.youtube.com/embed/MxFC0tv-bK4?si=knfu_c3sINFhExsq"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        )}
       </div>
     </div>
   );
