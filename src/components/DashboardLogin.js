@@ -16,7 +16,7 @@ const DashboardLogin = () => {
     e.preventDefault();
     setErrorMsg(false)
     // Handle login logic here
-    if(userId === "Admin" && password === "Admin"){
+    if(userId === "gold@ripuraj" && password === "gold@ripuraj"){
         dispatch(changeLoggedInUser(true))
         router.push("/dashboard");
 
