@@ -111,6 +111,7 @@ export default async function handler(req, res) {
         line2: userMap[form.userId]?.address?.line2,
         city: userMap[form.userId]?.address?.city,
         state: userMap[form.userId]?.address?.state,
+        country: userMap[form.userId]?.address?.country || "N/A",
         pincode: userMap[form.userId]?.address?.pincode,
         code: couponMap[form.couponId.toString()]?.code,
         campaignId: couponMap[form.couponId.toString()]?.campaignId,
