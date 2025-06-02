@@ -27,7 +27,7 @@ if (!connection.models.User) {
         pincode: { 
           type: String, 
           required: true, 
-          match: /^[0-9]{6}$/, // Ensures only 6-digit pin codes
+          match: /^[0-9]{5,6}$/, // Ensures only 6-digit pin codes
         },
         state: { type: String, required: true },
         country: { type: String, required: true },
