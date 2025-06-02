@@ -3,10 +3,12 @@ import Table from "@/components/Table";
 import { getDashboardData } from "@/components/utils/store";
 import { STATE_NAME } from "../../components/utils/mockData";
 import Button from "../../components/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import { changeLoggedInUser } from "@/components/utils/loggedInUserSlice";
+import { useHydration } from "@/components/hooks/useHydration";
 
 const headers = [
   { label: "First Name", key: "firstName" },
@@ -16,12 +18,14 @@ const headers = [
   { label: "Address", key: "address" },
   { label: "City", key: "city" },
   { label: "State", key: "state" },
+   { label: "Country", key: "country" },
   { label: "Coupon Code", key: "couponCode" },
   { label: "Created At", key: "createdAt" },
 ];
 
 const Dashboard = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const isUserLoggedIn = useSelector((state) => state.user.isLoggedInUser);
 
   useEffect(() => {
@@ -40,6 +44,12 @@ const Dashboard = () => {
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
 
+  const handleLogout = () => {
+    dispatch(changeLoggedInUser(false));
+    localStorage.removeItem("isLoggedInUser");
+    router.push("/dashboardlogin");
+  };
+
   const fetchDashboardData = async (page, pageSize, state, city, from, to) => {
     setLoading(true);
     try {
@@ -51,20 +61,20 @@ const Dashboard = () => {
         from,
         to,
       });
-  
+
       if (error) {
         console.error("Error fetching data:", error);
         return;
       }
-  
+
       let filteredData = response.data;
-  
+
       if (city) {
         filteredData = filteredData.filter((item) =>
           item?.city?.toLowerCase()?.includes(city.toLowerCase())
         );
       }
-  
+
       if (from && to) {
         filteredData = filteredData.filter((item) => {
           const itemDate = new Date(item?.createdAt);
@@ -73,7 +83,7 @@ const Dashboard = () => {
           return itemDate >= fromDate && itemDate <= toDate;
         });
       }
-  
+
       setData(filteredData);
       setTotalCount(response.pagination.total); // ✅ Correct line
     } catch (error) {
@@ -82,7 +92,6 @@ const Dashboard = () => {
       setLoading(false);
     }
   };
-  
 
   const handlePageChange = (newPage) => {
     setPagination((prev) => ({ ...prev, page: newPage }));
@@ -147,6 +156,9 @@ const Dashboard = () => {
     dateFrom,
     dateTo,
   ]);
+
+  const hydrated = useHydration();
+  if (!hydrated) return null; // or a loading spinner
 
   if (!isUserLoggedIn) return null;
 
@@ -223,12 +235,20 @@ const Dashboard = () => {
           </Button>
         </div>
 
-        <div className="absolute right-5">
+        <div className=" right-5">
           <Button
             onClick={handleDownloadExcel}
             className="px-4 py-2 mt-7  bg-green-600 text-white rounded-md"
           >
             Download Excel
+          </Button>
+        </div>
+        <div className="ml-auto">
+          <Button
+            onClick={handleLogout}
+            className="px-4 py-2 mt-7 bg-red-600 text-white rounded-md hover:bg-red-700"
+          >
+            Logout
           </Button>
         </div>
       </div>
