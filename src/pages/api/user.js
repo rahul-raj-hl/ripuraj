@@ -61,17 +61,17 @@ export default async function handler(req, res) {
 
         await user.save();
 
-        // Check if user already registered for this campaign
-        const existingForm = await Form.findOne({
-          userId: user.userId,
-          campaignId: campaignId,
-        });
+        // // Check if user already registered for this campaign
+        // const existingForm = await Form.findOne({
+        //   userId: user.userId,
+        //   campaignId: campaignId,
+        // });
 
-        if (existingForm) {
-          return res.status(400).json({
-            error: "User already registered for this campaign",
-          });
-        }
+        // if (existingForm) {
+        //   return res.status(400).json({
+        //     error: "User already registered for this campaign",
+        //   });
+        // }
 
         const coupon = await Coupon.findOne({
           code: couponCode,
