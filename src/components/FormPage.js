@@ -172,7 +172,7 @@ const FormPage = () => {
             />
           </div>
 
-          <div className="my-2 grid grid-cols-2 gap-5">
+          <div className="my-2 gap-5">
             <div>
               <Label label="Phone *" />
               <Input
@@ -195,7 +195,7 @@ const FormPage = () => {
                 }
               />
             </div>
-            <div>
+            {/* <div>
               <Label label="Email (Optional)" />
               <Input
                 placeholder="Email"
@@ -204,7 +204,7 @@ const FormPage = () => {
                 error={errors.email}
                 onChange={(e) => handleFormChange("email", e.target.value)}
               />
-            </div>
+            </div> */}
           </div>
           <div>
             <Label label="Scratch Coupon" />
