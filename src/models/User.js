@@ -11,8 +11,7 @@ if (!connection.models.User) {
     {
       userId: { type: Number, unique: true }, // Auto-increment field
       email: { type: String, lowercase: true, trim: true , default: null},
-      firstName: { type: String, required: true },
-      lastName: { type: String, required: true },
+      name: { type: String, required: true },
       phone: { 
         type: String, 
         required: true, 
@@ -21,9 +20,7 @@ if (!connection.models.User) {
       },
       address: {
         line1: { type: String, required: true },
-        line2: { type: String },
         city: { type: String, required: true },
-        // district: { type: String, required: true },
         pincode: { 
           type: String, 
           required: true, 
