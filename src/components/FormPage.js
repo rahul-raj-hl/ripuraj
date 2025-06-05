@@ -20,12 +20,9 @@ const FormPage = () => {
   const router = useRouter();
 
   const initialState = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: userMobileNumber,
+    name: "",
+    phone: "9065656565",
     address1: "",
-    address2: "",
     city: "",
     state: "",
     postalCode: "",
@@ -35,12 +32,9 @@ const FormPage = () => {
   };
 
   const initialStateErrorMessage = {
-    firstName: "",
-    lastName: "",
-    email: "",
+    name: "",
     phone: "",
     address1: "",
-    address2: "",
     city: "",
     state: "",
     postalCode: "",
@@ -67,19 +61,17 @@ const FormPage = () => {
     clearErrorMessage();
 
     const errorMsgObj = validate(form);
+    console.log("errorMsgObj", errorMsgObj);
     if (errorMsgObj.isValid) {
       const userDetail = {
         userDetails: {
-          firstName: form.firstName,
-          lastName: form.lastName,
-          email: form.email,
+          name: form.name,
           phone: form.phone,
         },
         campaignId: campaignId,
         couponCode: form.couponCode,
         address: {
           line1: form.address1,
-          line2: form.address2,
           city: form.city,
           state: form.state,
           pincode: form.postalCode,
@@ -134,10 +126,10 @@ const FormPage = () => {
             <Input
               placeholder="Full Name"
               type="text"
-              value={form.firstName}
-              error={errors.firstName}
+              value={form.name}
+              error={errors.name}
               required
-              onChange={(e) => handleFormChange("firstName", e.target.value)}
+              onChange={(e) => handleFormChange("name", e.target.value)}
             />
           </div>
 
@@ -151,7 +143,17 @@ const FormPage = () => {
               onChange={(e) => handleFormChange("address1", e.target.value)}
             />
           </div>
-
+          <div className="my-2">
+            <Input
+              placeholder="Postal / Zip Code"
+              type="text"
+              value={form.postalCode}
+              required
+              maxLength="6"
+              error={errors.postalCode}
+              onChange={(e) => handleFormChange("postalCode", e.target.value)}
+            />
+          </div>
           <div className="my-2">
             <Input
               placeholder="City"
@@ -172,40 +174,29 @@ const FormPage = () => {
             />
           </div>
 
-          <div className="my-2 grid grid-cols-2 gap-5">
-            <div>
-              <Label label="Phone *" />
-              <Input
-                className={
-                  userCountryName === "Nepal"
-                    ? "input w-full bg-white border-[#707070] border-1 font-medium"
-                    : "bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium"
-                }
-                placeholder="Phone"
-                type="text"
-                required
-                value={form.phone}
-                error={errors.phone}
-                maxLength="10"
-                readOnly={userCountryName !== "Nepal"}
-                onChange={
-                  userCountryName !== "Nepal"
-                    ? null
-                    : (e) => handleFormChange("phone", e.target.value)
-                }
-              />
-            </div>
-            <div>
-              <Label label="Email (Optional)" />
-              <Input
-                placeholder="Email"
-                type="text"
-                value={form.email}
-                error={errors.email}
-                onChange={(e) => handleFormChange("email", e.target.value)}
-              />
-            </div>
+          <div>
+            <Label label="Phone *" />
+            <Input
+              className={
+                userCountryName === "Nepal"
+                  ? "input w-full bg-white border-[#707070] border-1 font-medium"
+                  : "bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium"
+              }
+              placeholder="Phone"
+              type="text"
+              required
+              value={form.phone}
+              error={errors.phone}
+              maxLength="10"
+              readOnly={userCountryName !== "Nepal"}
+              onChange={
+                userCountryName !== "Nepal"
+                  ? null
+                  : (e) => handleFormChange("phone", e.target.value)
+              }
+            />
           </div>
+
           <div>
             <Label label="Scratch Coupon" />
             <Input
