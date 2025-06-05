@@ -21,7 +21,7 @@ const FormPage = () => {
 
   const initialState = {
     name: "",
-    phone: "9065656565",
+    phone: userMobileNumber,
     address1: "",
     city: "",
     state: "",
@@ -61,7 +61,6 @@ const FormPage = () => {
     clearErrorMessage();
 
     const errorMsgObj = validate(form);
-    console.log("errorMsgObj", errorMsgObj);
     if (errorMsgObj.isValid) {
       const userDetail = {
         userDetails: {
