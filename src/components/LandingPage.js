@@ -1,15 +1,13 @@
 import Image from "next/image";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import styles from "@/styles/Home.module.css";
 
-
 const LandingPage = () => {
+  const { t, i18n } = useTranslation();
 
-  const {t, i18n} = useTranslation()
-
-  const selectedLanguage = useSelector((state)=>state.language.lang)
+  const selectedLanguage = useSelector((state) => state.language.lang);
 
   // console.log(selectedLanguage,"landing page")
 
@@ -52,8 +50,15 @@ const LandingPage = () => {
           <p className="text-xl font-bold md:text-3xl lg:text-5xl xl:text-6xl text-[#E9B72E]">
             {t("landingMsg7")}
           </p>
+          <p className="mt-[0.7rem] text-[0.55rem] md:text-[0.95rem] sm:text-[1.rem]">
+            <span className="bg-[#121245]  px-3 py-1 rounded-[5px]">
+              1 <span className="text-[#E9B72E]">GM GOLD</span> COIN | 10 GMS
+              SILVER COIN
+            </span>
+          </p>
         </div>
       </div>
+      <p className="absolute right-8 bottom-4 text-sm">T&C Apply*</p>
     </div>
   );
 };
