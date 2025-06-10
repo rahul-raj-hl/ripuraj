@@ -15,32 +15,26 @@ const campaignId = "gold-scheme";
 const FormPage = () => {
   const userMobileNumber = useSelector((state) => state.mobile.mob);
   const userCountryName = useSelector((state) => state.countryName.countryName);
-  const countryCode = useSelector((state)=>state.countryName.countryCode);
+  const countryCode = useSelector((state) => state.countryName.countryCode);
 
   const router = useRouter();
 
   const initialState = {
-    firstName: "",
-    lastName: "",
-    email: "",
+    name: "",
     phone: userMobileNumber,
     address1: "",
-    address2: "",
     city: "",
     state: "",
     postalCode: "",
     country: userCountryName ? userCountryName : "India",
-    countryCode:countryCode,
+    countryCode: countryCode,
     couponCode: "",
   };
 
   const initialStateErrorMessage = {
-    firstName: "",
-    lastName: "",
-    email: "",
+    name: "",
     phone: "",
     address1: "",
-    address2: "",
     city: "",
     state: "",
     postalCode: "",
@@ -70,24 +64,20 @@ const FormPage = () => {
     if (errorMsgObj.isValid) {
       const userDetail = {
         userDetails: {
-          firstName: form.firstName,
-          lastName: form.lastName,
-          email: form.email,
+          name: form.name,
           phone: form.phone,
         },
         campaignId: campaignId,
         couponCode: form.couponCode,
         address: {
           line1: form.address1,
-          line2: form.address2,
           city: form.city,
           state: form.state,
           pincode: form.postalCode,
           country: form.country,
-          countryCode:form.countryCode
+          countryCode: form.countryCode,
         },
       };
-
 
       const [, error] = await createUser(userDetail);
       setLoading(false);
@@ -127,115 +117,83 @@ const FormPage = () => {
         priority
       />
 
-      <div className="card card-body mx-4 my-6 md:mx-32 md:my-10 shadow-2xl w-full md:w-[80%] bg-white text-black z-10">
+      <div className="card card-body mx-4 my-6 md:mx-32 md:my-10 shadow-2xl bg-white text-black z-10 max-w-xl w-full">
         <h2 className="text-2xl font-bold my-2">Registration Form</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <Label label="Name" />
-            <div className="grid grid-cols-2 gap-5">
-              <Input
-                placeholder="First"
-                type="text"
-                value={form.firstName}
-                error={errors.firstName}
-                required
-                onChange={(e) => handleFormChange("firstName", e.target.value)}
-              />
-              <Input
-                placeholder="Last"
-                type="text"
-                value={form.lastName}
-                error={errors.lastName}
-                required
-                onChange={(e) => handleFormChange("lastName", e.target.value)}
-              />
-            </div>
+            <Input
+              placeholder="Full Name"
+              type="text"
+              value={form.name}
+              error={errors.name}
+              required
+              onChange={(e) => handleFormChange("name", e.target.value)}
+            />
           </div>
 
-          <div className="my-2">
+          <div>
             <Label label="Address" />
             <Input
-              placeholder="Street Address"
+              placeholder="Enter address"
               type="text"
               value={form.address1}
               required
               onChange={(e) => handleFormChange("address1", e.target.value)}
             />
+          </div>
+          <div className="my-2">
             <Input
-              className="input w-full my-2 bg-white border-[#707070] border-1 font-medium"
-              placeholder="Street Address Line 2 (Optional)"
+              placeholder="Postal / Zip Code"
               type="text"
-              value={form.address2}
-              onChange={(e) => handleFormChange("address2", e.target.value)}
+              value={form.postalCode}
+              required
+              maxLength="6"
+              error={errors.postalCode}
+              onChange={(e) => handleFormChange("postalCode", e.target.value)}
+            />
+          </div>
+          <div className="my-2">
+            <Input
+              placeholder="City"
+              type="text"
+              value={form.city}
+              required
+              onChange={(e) => handleFormChange("city", e.target.value)}
+            />
+          </div>
+          <div className="my-2">
+            <Select
+              optionValue={selectedCountry.stateName}
+              className="bg-white border-1 border-black w-full"
+              onChange={(e) => handleFormChange("state", e.target.value)}
+              initialSelectedValue="Select State"
+              required={true}
+              error={errors.state}
             />
           </div>
 
-          <div className="my-2">
-            <div className="grid grid-cols-2 gap-5">
-              <Input
-                placeholder="City"
-                type="text"
-                value={form.city}
-                required
-                onChange={(e) => handleFormChange("city", e.target.value)}
-              />
-              <Select
-                optionValue={selectedCountry.stateName}
-                className="bg-white border-1 border-black w-full"
-                onChange={(e) => handleFormChange("state", e.target.value)}
-                initialSelectedValue="Select State"
-                required={true} 
-                error={errors.state} 
-              />
-            </div>
-          </div>
-
           <div>
-            <div className="grid grid-cols-2 gap-5">
-              <Input
-                placeholder="Postal / Zip Code"
-                type="text"
-                value={form.postalCode}
-                required
-                maxLength="6"
-                error={errors.postalCode}
-                onChange={(e) => handleFormChange("postalCode", e.target.value)}
-              />
-              <Input
-                className="bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium"
-                placeholder="Country"
-                type="text"
-                value={form.country}
-                readOnly
-              />
-            </div>
-          </div>
-
-          <div className="my-2 grid grid-cols-2 gap-5">
-            <div>
-              <Label label="Phone *" />
-              <Input
-                className={userCountryName === 'Nepal'? "input w-full bg-white border-[#707070] border-1 font-medium" : "bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium"}
-                placeholder="Phone"
-                type="text"
-                required
-                value={form.phone}
-                error={errors.phone}
-                maxLength="10"
-                readOnly={userCountryName !== 'Nepal'}
-                onChange={userCountryName !== 'Nepal'? null : (e)=>handleFormChange("phone", e.target.value)}
-              />
-            </div>
-            <div>
-              <Label label="Email (Optional)" />
-              <Input
-                placeholder="Email"
-                type="text"
-                value={form.email}
-                error={errors.email}
-                onChange={(e) => handleFormChange("email", e.target.value)}
-              />
-            </div>
+            <Label label="Phone *" />
+            <Input
+              className={
+                userCountryName === "Nepal"
+                  ? "input w-full bg-white border-[#707070] border-1 font-medium"
+                  : "bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium"
+              }
+              placeholder="Phone"
+              type="text"
+              required
+              value={form.phone}
+              error={errors.phone}
+              maxLength="10"
+              readOnly={userCountryName !== "Nepal"}
+              onChange={
+                userCountryName !== "Nepal"
+                  ? null
+                  : (e) => handleFormChange("phone", e.target.value)
+              }
+            />
           </div>
 
           <div>
@@ -248,11 +206,12 @@ const FormPage = () => {
               onChange={(e) => handleFormChange("couponCode", e.target.value)}
             />
           </div>
-
           <div className="flex my-2">
             <div
               className={`w-5 h-5 flex items-center justify-center border rounded relative ${
-                isChecked ? "bg-[#262688] border-[#262688]" : "bg-gray-100 border-gray-400"
+                isChecked
+                  ? "bg-[#262688] border-[#262688]"
+                  : "bg-gray-100 border-gray-400"
               }`}
             >
               <input

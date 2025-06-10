@@ -93,8 +93,6 @@ export default async function handler(req, res) {
     // Get request body (fixed for Pages Router)
     const { phone, countryCode } = req.body;
 
-    console.log("api call",req.body)
-
     if (!phone) {
       return res.status(400).json({
         success: false,
@@ -142,11 +140,9 @@ export default async function handler(req, res) {
         },
         // Required fields with placeholder values
         email: `temp_${phone}@placeholder.com`,
-        firstName: "Temporary",
-        lastName: "User",
+        name: "Temporary User",
         address: {
           line1: "Pending",
-          line2: "Pending",
           city: "Pending",
           pincode: "000000",
           state: "Pending",
