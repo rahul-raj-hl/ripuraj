@@ -18,11 +18,7 @@ const headers = [
   { label: "Address", key: "address" },
   { label: "City", key: "city" },
   { label: "State", key: "state" },
-<<<<<<< HEAD
   { label: "Country", key: "country" },
-=======
-   { label: "Country", key: "country" },
->>>>>>> master
   { label: "Coupon Code", key: "couponCode" },
   { label: "Created At", key: "createdAt" },
 ];
@@ -88,7 +84,6 @@ const Dashboard = () => {
         });
       }
 
-<<<<<<< HEAD
       // setData(filteredData);
       setData(
         filteredData.map((item) => ({
@@ -98,9 +93,6 @@ const Dashboard = () => {
           }),
         }))
       );
-=======
-      setData(filteredData);
->>>>>>> master
       setTotalCount(response.pagination.total); // ✅ Correct line
     } catch (error) {
       console.error("Error in fetchDashboardData:", error);
@@ -183,7 +175,56 @@ const Dashboard = () => {
       const worksheet = XLSX.utils.json_to_sheet(fullData);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "AllData");
+  const handleDownloadExcel = async () => {
+    try {
+      const [response, error] = await getDashboardData({
+        page: 1,
+        limit: 100000, // 🔥 A large number to ensure all data is fetched
+        state: selectedState,
+        city: selectedCity,
+        from: dateFrom,
+        to: dateTo,
+      });
 
+      if (error) {
+        console.error("Error fetching data for Excel:", error);
+        return;
+      }
+
+      let fullData = response.data;
+      fullData = fullData.map((item) => ({
+        ...item,
+        createdAt: new Date(item.createdAt).toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+        }),
+      }));
+
+      // Apply city filter again (if any)
+      if (selectedCity) {
+        fullData = fullData.filter((item) =>
+          item?.city?.toLowerCase()?.includes(selectedCity.toLowerCase())
+        );
+      }
+
+      // Apply date filter again (if any)
+      if (dateFrom && dateTo) {
+        fullData = fullData.filter((item) => {
+          const itemDate = new Date(item?.createdAt);
+          const fromDate = new Date(dateFrom);
+          const toDate = new Date(dateTo);
+          return itemDate >= fromDate && itemDate <= toDate;
+        });
+      }
+
+      // Export to Excel
+      const worksheet = XLSX.utils.json_to_sheet(fullData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "AllData");
+
+      const excelBuffer = XLSX.write(workbook, {
+        bookType: "xlsx",
+        type: "array",
+      });
       const excelBuffer = XLSX.write(workbook, {
         bookType: "xlsx",
         type: "array",
@@ -192,7 +233,14 @@ const Dashboard = () => {
       const blob = new Blob([excelBuffer], {
         type: "application/octet-stream",
       });
+      const blob = new Blob([excelBuffer], {
+        type: "application/octet-stream",
+      });
 
+      saveAs(blob, "All_Dashboard_Data.xlsx");
+    } catch (err) {
+      console.error("Error downloading full data:", err);
+    }
       saveAs(blob, "All_Dashboard_Data.xlsx");
     } catch (err) {
       console.error("Error downloading full data:", err);
@@ -290,6 +338,7 @@ const Dashboard = () => {
           <Button
             onClick={handleFilterClick}
             className="px-4 py-2 mt-7 cursor-pointer bg-blue-600 text-white rounded-md"
+            className="px-4 py-2 mt-7 cursor-pointer bg-blue-600 text-white rounded-md"
           >
             Filter
           </Button>
@@ -299,6 +348,7 @@ const Dashboard = () => {
           <Button
             onClick={handleDownloadExcel}
             className="px-4 py-2 mt-7 cursor-pointer  bg-green-600 text-white rounded-md"
+            className="px-4 py-2 mt-7 cursor-pointer  bg-green-600 text-white rounded-md"
           >
             Download Excel
           </Button>
@@ -306,11 +356,7 @@ const Dashboard = () => {
         <div className="ml-auto">
           <Button
             onClick={handleLogout}
-<<<<<<< HEAD
             className="px-4 py-2 mt-7 cursor-pointer bg-red-600 text-white rounded-md hover:bg-red-700"
-=======
-            className="px-4 py-2 mt-7 bg-red-600 text-white rounded-md hover:bg-red-700"
->>>>>>> master
           >
             Logout
           </Button>
