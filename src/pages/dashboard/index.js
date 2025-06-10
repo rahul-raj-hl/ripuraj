@@ -175,7 +175,56 @@ const Dashboard = () => {
       const worksheet = XLSX.utils.json_to_sheet(fullData);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "AllData");
+  const handleDownloadExcel = async () => {
+    try {
+      const [response, error] = await getDashboardData({
+        page: 1,
+        limit: 100000, // 🔥 A large number to ensure all data is fetched
+        state: selectedState,
+        city: selectedCity,
+        from: dateFrom,
+        to: dateTo,
+      });
 
+      if (error) {
+        console.error("Error fetching data for Excel:", error);
+        return;
+      }
+
+      let fullData = response.data;
+      fullData = fullData.map((item) => ({
+        ...item,
+        createdAt: new Date(item.createdAt).toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+        }),
+      }));
+
+      // Apply city filter again (if any)
+      if (selectedCity) {
+        fullData = fullData.filter((item) =>
+          item?.city?.toLowerCase()?.includes(selectedCity.toLowerCase())
+        );
+      }
+
+      // Apply date filter again (if any)
+      if (dateFrom && dateTo) {
+        fullData = fullData.filter((item) => {
+          const itemDate = new Date(item?.createdAt);
+          const fromDate = new Date(dateFrom);
+          const toDate = new Date(dateTo);
+          return itemDate >= fromDate && itemDate <= toDate;
+        });
+      }
+
+      // Export to Excel
+      const worksheet = XLSX.utils.json_to_sheet(fullData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "AllData");
+
+      const excelBuffer = XLSX.write(workbook, {
+        bookType: "xlsx",
+        type: "array",
+      });
       const excelBuffer = XLSX.write(workbook, {
         bookType: "xlsx",
         type: "array",
@@ -184,7 +233,14 @@ const Dashboard = () => {
       const blob = new Blob([excelBuffer], {
         type: "application/octet-stream",
       });
+      const blob = new Blob([excelBuffer], {
+        type: "application/octet-stream",
+      });
 
+      saveAs(blob, "All_Dashboard_Data.xlsx");
+    } catch (err) {
+      console.error("Error downloading full data:", err);
+    }
       saveAs(blob, "All_Dashboard_Data.xlsx");
     } catch (err) {
       console.error("Error downloading full data:", err);
@@ -282,6 +338,7 @@ const Dashboard = () => {
           <Button
             onClick={handleFilterClick}
             className="px-4 py-2 mt-7 cursor-pointer bg-blue-600 text-white rounded-md"
+            className="px-4 py-2 mt-7 cursor-pointer bg-blue-600 text-white rounded-md"
           >
             Filter
           </Button>
@@ -290,6 +347,7 @@ const Dashboard = () => {
         <div className=" right-5">
           <Button
             onClick={handleDownloadExcel}
+            className="px-4 py-2 mt-7 cursor-pointer  bg-green-600 text-white rounded-md"
             className="px-4 py-2 mt-7 cursor-pointer  bg-green-600 text-white rounded-md"
           >
             Download Excel
