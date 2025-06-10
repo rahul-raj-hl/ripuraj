@@ -18,11 +18,7 @@ const headers = [
   { label: "Address", key: "address" },
   { label: "City", key: "city" },
   { label: "State", key: "state" },
-<<<<<<< HEAD
   { label: "Country", key: "country" },
-=======
-   { label: "Country", key: "country" },
->>>>>>> master
   { label: "Coupon Code", key: "couponCode" },
   { label: "Created At", key: "createdAt" },
 ];
@@ -88,7 +84,6 @@ const Dashboard = () => {
         });
       }
 
-<<<<<<< HEAD
       // setData(filteredData);
       setData(
         filteredData.map((item) => ({
@@ -98,9 +93,6 @@ const Dashboard = () => {
           }),
         }))
       );
-=======
-      setData(filteredData);
->>>>>>> master
       setTotalCount(response.pagination.total); // ✅ Correct line
     } catch (error) {
       console.error("Error in fetchDashboardData:", error);
@@ -306,11 +298,7 @@ const Dashboard = () => {
         <div className="ml-auto">
           <Button
             onClick={handleLogout}
-<<<<<<< HEAD
             className="px-4 py-2 mt-7 cursor-pointer bg-red-600 text-white rounded-md hover:bg-red-700"
-=======
-            className="px-4 py-2 mt-7 bg-red-600 text-white rounded-md hover:bg-red-700"
->>>>>>> master
           >
             Logout
           </Button>
