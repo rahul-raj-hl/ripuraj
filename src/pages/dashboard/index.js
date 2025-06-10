@@ -11,9 +11,10 @@ import { changeLoggedInUser } from "@/components/utils/loggedInUserSlice";
 import { useHydration } from "@/components/hooks/useHydration";
 
 const headers = [
-  { label: "First Name", key: "firstName" },
-  { label: "Last Name", key: "lastName" },
-  { label: "Email", key: "email" },
+  // { label: "First Name", key: "firstName" },
+  // { label: "Last Name", key: "lastName" },
+  { label: "Name", key: "name" },
+  // { label: "Email", key: "email" },
   { label: "Phone", key: "phone" },
   { label: "Address", key: "address" },
   { label: "City", key: "city" },

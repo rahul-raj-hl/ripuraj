@@ -103,17 +103,17 @@ export default async function handler(req, res) {
 
       // Combine the data
       const enrichedForms = forms.map((form) => ({
-        firstName: userMap[form.userId]?.firstName,
-        lastName: userMap[form.userId]?.lastName,
-        email: userMap[form.userId]?.email,
+        // firstName: userMap[form.userId]?.firstName,
+        // lastName: userMap[form.userId]?.lastName,
+        name: userMap[form.userId]?.name,
+        // email: userMap[form.userId]?.email,
         phone: userMap[form.userId]?.phone,
-        line1: userMap[form.userId]?.address?.line1,
-        line2: userMap[form.userId]?.address?.line2,
+        address: userMap[form.userId]?.address?.line1,
         city: userMap[form.userId]?.address?.city,
         state: userMap[form.userId]?.address?.state,
         country: userMap[form.userId]?.address?.country || "N/A",
         pincode: userMap[form.userId]?.address?.pincode,
-        code: couponMap[form.couponId.toString()]?.code,
+        couponCode: couponMap[form.couponId.toString()]?.code,
         campaignId: couponMap[form.couponId.toString()]?.campaignId,
         createdAt: form.createdAt,
       }));

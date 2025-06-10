@@ -135,7 +135,7 @@ const FormPage = () => {
           <div>
             <Label label="Address" />
             <Input
-              placeholder="Enter address"
+              placeholder="Full Address"
               type="text"
               value={form.address1}
               required
@@ -144,7 +144,7 @@ const FormPage = () => {
           </div>
           <div className="my-2">
             <Input
-              placeholder="Postal / Zip Code"
+              placeholder="PIN code"
               type="text"
               value={form.postalCode}
               required
