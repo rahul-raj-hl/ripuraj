@@ -144,7 +144,7 @@ const FormPage = () => {
           </div>
           <div className="my-2">
             <Input
-              placeholder="PIN code"
+              placeholder={userCountryName?"Postal Code":"PIN code"}
               type="text"
               value={form.postalCode}
               required
