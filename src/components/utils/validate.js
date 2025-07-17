@@ -1,5 +1,5 @@
 const validate = ({ name, phone, postalCode, state }) => {
-  const isNameValid = /^[A-Za-z ]{3,16}$/.test(name);
+  const isNameValid = /^[A-Za-z ]{3,50}$/.test(name);
   const isPhoneNoValid = /^[6-9]\d{9}$/.test(phone);
   const isPostalCode = /^(?:[1-9]\d{5}|\d{5})$/.test(postalCode);
   const isStateValid = state !== "";
@@ -15,7 +15,7 @@ const validate = ({ name, phone, postalCode, state }) => {
       errorMsg: {
         name: isNameValid
           ? ""
-          : "First name must contain between 3 and 16 characters.",
+          : "Name must contain between 3 and 50 characters.",
         phone: isPhoneNoValid
           ? ""
           : "Phone number must be 10 digits long and valid.",
