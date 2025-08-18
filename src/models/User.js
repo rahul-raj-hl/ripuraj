@@ -12,6 +12,7 @@ if (!connection.models.User) {
       userId: { type: Number, unique: true }, // Auto-increment field
       email: { type: String, lowercase: true, trim: true , default: null},
       name: { type: String, required: true },
+      customerType:{ type: String, required: true},
       phone: { 
         type: String, 
         required: true, 
@@ -27,6 +28,7 @@ if (!connection.models.User) {
           match: /^[0-9]{5,6}$/, // Ensures only 6-digit pin codes
         },
         state: { type: String, required: true },
+        district:{type:String,required: true},
         country: { type: String, required: true },
         countryCode:{type: String, required: true}
       },

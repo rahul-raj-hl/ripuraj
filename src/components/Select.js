@@ -9,7 +9,7 @@ const Select = ({ className, optionValue, onChange, value,initialSelectedValue, 
         value={value}
         required={required}
       >
-        {initialSelectedValue && <option disabled selected>Select State</option>}
+        {initialSelectedValue && <option disabled selected>{initialSelectedValue}</option>}
         {optionValue.map((val) => (
           <option className="bg-white font-medium hover:bg-[#E9B72E] " key={val} value={val}>
             {val}

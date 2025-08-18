@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "@/components/Table";
 import { getDashboardData } from "@/components/utils/store";
 import { STATE_NAME } from "../../components/utils/mockData";
+import { DISTRICT_NAME_INDIA } from "../../components/utils/mockData";
 import Button from "../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -18,6 +19,7 @@ const headers = [
   { label: "Phone", key: "phone" },
   { label: "Address", key: "address" },
   { label: "City", key: "city" },
+  { label: "District", key: "district" },
   { label: "State", key: "state" },
   { label: "Country", key: "country" },
   { label: "Coupon Code", key: "couponCode" },
@@ -41,7 +43,9 @@ const Dashboard = () => {
   const [pagination, setPagination] = useState({ page: 0, pageSize: 25 });
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
   const [cityInput, setCityInput] = useState("");
+  const [districtInput, setDistrictInput] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
 
@@ -51,14 +55,15 @@ const Dashboard = () => {
     router.push("/dashboardlogin");
   };
 
-  const fetchDashboardData = async (page, pageSize, state, city, from, to) => {
+  const fetchDashboardData = async (page, pageSize, state, city, district, from, to) => {
     setLoading(true);
     try {
       const [response, error] = await getDashboardData({
         page: page + 1,
         limit: pageSize,
-        state,
-        city,
+        state: state || "",
+  city: city || "",
+  district: district || "",
         from,
         to,
       });
@@ -76,14 +81,20 @@ const Dashboard = () => {
         );
       }
 
-      if (from && to) {
-        filteredData = filteredData.filter((item) => {
-          const itemDate = new Date(item?.createdAt);
-          const fromDate = new Date(from);
-          const toDate = new Date(to);
-          return itemDate >= fromDate && itemDate <= toDate;
-        });
-      }
+      if (district) {
+        filteredData = filteredData.filter((item) =>
+          item?.district?.toLowerCase()?.includes(district.toLowerCase())
+        );
+        }
+
+      // if (from && to) {
+      //   filteredData = filteredData.filter((item) => {
+      //     const itemDate = new Date(item?.createdAt);
+      //     const fromDate = new Date(from);
+      //     const toDate = new Date(to);
+      //     return itemDate >= fromDate && itemDate <= toDate;
+      //   });
+      // }
 
       // setData(filteredData);
       setData(
@@ -112,6 +123,8 @@ const Dashboard = () => {
 
   const handleStateChange = (e) => {
     setSelectedState(e.target.value);
+    setSelectedDistrict("");
+    setDistrictInput("");
   };
 
   const handleCityInputChange = (e) => {
@@ -122,73 +135,98 @@ const Dashboard = () => {
     setDateFrom(e.target.value);
   };
 
+  const handleDistrictInputChange = (e) => {
+    setDistrictInput(e.target.value);
+    };
+
   const handleDateToChange = (e) => {
     setDateTo(e.target.value);
   };
 
   const handleFilterClick = () => {
+     if (cityInput?.trim() && !selectedState) {
+    alert("Please select a State before filtering by City.");
+    return;
+  }
     setSelectedCity(cityInput);
+    // setSelectedDistrict(districtInput);
     setPagination((prev) => ({ ...prev, page: 0 }));
   };
   const handleDownloadExcel = async () => {
-    try {
-      const [response, error] = await getDashboardData({
-        page: 1,
-        limit: 100000, // 🔥 A large number to ensure all data is fetched
-        state: selectedState,
-        city: selectedCity,
-        from: dateFrom,
-        to: dateTo,
-      });
+  try {
+    const [response, error] = await getDashboardData({
+      page: 1,
+      limit: 100000,                // big page to fetch all rows
+      state: selectedState || "",
+      city: selectedCity || "",
+      district: selectedDistrict || "",
+      // IMPORTANT: your API expects startDate / endDate
+      // If your getDashboardData already maps from/to -> startDate/endDate,
+      // you can keep using dateFrom/dateTo. Otherwise pass startDate/endDate here.
+      from: dateFrom || "",
+      to: dateTo || "",
+    });
 
-      if (error) {
-        console.error("Error fetching data for Excel:", error);
-        return;
-      }
-
-      let fullData = response.data;
-      fullData = fullData.map((item) => ({
-        ...item,
-        createdAt: new Date(item.createdAt).toLocaleString("en-IN", {
-          timeZone: "Asia/Kolkata",
-        }),
-      }));
-
-      // Apply city filter again (if any)
-      if (selectedCity) {
-        fullData = fullData.filter((item) =>
-          item?.city?.toLowerCase()?.includes(selectedCity.toLowerCase())
-        );
-      }
-
-      // Apply date filter again (if any)
-      if (dateFrom && dateTo) {
-        fullData = fullData.filter((item) => {
-          const itemDate = new Date(item?.createdAt);
-          const fromDate = new Date(dateFrom);
-          const toDate = new Date(dateTo);
-          return itemDate >= fromDate && itemDate <= toDate;
-        });
-      }
-
-      // Export to Excel
-      const worksheet = XLSX.utils.json_to_sheet(fullData);
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "AllData");
-
-      const excelBuffer = XLSX.write(workbook, {
-        bookType: "xlsx",
-        type: "array",
-      });
-
-      const blob = new Blob([excelBuffer], {
-        type: "application/octet-stream",
-      });
-      saveAs(blob, "All_Dashboard_Data.xlsx");
-    } catch (err) {
-      console.error("Error downloading full data:", err);
+    if (error) {
+      console.error("Error fetching data for Excel:", error);
+      return;
     }
-  };
+
+    // Keep raw data (with ISO dates) for filtering first
+    let fullData = Array.isArray(response.data) ? [...response.data] : [];
+
+    // Client-side rechecks (optional but consistent with your page)
+    if (selectedCity) {
+      const c = selectedCity.toLowerCase();
+      fullData = fullData.filter((i) => i?.city?.toLowerCase()?.includes(c));
+    }
+
+    if (selectedDistrict) {
+      const d = selectedDistrict.toLowerCase();
+      fullData = fullData.filter((i) => i?.district?.toLowerCase()?.includes(d));
+    }
+
+    if (dateFrom && dateTo) {
+      const fromDate = new Date(dateFrom);
+      const toDate = new Date(dateTo);
+      // include end date's whole day
+      toDate.setHours(23, 59, 59, 999);
+
+      fullData = fullData.filter((i) => {
+        const itemDate = new Date(i?.createdAt); // i.createdAt should still be ISO
+        return itemDate >= fromDate && itemDate <= toDate;
+      });
+    }
+
+    // Only now format createdAt for Excel readability
+    const excelRows = fullData.map((i) => ({
+      "Customer Type": i?.customerType ?? "",
+      Name: i?.name ?? "",
+      Phone: i?.phone ?? "",
+      Address: i?.address ?? "",
+      City: i?.city ?? "",
+      District: i?.district ?? "",
+      State: i?.state ?? "",
+      Country: i?.country ?? "",
+      "Coupon Code": i?.couponCode ?? "",
+      "Created At": new Date(i?.createdAt).toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+      }),
+    }));
+
+    // Build & save the workbook
+    const worksheet = XLSX.utils.json_to_sheet(excelRows);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "AllData");
+
+    const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+    const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(blob, "All_Dashboard_Data.xlsx");
+  } catch (err) {
+    console.error("Error downloading full data:", err);
+  }
+};
+
 
   useEffect(() => {
     fetchDashboardData(
@@ -196,6 +234,7 @@ const Dashboard = () => {
       pagination.pageSize,
       selectedState,
       selectedCity,
+      selectedDistrict,
       dateFrom,
       dateTo
     );
@@ -204,6 +243,7 @@ const Dashboard = () => {
     pagination.pageSize,
     selectedState,
     selectedCity,
+    selectedDistrict,
     dateFrom,
     dateTo,
   ]);
@@ -234,6 +274,37 @@ const Dashboard = () => {
             ))}
           </select>
         </div>
+
+        <div className="flex flex-col">
+    <label htmlFor="district-select" className="block mb-1 font-semibold">
+      {selectedState ? "Filter by District" : "District (select state first)"}
+    </label>
+    {selectedState ? (
+      <select
+        id="district-select"
+        value={selectedDistrict}
+        onChange={(e) => setSelectedDistrict(e.target.value)}
+        className="w-60 px-3 py-2 border bg-black rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="">All Districts</option>
+        {(DISTRICT_NAME_INDIA[selectedState] || []).map((d) => (
+          <option key={d} value={d}>
+            {d}
+          </option>
+        ))}
+      </select>
+    ) : (
+      <input
+        id="district-input"
+        type="text"
+        placeholder="District"
+        value={districtInput}
+        onChange={handleDistrictInputChange}
+        disabled
+        className="w-60 px-3 py-2 border text-white rounded-md opacity-60"
+      />
+    )}
+  </div>
 
         <div className="flex flex-col">
           <label htmlFor="city-search" className="block mb-1 font-semibold">

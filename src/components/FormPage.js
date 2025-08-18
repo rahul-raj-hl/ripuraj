@@ -8,7 +8,7 @@ import validate from "./utils/validate";
 import { createUser } from "./utils/store";
 import { useSelector } from "react-redux";
 import Select from "./Select";
-import { COUNTRY_DETAILS } from "./utils/mockData";
+import { COUNTRY_DETAILS, DISTRICT_NAME_INDIA, DISTRICT_NAME_NEPAL, CUSTOMER_TYPE } from "./utils/mockData";
 
 const campaignId = "gold-scheme";
 
@@ -25,10 +25,12 @@ const FormPage = () => {
     address1: "",
     city: "",
     state: "",
+    district: "",
     postalCode: "",
     country: userCountryName ? userCountryName : "India",
     countryCode: countryCode,
     couponCode: "",
+    customerType: "",
   };
 
   const initialStateErrorMessage = {
@@ -37,9 +39,11 @@ const FormPage = () => {
     address1: "",
     city: "",
     state: "",
+    district: "",
     postalCode: "",
     country: "",
     couponCode: "",
+    customerType: "",
   };
 
   const [form, setForm] = useState(initialState);
@@ -65,19 +69,23 @@ const FormPage = () => {
       const userDetail = {
         userDetails: {
           name: form.name,
-          phone: form.phone,
+          phone: form.phone, 
         },
         campaignId: campaignId,
         couponCode: form.couponCode,
+        customerType:form.customerType,
         address: {
           line1: form.address1,
           city: form.city,
           state: form.state,
+          district:form.district,
           pincode: form.postalCode,
           country: form.country,
           countryCode: form.countryCode,
         },
       };
+
+      console.log(userDetail)
 
       const [, error] = await createUser(userDetail);
       setLoading(false);
@@ -96,6 +104,16 @@ const FormPage = () => {
   const selectedCountry = COUNTRY_DETAILS.find(
     (item) => item.countryName === form.country
   );
+
+  // Get district options for selected state
+  const getDistrictOptions = () => {
+    if (!form.state) return [];
+    const stateKey = form.state.replace(/\s+/g, "_");
+    if (form.country === "Nepal") {
+      return DISTRICT_NAME_NEPAL[stateKey] || [];
+    }
+    return DISTRICT_NAME_INDIA[stateKey] || [];
+  };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -132,6 +150,17 @@ const FormPage = () => {
             />
           </div>
 
+          <div className="my-2">
+            <Select
+              optionValue={CUSTOMER_TYPE}
+              className="bg-white text-gray-500 w-full border-[#707070] border-1 font-medium"
+              onChange={(e) => handleFormChange("customerType", e.target.value)}
+              initialSelectedValue="Select Customer Type"
+              required={true}
+              error={errors.customerType}
+            />
+          </div>
+
           <div>
             <Label label="Address" />
             <Input
@@ -165,11 +194,22 @@ const FormPage = () => {
           <div className="my-2">
             <Select
               optionValue={selectedCountry.stateName}
-              className="bg-white border-1 border-black w-full"
+              className="bg-white text-gray-500 w-full border-[#707070] border-1 font-medium"
               onChange={(e) => handleFormChange("state", e.target.value)}
               initialSelectedValue="Select State"
               required={true}
               error={errors.state}
+            />
+          </div>
+          <div className="my-2">
+            <Select
+              optionValue={getDistrictOptions()}
+              className={` ${!form.state ? "bg-gray-200 cursor-not-allowed text-gray-500 input w-full border-[#707070] border-1 font-medium" : 'bg-white border-1 border-black w-full text-gray-500 font-medium'}`}
+              onChange={form.state ? (e) => handleFormChange("district", e.target.value) : undefined}
+              initialSelectedValue="Select District"
+              required={true}
+              error={errors.district}
+              disabled={!form.state}
             />
           </div>
 

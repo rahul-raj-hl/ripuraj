@@ -20,34 +20,31 @@ export async function createUser(userData) {
   }
 }
 
-export async function getDashboardData(params) {
+export async function getDashboardData(params = {}) {
   try {
-    const { page, limit, state, city, from, to } = params;  // ✅ Updated
+    let { page = 1, limit = 25, state, city, district, from, to } = params;
 
-    const queryParams = new URLSearchParams({
-      page: page.toString(),
-      limit: limit.toString(),  // ✅ Updated
-      ...(state && { state }),
-      ...(city && { city }),
-      ...(from && { startDate: from }),
-      ...(to && { endDate: to }),
-    });
+    // normalize text inputs
+    state = state?.trim();
+    city = city?.trim();
+    district = district?.trim();
 
-    const response = await fetch(`/api/dashboard?${queryParams.toString()}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const queryParams = new URLSearchParams();
+    queryParams.set("page", String(page));
+    queryParams.set("limit", String(limit));
+    if (state) queryParams.set("state", state);
+    if (city) queryParams.set("city", city);
+    if (district) queryParams.set("district", district);
+    if (from) queryParams.set("startDate", from);
+    if (to) queryParams.set("endDate", to);
+
+    const response = await fetch(`/api/dashboard?${queryParams.toString()}`);
     const jsonResponse = await response.json();
 
-    if (response.status !== 200) {
-      return [null, jsonResponse.error];
-    }
-
+    if (!response.ok) return [null, jsonResponse?.error || "Request failed"];
     return [jsonResponse, null];
-    
   } catch (error) {
     return [null, error || "Something went wrong"];
   }
 }
+

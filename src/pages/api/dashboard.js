@@ -24,10 +24,11 @@ export default async function handler(req, res) {
       // Get location filters
       const city = req.query.city?.trim();
       const state = req.query.state?.trim();
+      const district = req.query.district?.trim();
 
       // First find users matching location filters if any
       let filteredUserIds = [];
-      if (city || state) {
+      if (city || state|| district) {
         const userQuery = {};
         if (city) {
           userQuery["address.city"] = new RegExp(city, "i");
@@ -35,6 +36,10 @@ export default async function handler(req, res) {
         if (state) {
           userQuery["address.state"] = new RegExp(state, "i");
         }
+        if (district) {
+          userQuery["address.district"] = new RegExp(district, "i");
+        }
+        
         const filteredUsers = await User.find(userQuery);
         filteredUserIds = filteredUsers.map((user) => user.userId);
       }
@@ -43,20 +48,24 @@ export default async function handler(req, res) {
       const queryConditions = { campaignId };
 
       // Add date range conditions if provided
-      if (startDate || endDate) {
-        queryConditions.createdAt = {};
-        if (startDate) {
-          queryConditions.createdAt.$gte = startDate;
-        }
-        if (endDate) {
-          queryConditions.createdAt.$lte = endDate;
-        }
-      }
+       if (startDate || endDate) {
+   queryConditions.createdAt = {};
+   if (startDate) {
+     // start of local day
+     startDate.setHours(0, 0, 0, 0);
+     queryConditions.createdAt.$gte = startDate;
+   }
+   if (endDate) {
+     // end of local day
+     endDate.setHours(23, 59, 59, 999);
+     queryConditions.createdAt.$lte = endDate;
+   }
+ }
 
       // Add user location filter if city or state was specified
-      if ((city || state) && filteredUserIds.length > 0) {
+      if ((city || state || district) && filteredUserIds.length > 0) {
         queryConditions.userId = { $in: filteredUserIds };
-      } else if ((city || state) && filteredUserIds.length === 0) {
+      } else if ((city || state || district) && filteredUserIds.length === 0) {
         // If location filters were applied but no users found, return empty result
         return res.status(200).json({
           data: [],
@@ -105,11 +114,13 @@ export default async function handler(req, res) {
       const enrichedForms = forms.map((form) => ({
         // firstName: userMap[form.userId]?.firstName,
         // lastName: userMap[form.userId]?.lastName,
+        customerType: userMap[form.userId]?.customerType || "N/A",
         name: userMap[form.userId]?.name,
         // email: userMap[form.userId]?.email,
         phone: userMap[form.userId]?.phone,
         address: userMap[form.userId]?.address?.line1,
         city: userMap[form.userId]?.address?.city,
+        district: userMap[form.userId]?.address?.district,
         state: userMap[form.userId]?.address?.state,
         country: userMap[form.userId]?.address?.country || "N/A",
         pincode: userMap[form.userId]?.address?.pincode,
@@ -133,6 +144,7 @@ export default async function handler(req, res) {
           endDate: endDate?.toISOString(),
           city,
           state,
+          district,
         },
       });
     } catch (error) {
