@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     try {
-      let { userDetails, campaignId, couponCode, address } = req.body;
+      let { userDetails, campaignId, couponCode, address, customerType  } = req.body;
 
       // Normalize email input
       if (!userDetails.email || userDetails.email.trim() === "") {
@@ -53,6 +53,9 @@ export default async function handler(req, res) {
 
         // Update user data
         Object.assign(user, userDetails);
+
+        //ensure customerType is overwritten
+        user.customerType = customerType;
 
         if (address) {
           user.address = address;
@@ -93,6 +96,7 @@ export default async function handler(req, res) {
 
         user = new User({
           ...userDetails,
+          customerType,
           address,
         });
 

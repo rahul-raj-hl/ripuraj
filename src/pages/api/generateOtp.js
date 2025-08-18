@@ -90,8 +90,8 @@ export default async function handler(req, res) {
     // Connect to database
     await connectToDB();
 
-    // Get request body (fixed for Pages Router)
-    const { phone, countryCode } = req.body;
+  // Get request body (fixed for Pages Router)
+  const { phone, countryCode, customerType } = req.body;
 
     if (!phone) {
       return res.status(400).json({
@@ -127,7 +127,12 @@ export default async function handler(req, res) {
       };
       // Ensure country field exists
       if (!user.address.country) {
-          user.address.country = "India";
+        user.address.country = "India";
+      }
+
+      // Ensure district is set
+      if (!user.address.district) {
+        user.address.district = "Pending";
       }
     } else {
       // Create new user with minimal info
@@ -141,13 +146,15 @@ export default async function handler(req, res) {
         // Required fields with placeholder values
         email: `temp_${phone}@placeholder.com`,
         name: "Temporary User",
+        customerType: customerType || "Temporary Type",
         address: {
           line1: "Pending",
           city: "Pending",
           pincode: "000000",
           state: "Pending",
+          district: "Pending",
           country: "IN",
-          countryCode:countryCode
+          countryCode: countryCode
         },
       });
     }
