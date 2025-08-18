@@ -94,6 +94,19 @@ export default async function handler(req, res) {
           userDetails.email = null;
         }
 
+        const coupon = await Coupon.findOne({
+          code: couponCode,
+          campaignId: campaignId,
+        });
+
+        if (!coupon) {
+          return res.status(400).json({ error: "Invalid coupon code" });
+        }
+
+        if (coupon.userId) {
+          return res.status(400).json({ error: "Coupon already used" });
+        }
+
         user = new User({
           ...userDetails,
           customerType,
