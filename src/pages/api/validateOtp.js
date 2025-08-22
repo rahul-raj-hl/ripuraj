@@ -51,7 +51,7 @@ export async function POST(req, res) {
 
     // Find user by phone number
     const user = await User.findOne({ phone });
-    console.log(user);
+    // console.log(user);
     
     if (!user) {
       return res.status(404).json({

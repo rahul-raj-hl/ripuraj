@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Table from "@/components/Table";
 import { getDashboardData } from "@/components/utils/store";
 import { STATE_NAME } from "../../components/utils/mockData";
@@ -248,6 +248,20 @@ const Dashboard = () => {
     dateTo,
   ]);
 
+  // normalize: trim, lowercase, replace all non-alphanumerics with underscores
+const normalizeStateKey = (s) =>
+  (s || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, "_");
+
+// Build a normalized lookup once
+const DISTRICTS_MAP = useMemo(() => {
+  const map = {};
+  for (const [k, v] of Object.entries(DISTRICT_NAME_INDIA || {})) {
+    map[normalizeStateKey(k)] = v;
+  }
+  return map;
+}, []);
+
+
   const hydrated = useHydration();
   if (!hydrated) return null; // or a loading spinner
 
@@ -287,7 +301,8 @@ const Dashboard = () => {
         className="w-60 px-3 py-2 border bg-black rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="">All Districts</option>
-        {(DISTRICT_NAME_INDIA[selectedState] || []).map((d) => (
+        {/* {(DISTRICT_NAME_INDIA[selectedState] || []).map((d) => ( */}
+          {(DISTRICTS_MAP[normalizeStateKey(selectedState)] || []).map((d) => (
           <option key={d} value={d}>
             {d}
           </option>

@@ -20,7 +20,7 @@ const PhoneNumberInput = ({ formik }) => {
 
   const validatePhoneNumber = (phoneNumber) => {
     const regex = /^[9876]\d{9}$/;
-    console.log("hello", phoneNumber)
+    // console.log("hello", phoneNumber)
     //adding user phone number to redux store
     dispatch(updateMobileNumber(formik.values.phoneNumber))
     return regex.test(phoneNumber);
