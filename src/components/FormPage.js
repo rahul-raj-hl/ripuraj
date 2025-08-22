@@ -85,7 +85,7 @@ const FormPage = () => {
         },
       };
 
-      console.log(userDetail)
+      // console.log(userDetail)
 
       const [, error] = await createUser(userDetail);
       setLoading(false);

@@ -10,7 +10,7 @@ async function sendSMS(phoneNumber) {
     const url = `http://pertinaxsolution.com/api/mt/SendSMS?user=Ripuraj Agro&password=${password}&senderid=RIPUAG&channel=trans&DCS=0&flashsms=0&number=${phoneNumber}&text=Thank you for participating in Ripuraj Gold %26 Silver Scheme! Keep your scratch coupon safe. We'll contact you soon for prize verification.\nRipuraj Agro&route=13&Peid=1101587830000086432&DLTTemplateId=1107174540819636355`
 
     const response = await fetch(url);
-    console.log(await response.json());
+    // console.log(await response.json());
     if (!response.ok) {
       throw new Error('SMS sending failed');
     }

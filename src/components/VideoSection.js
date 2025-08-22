@@ -9,7 +9,7 @@ const VideoSection = () => {
   
 
   const selectedLanguage = useSelector((state) => state.language.lang);
-  console.log(selectedLanguage);
+  // console.log(selectedLanguage);
 
 
   return (
