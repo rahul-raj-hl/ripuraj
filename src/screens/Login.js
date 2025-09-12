@@ -10,7 +10,7 @@ const Login = () => {
     <div className="bg-white">
             <LandingPage />
             <OTPValidation />
-            <VideoSection />
+            {/* <VideoSection /> */}
             <TermsAndConditions />
             <Footer1 />
             <Footer />
